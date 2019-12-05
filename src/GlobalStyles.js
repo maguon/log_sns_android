@@ -1,7 +1,7 @@
 import {
     StyleSheet
 } from 'react-native'
-import { fontSizeCoeff } from '../util/util'
+import { fontSizeCoeff } from './utils/util'
 
 const globalStyles = StyleSheet.create({
     container: {
