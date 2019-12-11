@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { Icon } from 'native-base'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 
 const Footer = props => {

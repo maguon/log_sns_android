@@ -1,45 +1,47 @@
 import React from 'react'
-import { View, Text, TextInput, StyleSheet } from 'react-native'
-import { Container, Icon, Input, Item, Content, Button } from 'native-base'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import globalStyles from '../../GlobalStyles'
+import { Button, WingBlank, WhiteSpace, Icon } from '@ant-design/react-native'
 
 
 const Login = props => {
+    const { navigation } = props
     return (
-        <Container style={{ backgroundColor: '#f0f0f0', padding: 10 }}>
-            <View style={{ alignItems: 'center', marginVertical: 90, marginHorizontal: 10 }}>
-                <Text style={globalStyles.xlText}>欢迎登录司机部落</Text>
+        <View style={[globalStyles.container, { flex: 1 }]}>
+            <View style={{ alignItems: 'center', marginVertical: 90 }}>
+                <Text style={globalStyles.xxlText}>欢迎登录司机部落</Text>
             </View>
-            <View style={{ height: 50, margin: 10 }}>
-                <Item rounded style={{ height: 50 }}>
-                    <Icon active name='ios-person' style={{ marginLeft: 10 }} />
-                    <Input placeholder='请输入账号' onChangeText={() => { }} />
-
-                </Item>
-            </View>
-            <View style={{ height: 50, margin: 10 }}>
-                <Item rounded style={{ height: 50 }}>
-                    <Icon active name='ios-lock' style={{ marginLeft: 10 }} />
-                    <Input placeholder='请输入密码' onChangeText={() => { }} />
-                    <Icon active name='ios-eye' style={{ marginRight: 10 }} />
-                    <Icon active name='ios-eye-off' style={{ marginRight: 10 }} />
-                </Item>
-            </View>
-            <View style={{ margin: 10, height: 30 }}>
-                <Button full style={{ backgroundColor: '#1591cf' }} onPress={() => { console.log(1111) }} >
-                    <Text style={{ color: '#fff' }}>登录</Text>
-                </Button>
-            </View>
-            <View style={{ margin: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
-                <View>
-                    <Text >注册</Text>
+            <WingBlank size="lg">
+                <View style={{ height: 50, borderWidth: 0.5, borderColor: '#777', flexDirection: 'row', borderRadius: 25, alignItems: 'center' }}>
+                    <Icon name="user" size="md" color="#000" style={{ marginHorizontal: 15 }} />
+                    <TextInput style={{ flex: 1, marginRight: 15 }} placeholder='请输入账号' />
                 </View>
-                <View>
-                    <Text >忘记密码</Text>
+            </WingBlank>
+            <WhiteSpace size='md' />
+            <WingBlank size="lg">
+                <View style={{ height: 50, borderWidth: 0.5, borderColor: '#777', flexDirection: 'row', borderRadius: 25, alignItems: 'center' }}>
+                    <Icon name="lock" size="md" color="#000" style={{ marginHorizontal: 15 }} />
+                    <TextInput style={{ flex: 1 }} placeholder='请输入密码' />
+                    <Icon name="eye" size="md" color="#000" style={{ marginHorizontal: 15 }} />
+                    <Icon name="eye-invisible" size="md" color="#000" style={{ marginHorizontal: 15 }} />
                 </View>
-            </View>
-
-        </Container>
+            </WingBlank>
+            <WhiteSpace size='xl' />
+            <WingBlank size="lg">
+                <Button type="primary" onPress={() => navigation.navigate('TabsStack')}>登录</Button>
+            </WingBlank>
+            <WhiteSpace size='md' />
+            <WingBlank size="lg">
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <TouchableOpacity onPress={() => { navigation.navigate('UserRegister') }}>
+                        <Text >注册</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => { navigation.navigate('RetrievePassword') }}>
+                        <Text >忘记密码</Text>
+                    </TouchableOpacity>
+                </View>
+            </WingBlank>
+        </View>
     )
 }
 
