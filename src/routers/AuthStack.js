@@ -1,11 +1,10 @@
 import React from 'react'
 import { createStackNavigator } from 'react-navigation-stack'
-import Login from '../views/login/Login'
-import UserRegister from '../views/userRegister/UserRegister'
-import RetrievePassword from '../views/retrievePassword/RetrievePassword'
+import Login from '../views/auth/login/Login'
+import UserRegister from '../views/auth/userRegister/UserRegister'
+import RetrievePassword from '../views/auth/retrievePassword/RetrievePassword'
 import NavBar from './navBar/NavBar'
 import StackViewStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator'
-
 
 export default createStackNavigator({
     Login: {
@@ -16,7 +15,7 @@ export default createStackNavigator({
     },
     UserRegister: {
         screen: UserRegister,
-        navigationOptions: {
+        navigationOptions: {    
             title: '注册',
             header: ({ scene, previous, navigation }) => {
                 // console.log('props',props)

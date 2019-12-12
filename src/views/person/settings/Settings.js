@@ -1,12 +1,13 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-const Init = props => {
-    return (
+//设置
+const Settings = props => {
+    return(
         <View>
-            <Text>Init</Text>
+            <Text>Settings</Text>
         </View>
     )
 }
 
-export default Init
+export default Settings

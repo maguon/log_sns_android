@@ -1,12 +1,13 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-const Init = props => {
+//我的粉丝
+const FansList = props => {
     return (
         <View>
-            <Text>Init</Text>
+            <Text>FansList</Text>
         </View>
     )
 }
 
-export default Init
+export default FansList

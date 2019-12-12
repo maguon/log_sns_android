@@ -1,12 +1,12 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-const Init = props => {
+const RequestContact = props => {
     return (
         <View>
-            <Text>Init</Text>
+            <Text>RequestContact</Text>
         </View>
     )
 }
 
-export default Init
+export default RequestContact

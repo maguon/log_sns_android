@@ -2,15 +2,14 @@ import React from 'react'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import AuthStack from './AuthStack'
-import TabsStack from './TabsStack'
+import MainStack from './MainStack'
 
 const RouteConfigs = {
-    initialRouteName: 'TabsStack'
+    initialRouteName: 'MainStack'
 }
-
 
 export default createAppContainer(createSwitchNavigator({
     Auth: AuthStack,
-    TabsStack: TabsStack,
+    MainStack
 
 }, RouteConfigs))

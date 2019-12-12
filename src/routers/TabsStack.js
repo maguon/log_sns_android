@@ -1,56 +1,56 @@
 import React from 'react'
-import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { Icon } from '@ant-design/react-native'
-import HomeStack from './HomeStack'
-import CommunityStack from './CommunityStack'
-import MessageStack from './MessageStack'
-import PersonStack from './PersonStack'
+import PersonCenter from '../views/person/personCenter/PersonCenter'
+import MessageList from '../views/message/messageList/MessageList'
+import Community from '../views/community/Community'
+import Home from '../views/home/Home'
 
 
 const TabScreens = createBottomTabNavigator(
     {
-        HomeStack: {
-            screen: HomeStack,
+        Home: {
+            screen: Home,
             navigationOptions: {
                 title: '首页'
             }
         },
-        CommunityStack: {
-            screen: CommunityStack,
+        Community: {
+            screen: Community,
             navigationOptions: {
                 title: '社区'
             }
         },
-        MessageStack: {
-            screen: MessageStack,
+        Message: {
+            screen: MessageList,
             navigationOptions: {
                 title: '消息'
             }
         },
-        PersonStack: {
-            screen: PersonStack,
+        Person: {
+            screen: PersonCenter,
             navigationOptions: {
                 title: '个人'
             }
         }
     },
     {
+        initialRouteName: 'Message',
         defaultNavigationOptions: ({ navigation }) => ({
             tabBarIcon: ({ focused, horizontal, tintColor }) => {
                 const { routeName } = navigation.state
                 let iconName
-                if (routeName === 'HomeStack') {
+                if (routeName === 'Home') {
                     iconName = 'home'
-                } else if (routeName === 'CommunityStack') {
+                } else if (routeName === 'Community') {
                     iconName = 'team'
-                } else if (routeName === 'MessageStack') {
+                } else if (routeName === 'Message') {
                     iconName = 'message'
-                } else if (routeName === 'PersonStack') {
+                } else if (routeName === 'Person') {
                     iconName = 'user'
-
                 }
-                return <Icon name={iconName} size='md'  color={tintColor}/>
-            },
+                return <Icon name={iconName} size='md' color={tintColor} />
+            }
         }),
         tabBarOptions: {
             activeTintColor: '#1083e6',

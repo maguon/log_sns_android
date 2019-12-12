@@ -1,12 +1,14 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-const Init = props => {
+
+//我参与的投票
+const VoteList = props => {
     return (
         <View>
-            <Text>Init</Text>
+            <Text>VoteList</Text>
         </View>
     )
 }
 
-export default Init
+export default VoteList

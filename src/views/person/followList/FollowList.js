@@ -1,12 +1,13 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-const Init = props => {
+//我的关注
+const FollowList = props => {
     return (
         <View>
-            <Text>Init</Text>
+            <Text>FollowList</Text>
         </View>
     )
 }
 
-export default Init
+export default FollowList
