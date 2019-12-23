@@ -16,16 +16,31 @@ const MessageList = props => {
             <ScrollView style={globalStyles.container}>
                 <List>
                     <Item arrow="horizontal"
+                        extra={
+                            <View style={{ backgroundColor: 'red', justifyContent: 'center', alignItems: 'center', height: 20, borderRadius: 10 }}>
+                                <Text style={{ color: '#fff', paddingHorizontal: 10 }}>1</Text>
+                            </View>
+                        }
                         onPress={() => { navigation.navigate('FollowingList') }}
                         onLongPress={() => { navigation.navigate('FollowingList') }}
                         thumb={<Icon name="star" style={{ marginRight: 15 }} />} >
                         关注我</Item>
                     <Item arrow="horizontal"
+                        extra={
+                            <View style={{ backgroundColor: 'red', justifyContent: 'center', alignItems: 'center', height: 20, borderRadius: 10 }}>
+                                <Text style={{ color: '#fff', paddingHorizontal: 10 }}>1</Text>
+                            </View>
+                        }
                         onPress={() => { navigation.navigate('CommentOnMeList') }}
                         onLongPress={() => { navigation.navigate('CommentOnMeList') }}
                         thumb={<Icon name="edit" style={{ marginRight: 15 }} />} >
                         评价我</Item>
                     <Item arrow="horizontal"
+                        extra={
+                            <View style={{ backgroundColor: 'red', justifyContent: 'center', alignItems: 'center', height: 20, borderRadius: 10 }}>
+                                <Text style={{ color: '#fff', paddingHorizontal: 10 }}>200</Text>
+                            </View>
+                        }
                         onPress={() => { navigation.navigate('LikeMeList') }}
                         onLongPress={() => { navigation.navigate('LikeMeList') }}
                         thumb={<Icon name="like" style={{ marginRight: 15 }} />} >
@@ -34,8 +49,13 @@ const MessageList = props => {
                 <WhiteSpace size='md' style={globalStyles.containerBackgroundColor} />
                 <List>
                     <Item arrow="horizontal"
-                        onPress={() => { navigation.navigate('FollowList') }}
-                        onLongPress={() => { navigation.navigate('FollowList') }}
+                        extra={
+                            <View style={{ backgroundColor: 'red', justifyContent: 'center', alignItems: 'center', height: 20, borderRadius: 10 }}>
+                                <Text style={{ color: '#fff', paddingHorizontal: 10 }}>1</Text>
+                            </View>
+                        }
+                        onPress={() => { navigation.navigate('RequestContactList') }}
+                        onLongPress={() => { navigation.navigate('RequestContactList') }}
                         thumb={<Icon name="phone" style={{ marginRight: 15 }} />} >
                         申请联系方式</Item>
                 </List>
@@ -43,7 +63,11 @@ const MessageList = props => {
                 <List>
                     <Item
                         multipleLine
-                        thumb={<Icon name="notification" style={{ marginRight: 15 }} />}>
+                        thumb={
+                            <View>
+                                <Icon name="notification" style={{ marginRight: 15 }} />
+                            </View>
+                        }>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text>系统消息</Text>
                             <Text style={{ color: '#777' }}>2016-05-06 13:20:13</Text>
@@ -52,7 +76,12 @@ const MessageList = props => {
                     </Item>
                     <Item
                         multipleLine
-                        thumb={<Icon name="notification" style={{ marginRight: 15 }} />}>
+                        thumb={
+                            <View style={{ flexDirection: 'row' }}>
+                                <Icon name="notification" style={{ marginRight: 15 }} />
+                                <View style={{ height: 10, width: 10, borderRadius: 5, backgroundColor: 'red', position: 'absolute', top: 0, right: 15 }} />
+                            </View>
+                        }>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text>系统消息</Text>
                             <Text style={{ color: '#777' }}>2016-05-06 13:20:13</Text>

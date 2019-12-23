@@ -5,6 +5,8 @@ import Header from './Header'
 import Footer from './Footer'
 import Image from './Image'
 import Map from './Map'
+import ReplyContent from './ReplyContent'
+import ReplyHeader from './ReplyHeader'
 
 export {
     Card,
@@ -13,5 +15,7 @@ export {
     Header,
     Footer,
     Image,
-    Map
+    Map,
+    ReplyContent,
+    ReplyHeader
 }

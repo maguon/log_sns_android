@@ -1,12 +1,12 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-const RequestContact = props => {
+const Blog = props => {
     return (
         <View>
-            <Text>RequestContact</Text>
+            <Text>Blog</Text>
         </View>
     )
 }
 
-export default RequestContact
+export default Blog

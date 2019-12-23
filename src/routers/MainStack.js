@@ -14,8 +14,17 @@ import Settings from '../views/person/settings/Settings' //设置
 import CommentOnMeList from '../views/message/commentOnMeList/CommentOnMeList' //评价我
 import FollowingList from '../views/message/followingList/FollowingList' //关注我
 import LikeMeList from '../views/message/likeMeList/LikeMeList' //赞我
-import RequestContact from '../views/message/requestContact/RequestContact' //申请联系方式
+import RequestContactList from '../views/message/requestContactList/RequestContactList' //申请联系方式
+import Blog from '../views/blog/Blog' //微博详情
+import BlogPicture from '../views/blogPicture/BlogPicture' //微博照片详情
+import BlogVideo from '../views/blogVideo/BlogVideo' //微博视频详情
+import Friend from '../views/friend/Friend' //网友详情
+import CollectionAddr from '../views/collectionAddr/CollectionAddr' //收藏地址
+import SeekHelp from '../views/seekHelp/SeekHelp' //发帮助
+import Scan from '../views/scan/Scan' //扫一扫
+import PublishBlog from '../views/publishBlog/PublishBlog' //写文章
 import NavBar from './navBar/NavBar'
+import NavPulishBlog from './navBar/NavPulishBlog'
 
 export default createStackNavigator({
     TabsStack: {
@@ -42,8 +51,8 @@ export default createStackNavigator({
             title: '赞我'
         }
     },
-    RequestContact: {
-        screen: RequestContact,
+    RequestContactList: {
+        screen: RequestContactList,
         navigationOptions: {
             title: '申请联系方式'
         }
@@ -100,6 +109,58 @@ export default createStackNavigator({
         screen: Settings,
         navigationOptions: {
             title: '设置'
+        }
+    },
+    Blog: {
+        screen: Blog,
+        navigationOptions: {
+            title: '微博'
+        }
+    },
+    CollectionAddr: {
+        screen: CollectionAddr,
+        navigationOptions: {
+            title: '收藏地址'
+        }
+    },
+    BlogVideo: {
+        screen: BlogVideo,
+        navigationOptions: {
+            title: '微博视频',
+        }
+    },
+    Friend: {
+        screen: Friend,
+        navigationOptions: {
+            title: '网友详情'
+        }
+    },
+    Scan: {
+        screen: Scan,
+        navigationOptions: {
+            title: '扫一扫'
+        }
+    },
+    BlogPicture: {
+        screen: BlogPicture,
+        navigationOptions: {
+            title: '微博照片'
+        }
+    },
+    SeekHelp: {
+        screen: SeekHelp,
+        navigationOptions: {
+            title: '发布帮助',
+        }
+    },
+    PublishBlog: {
+        screen: PublishBlog,
+        navigationOptions: {
+            title: '写文章',
+            header: ({ scene, previous, navigation }) => {
+                // console.log('props',props)
+                return <NavPulishBlog scene={scene} previous={previous} navigation={navigation} />
+            }
         }
     }
 }, {

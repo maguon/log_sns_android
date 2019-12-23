@@ -1,15 +1,21 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text ,StyleSheet} from 'react-native'
 
 
 const Card = props => {
     // console.log('props', props)
-    const { children } = props
+    const { children ,style=styles.card} = props
     return (
-        <View style={{ borderColor: '#ddd', borderWidth: 0.5, borderRadius: 10, margin: 7.5 }}>
+        <View style={style}>
             {children}
         </View>
     )
 }
 
 export default Card
+
+const styles= StyleSheet.create({
+    card:{
+        borderColor: '#ddd', borderWidth: 0.5, borderRadius: 10 
+    }
+})
