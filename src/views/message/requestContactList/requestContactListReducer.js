@@ -7,13 +7,19 @@ const initialState = {
     },
     getRequestContactList: {
         isResultStatus: 0,
-        errorMsg: '',
-        failedMsg: '',
+        failedMsg: ''
     },
     getRequestContactListMore: {
         isResultStatus: 0,
-        errorMsg: '',
-        failedMsg: '',
+        failedMsg: ''
+    },
+    refuse:{
+        isResultStatus: 0,
+        failedMsg: ''
+    },
+    agree:{
+        isResultStatus: 0,
+        failedMsg: ''
     }
 }
 

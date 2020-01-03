@@ -1,0 +1,1 @@
+export const base_host='http://stg.myxxjs.com:9901/api'

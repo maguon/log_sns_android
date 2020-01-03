@@ -1,7 +1,9 @@
 import React from 'react'
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, InteractionManager } from 'react-native'
 import { Button, WingBlank, WhiteSpace, Icon, List } from '@ant-design/react-native'
 import globalStyles from '../../../GlobalStyles'
+import { connect } from 'react-redux'
+import reduxActions from '../../../reduxActions'
 
 const Item = List.Item
 
@@ -31,21 +33,45 @@ const PersonCenter = props => {
                 <WhiteSpace size='md' style={globalStyles.containerBackgroundColor} />
                 <List>
                     <Item arrow="horizontal"
-                        onPress={() => { navigation.navigate('ArticleList') }}
-                        onLongPress={() => { navigation.navigate('ArticleList') }}
+                        onPress={() => { 
+                            // props.getArticleListWaiting()
+                            navigation.navigate('ArticleList') 
+                            // InteractionManager.runAfterInteractions(props.getArticleList)
+                        }}
+                        onLongPress={() => { 
+                            // props.getArticleListWaiting()
+                            navigation.navigate('ArticleList') 
+                            // InteractionManager.runAfterInteractions(props.getArticleList)
+                        }}
                         thumb={<Icon name="file-text" style={{ marginRight: 15 }} />} >
                         我的文章(128)</Item>
                 </List>
                 <WhiteSpace size='md' style={globalStyles.containerBackgroundColor} />
                 <List>
                     <Item arrow="horizontal"
-                        onPress={() => { navigation.navigate('FollowList') }}
-                        onLongPress={() => { navigation.navigate('FollowList') }}
+                        onPress={() => {
+                            props.getFollowListWaiting()
+                            navigation.navigate('FollowList')
+                            InteractionManager.runAfterInteractions(props.getFollowList)
+                        }}
+                        onLongPress={() => {
+                            props.getFollowListWaiting()
+                            navigation.navigate('FollowList')
+                            InteractionManager.runAfterInteractions(props.getFollowList)
+                        }}
                         thumb={<Icon name="heart" style={{ marginRight: 15 }} />} >
                         我的关注(128)</Item>
                     <Item arrow="horizontal"
-                        onPress={() => { navigation.navigate('FansList') }}
-                        onLongPress={() => { navigation.navigate('FansList') }}
+                        onPress={() => {
+                            props.getFansListWaiting()
+                            navigation.navigate('FansList')
+                            InteractionManager.runAfterInteractions(props.getFansList)
+                        }}
+                        onLongPress={() => {
+                            props.getFansListWaiting()
+                            navigation.navigate('FansList')
+                            InteractionManager.runAfterInteractions(props.getFansList)
+                        }}
                         thumb={<Icon name="smile" style={{ marginRight: 15 }} />} >
                         我的粉丝(128)</Item>
                 </List>
@@ -93,4 +119,25 @@ const PersonCenter = props => {
     )
 }
 
-export default PersonCenter
+const mapDispatchToProps = (dispatch) => ({
+    getFollowList: () => {
+        dispatch(reduxActions.followList.getFollowList())
+    },
+    getFollowListWaiting: () => {
+        dispatch(reduxActions.followList.getFollowListWaiting())
+    },
+    getFansList: () => {
+        dispatch(reduxActions.fansList.getFansList())
+    },
+    getFansListWaiting: () => {
+        dispatch(reduxActions.fansList.getFansListWaiting())
+    },
+    getArticleList: () => {
+        dispatch(reduxActions.articleList.getArticleList())
+    },
+    getArticleListWaiting: () => {
+        dispatch(reduxActions.articleList.getArticleListWaiting())
+    }
+})
+
+export default connect(null, mapDispatchToProps)(PersonCenter)

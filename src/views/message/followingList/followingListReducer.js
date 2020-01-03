@@ -7,13 +7,11 @@ const initialState = {
     },
     getFollowingList: {
         isResultStatus: 0,
-        errorMsg: '',
-        failedMsg: '',
+        failedMsg: ''
     },
     getFollowingListMore: {
         isResultStatus: 0,
-        errorMsg: '',
-        failedMsg: '',
+        failedMsg: ''
     }
 }
 

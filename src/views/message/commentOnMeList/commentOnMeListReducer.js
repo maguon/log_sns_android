@@ -7,13 +7,11 @@ const initialState = {
     },
     getCommentOnMeList: {
         isResultStatus: 0,
-        errorMsg: '',
-        failedMsg: '',
+        failedMsg: ''
     },
     getCommentOnMeListMore: {
         isResultStatus: 0,
-        errorMsg: '',
-        failedMsg: '',
+        failedMsg: ''
     }
 }
 

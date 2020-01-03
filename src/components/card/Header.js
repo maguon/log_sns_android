@@ -4,6 +4,7 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import { Button } from '@ant-design/react-native'
 
 const Header = props => {
+    const { params } = props
     return (
         <View>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>

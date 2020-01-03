@@ -1,0 +1,7 @@
+export const get_seekHelpArticleList_success = 'get_seekHelpArticleList_success'
+export const get_seekHelpArticleList_failed = 'get_seekHelpArticleList_failed'
+export const get_seekHelpArticleList_waiting = 'get_seekHelpArticleList_waiting'
+
+export const get_seekHelpArticleListMore_success = 'get_seekHelpArticleListMore_success'
+export const get_seekHelpArticleListMore_failed = 'get_seekHelpArticleListMore_failed'
+export const get_seekHelpArticleListMore_waiting = 'get_seekHelpArticleListMore_waiting'

@@ -7,13 +7,11 @@ const initialState = {
     },
     getLikeMeList: {
         isResultStatus: 0,
-        errorMsg: '',
-        failedMsg: '',
+        failedMsg: ''
     },
     getLikeMeListMore: {
         isResultStatus: 0,
-        errorMsg: '',
-        failedMsg: '',
+        failedMsg: ''
     }
 }
 

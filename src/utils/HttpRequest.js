@@ -25,7 +25,7 @@ function put(url, params) {
     }).then((response) => response.json())
 }
 
-function del(url, callback) {
+function del(url) {
     return fetch(url, {
         method: 'DELETE',
         headers: requestHeaders.headers,
