@@ -1,15 +1,19 @@
 import reduxActionTypes from '../../../../reduxActionTypes'
 import httpRequest from '../../../../utils/HttpRequest'
 import * as host from '../../../../utils/host'
-import { sleep } from '../../../../utils/util'
+import { sleep, ObjectToUrl } from '../../../../utils/util'
+
 
 const pageSize = 1
 
 export const getTextArticleList = reqParams => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
-        // console.log('reqParams', reqParams)
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages`
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages?${ObjectToUrl({
+            start: 0,
+            size: pageSize,
+            ...reqParams
+        })}`
         // console.log('url', url)
         const res = await httpRequest.get(url)
         // console.log('res', res)
@@ -33,16 +37,25 @@ export const getTextArticleListWaiting = () => (dispatch) => {
     dispatch({ type: reduxActionTypes.textArticleList.get_textArticleList_waiting })
 }
 
-export const getTextArticleListMore = () => async (dispatch, getState) => {
-    const { loginReducer, articleListReducer } = getState()
-    if (articleListReducer.getArticleListMore.isResultStatus == 1) {
+export const getTextArticleListMore = reqParams => async (dispatch, getState) => {
+    const { loginReducer, textArticleListReducer } = getState()
+    // console.log('reqParams', ObjectToUrl({
+    //     start: 0,
+    //     size: pageSize,
+    //     ...reqParams
+    // }))
+    if (textArticleListReducer.getTextArticleListMore.isResultStatus == 1) {
         await sleep(1000)
-        dispatch(getArticleListMore)
+        dispatch(getTextArticleListMore)
     } else {
-        if (!articleListReducer.data.isCompleted) {
+        if (!textArticleListReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.textArticleList.get_textArticleListMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages?${ObjectToUrl({
+                    start: 0,
+                    size: pageSize,
+                    ...reqParams
+                })}`
                 // console.log('url', url)
                 const res = await httpRequest.get(url)
                 // console.log('res', res)

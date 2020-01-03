@@ -9,7 +9,11 @@ export const getVideoArticleList = reqParams => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         // console.log('reqParams', reqParams)
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages`
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages${ObjectToUrl({
+            start: 0,
+            size: pageSize,
+            ...reqParams
+        })}`
         // console.log('url', url)
         const res = await httpRequest.get(url)
         // console.log('res', res)
@@ -21,19 +25,19 @@ export const getVideoArticleList = reqParams => async (dispatch, getState) => {
                 }
             })
         } else {
-            dispatch({ type: reduxActionTypes.videoArticleList.get_videoArticleList_failed, payload: {} })
+            dispatch({ type: reduxActionTypes.videoArticleList.get_videoArticleList_failed, payload: { failedMsg: `${res.msg}` } })
         }
     } catch (err) {
         // console.log('err', err)
-        dispatch({ type: reduxActionTypes.videoArticleList.get_videoArticleList_failed, payload: {} })
+        dispatch({ type: reduxActionTypes.videoArticleList.get_videoArticleList_failed, payload: { failedMsg: `${err}` } })
     }
 }
 
 export const getVideoArticleListWaiting = () => (dispatch) => {
-    dispatch({ type: reduxActionTypes.videoArticleList.get_articleList_waiting })
+    dispatch({ type: reduxActionTypes.videoArticleList.get_videoArticleList_waiting })
 }
 
-export const getVideoArticleListMore = () => async (dispatch, getState) => {
+export const getVideoArticleListMore = reqParams => async (dispatch, getState) => {
     const { loginReducer, videoArticleListReducer } = getState()
     if (videoArticleListReducer.getVideoArticleListMore.isResultStatus == 1) {
         await sleep(1000)
@@ -42,7 +46,11 @@ export const getVideoArticleListMore = () => async (dispatch, getState) => {
         if (!videoArticleListReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.videoArticleList.get_videoArticleListMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages${ObjectToUrl({
+                    start: 0,
+                    size: pageSize,
+                    ...reqParams
+                })}`
                 // console.log('url', url)
                 const res = await httpRequest.get(url)
                 // console.log('res', res)

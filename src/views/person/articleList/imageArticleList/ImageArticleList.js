@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, RefreshControl, View } from 'react-native'
+import { FlatList, RefreshControl, View ,InteractionManager} from 'react-native'
 import { Card, Content as CardContent, Footer, Header, Video, Image, Map } from '../../../../components/card'
 import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
 import { connect } from 'react-redux'
@@ -12,17 +12,17 @@ import moment from 'moment'
 class ImageArticleList extends Component {
 
     componentDidMount() {
-        console.log('componentDidMount')
+        this.props.getImageArticleListWaiting()
+        InteractionManager.runAfterInteractions(()=>this.props.getImageArticleList({ type: 1, carrier: 2 }))
     }
 
 
     render() {
-        const { articleListReducer } = this.props
-        // console.log('articleListReducer', articleListReducer)
+        const { imageArticleListReducer } = this.props
         return (
             <FlatList
                 keyExtractor={(item, index) => `${index}`}
-                data={[]}
+                data={imageArticleListReducer.data.imageArticleList}
                 renderItem={params => {
                     const { item, index } = params
                     return (
@@ -31,7 +31,7 @@ class ImageArticleList extends Component {
                             <Card>
                                 <Header />
                                 <CardContent />
-                                <Map />
+                                <Image />
                                 <Footer />
                             </Card>
                             <WhiteSpace size='md' />
@@ -41,52 +41,22 @@ class ImageArticleList extends Component {
                 refreshControl={
                     <RefreshControl
                         colors={[styleColor]}
-                        refreshing={articleListReducer.getArticleList.isResultStatus == 1}
+                        refreshing={imageArticleListReducer.getImageArticleList.isResultStatus == 1}
                         onRefresh={() => {
-                            this.props.getArticleListWaiting()
-                            this.props.getArticleList()
+                            this.props.getImageArticleListWaiting()
+                            this.props.getImageArticleList({ type: 1, carrier: 2 })
                         }}
                     />
                 }
                 onEndReachedThreshold={0.2}
                 onEndReached={() => {
-                    if (articleListReducer.getArticleList.isResultStatus == 2 && !articleListReducer.data.isCompleted) {
-                        this.props.getArticleListMore()
+                    if (imageArticleListReducer.getImageArticleList.isResultStatus == 2 && !imageArticleListReducer.data.isCompleted) {
+                        this.props.getImageArticleListMore({ type: 1, carrier: 2 })
                     }
                 }}
-                ListEmptyComponent={articleListReducer.getArticleList.isResultStatus != 1 && <ListEmpty title='暂无文章' />}
-                ListFooterComponent={articleListReducer.getArticleListMore.isResultStatus == 1 ? <ListFooter /> : <View />}
+                ListEmptyComponent={imageArticleListReducer.getImageArticleList.isResultStatus != 1 && <ListEmpty title='暂无图片文章' />}
+                ListFooterComponent={imageArticleListReducer.getImageArticleListMore.isResultStatus == 1 ? <ListFooter /> : <View />}
             />
-            // <ScrollView style={{ flex: 1 }}>
-            //     <WhiteSpace size='md' />
-            //     <WingBlank size='md'>
-            //         <Card>
-            //             <Header />
-            //             <CardContent />
-            //             <Map />
-            //             <Footer />
-            //         </Card>
-            //         <WhiteSpace size='md' />
-            //     </WingBlank>
-            //     <WingBlank size='md'>
-            //         <Card>
-            //             <Header />
-            //             <CardContent />
-            //             <Image />
-            //             <Footer />
-            //         </Card>
-            //         <WhiteSpace size='md' />
-            //     </WingBlank>
-            //     <WingBlank size='md'>
-            //         <Card>
-            //             <Header />
-            //             <CardContent />
-            //             <Video />
-            //             <Footer />
-            //         </Card>
-            //         <WhiteSpace size='md' />
-            //     </WingBlank>
-            // </ScrollView>
         )
     }
 }
@@ -94,19 +64,25 @@ class ImageArticleList extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        articleListReducer: state.articleListReducer
+        imageArticleListReducer: state.imageArticleListReducer
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getArticleList: () => {
-        dispatch(reduxActions.articleList.getArticleList())
+    getImageArticleList: reqParams => {
+        dispatch(reduxActions.imageArticleList.getImageArticleList(reqParams))
     },
-    getArticleListWaiting: () => {
-        dispatch(reduxActions.articleList.getArticleListWaiting())
+    getImageArticleListWaiting: () => {
+        dispatch(reduxActions.imageArticleList.getImageArticleListWaiting())
     },
-    getArticleListMore: () => {
-        dispatch(reduxActions.articleList.getArticleListMore())
+    getImageArticleListMore: reqParams => {
+        dispatch(reduxActions.imageArticleList.getImageArticleListMore(reqParams))
+    },
+    delArticle: reqParams => {
+        dispatch(reduxActions.articleList.delArticle(reqParams))
+    },
+    likeArticle: reqParams => {
+        dispatch(reduxActions.articleList.likeArticle(reqParams))
     }
 })
 

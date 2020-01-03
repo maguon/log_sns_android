@@ -9,7 +9,11 @@ export const getSeekHelpArticleList = reqParams => async (dispatch, getState) =>
     try {
         const { loginReducer } = getState()
         // console.log('reqParams', reqParams)
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages`
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages?${ObjectToUrl({
+            start: 0,
+            size: pageSize,
+            ...reqParams
+        })}`
         // console.log('url', url)
         const res = await httpRequest.get(url)
         // console.log('res', res)
@@ -33,16 +37,20 @@ export const getSeekHelpArticleListWaiting = () => (dispatch) => {
     dispatch({ type: reduxActionTypes.seekHelpArticleList.get_seekHelpArticleList_waiting })
 }
 
-export const getSeekHelpArticleListMore = () => async (dispatch, getState) => {
-    const { loginReducer, articleListReducer } = getState()
-    if (articleListReducer.getArticleListMore.isResultStatus == 1) {
+export const getSeekHelpArticleListMore = reqParams => async (dispatch, getState) => {
+    const { loginReducer, seekHelpArticleListReducer } = getState()
+    if (seekHelpArticleListReducer.getSeekHelpArticleListMore.isResultStatus == 1) {
         await sleep(1000)
-        dispatch(getArticleListMore)
+        dispatch(getSeekHelpArticleListMore)
     } else {
-        if (!articleListReducer.data.isCompleted) {
+        if (!seekHelpArticleListReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.seekHelpArticleList.get_seekHelpArticleListMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages${ObjectToUrl({
+                    start: 0,
+                    size: pageSize,
+                    ...reqParams
+                })}`
                 // console.log('url', url)
                 const res = await httpRequest.get(url)
                 // console.log('res', res)

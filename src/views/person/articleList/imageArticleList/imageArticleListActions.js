@@ -9,7 +9,11 @@ export const getImageArticleList = reqParams => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         // console.log('reqParams', reqParams)
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages`
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages${ObjectToUrl({
+            start: 0,
+            size: pageSize,
+            ...reqParams
+        })}`
         // console.log('url', url)
         const res = await httpRequest.get(url)
         // console.log('res', res)
@@ -33,16 +37,20 @@ export const getImageArticleListWaiting = () => (dispatch) => {
     dispatch({ type: reduxActionTypes.imageArticleList.get_imageArticleList_waiting })
 }
 
-export const getImageArticleListMore = () => async (dispatch, getState) => {
-    const { loginReducer, articleListReducer } = getState()
-    if (articleListReducer.getArticleListMore.isResultStatus == 1) {
+export const getImageArticleListMore = reqParams => async (dispatch, getState) => {
+    const { loginReducer, imageArticleListReducer } = getState()
+    if (imageArticleListReducer.getImageArticleListMore.isResultStatus == 1) {
         await sleep(1000)
-        dispatch(getArticleListMore)
+        dispatch(getImageArticleListMore)
     } else {
-        if (!articleListReducer.data.isCompleted) {
+        if (!imageArticleListReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.imageArticleList.get_imageArticleListMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages${ObjectToUrl({
+                    start: 0,
+                    size: pageSize,
+                    ...reqParams
+                })}`
                 // console.log('url', url)
                 const res = await httpRequest.get(url)
                 // console.log('res', res)

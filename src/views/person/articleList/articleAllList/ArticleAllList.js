@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { FlatList, RefreshControl, View, InteractionManager } from 'react-native'
-import { Card, Content as CardContent, Footer, Header, Video, Image, Map } from '../../../../components/card'
+import { Card, Content as CardContent, Footer, Header, Video, Image, Map, FooterForDel } from '../../../../components/card'
 import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
 import { connect } from 'react-redux'
 import reduxActions from '../../../../reduxActions'
@@ -12,28 +12,41 @@ import moment from 'moment'
 class ArticleAllList extends Component {
 
     componentDidMount() {
-        console.log('ArticleAllListcomponentDidMount')
-        this.props.getArticleListWaiting()
-        InteractionManager.runAfterInteractions(this.props.getArticleList)
+        // console.log('ArticleAllListcomponentDidMount')
+        this.props.getArticleAllListWaiting()
+        InteractionManager.runAfterInteractions(this.props.getArticleAllList)
     }
 
     render() {
-        const { articleListReducer } = this.props
+        const { articleAllListReducer } = this.props
         // console.log('articleListReducer', articleListReducer)
         return (
             <FlatList
                 keyExtractor={(item, index) => `${index}`}
-                data={articleListReducer.data.articleList}
+                data={articleAllListReducer.data.articleAllList}
                 renderItem={params => {
                     const { item, index } = params
+                    // console.log('item', item)
                     return (
                         <WingBlank size='md'>
                             {index == 0 && <WhiteSpace size='md' />}
                             <Card>
-                                <Header />
-                                <CardContent />
-                                <Map />
-                                <Footer />
+                                <Header params={{
+                                    nick: item.user_detail_info[0].nick_name,
+                                    date: item.created_at,
+                                    address: item.addressName,
+                                    avatar: item.user_detail_info[0].avatar
+                                }} />
+                                <CardContent params={{ content: item.info }} />
+                                {item.type == 1 && item.carrier == 4 && <Map />}
+                                {item.type == 1 && item.carrier == 2 && <Image />}
+                                {item.type == 1 && item.carrier == 3 && <Video />}
+                                <FooterForDel
+                                    msgCount={item.commentsNum}
+                                    likeCount={item.agreeNum}
+                                    delOnPress={() => { this.props.delArticle({ messageId: item._id }) }}
+                                    msgOnPress={() => { console.log('msgOnPress') }}
+                                    likeOnPress={() => { this.props.likeArticle({ messageId: item._id }) }} />
                             </Card>
                             <WhiteSpace size='md' />
                         </WingBlank>
@@ -42,52 +55,22 @@ class ArticleAllList extends Component {
                 refreshControl={
                     <RefreshControl
                         colors={[styleColor]}
-                        refreshing={articleListReducer.getArticleList.isResultStatus == 1}
+                        refreshing={articleAllListReducer.getArticleAllList.isResultStatus == 1}
                         onRefresh={() => {
-                            this.props.getArticleListWaiting()
-                            this.props.getArticleList()
+                            this.props.getArticleAllListWaiting()
+                            this.props.getArticleAllList()
                         }}
                     />
                 }
                 onEndReachedThreshold={0.2}
                 onEndReached={() => {
-                    if (articleListReducer.getArticleList.isResultStatus == 2 && !articleListReducer.data.isCompleted) {
-                        this.props.getArticleListMore()
+                    if (articleAllListReducer.getArticleAllList.isResultStatus == 2 && !articleAllListReducer.data.isCompleted) {
+                        this.props.getArticleAllListMore()
                     }
                 }}
-                ListEmptyComponent={articleListReducer.getArticleList.isResultStatus != 1 && <ListEmpty title='暂无文章' />}
-                ListFooterComponent={articleListReducer.getArticleListMore.isResultStatus == 1 ? <ListFooter /> : <View />}
+                ListEmptyComponent={articleAllListReducer.getArticleAllList.isResultStatus != 1 && <ListEmpty title='暂无文章' />}
+                ListFooterComponent={articleAllListReducer.getArticleAllListMore.isResultStatus == 1 ? <ListFooter /> : <View />}
             />
-            // <ScrollView style={{ flex: 1 }}>
-            //     <WhiteSpace size='md' />
-            //     <WingBlank size='md'>
-            //         <Card>
-            //             <Header />
-            //             <CardContent />
-            //             <Map />
-            //             <Footer />
-            //         </Card>
-            //         <WhiteSpace size='md' />
-            //     </WingBlank>
-            //     <WingBlank size='md'>
-            //         <Card>
-            //             <Header />
-            //             <CardContent />
-            //             <Image />
-            //             <Footer />
-            //         </Card>
-            //         <WhiteSpace size='md' />
-            //     </WingBlank>
-            //     <WingBlank size='md'>
-            //         <Card>
-            //             <Header />
-            //             <CardContent />
-            //             <Video />
-            //             <Footer />
-            //         </Card>
-            //         <WhiteSpace size='md' />
-            //     </WingBlank>
-            // </ScrollView>
         )
     }
 }
@@ -96,19 +79,25 @@ class ArticleAllList extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        articleListReducer: state.articleListReducer
+        articleAllListReducer: state.articleAllListReducer
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getArticleList: () => {
-        dispatch(reduxActions.articleList.getArticleList())
+    getArticleAllList: () => {
+        dispatch(reduxActions.articleAllList.getArticleAllList())
     },
-    getArticleListWaiting: () => {
-        dispatch(reduxActions.articleList.getArticleListWaiting())
+    getArticleAllListWaiting: () => {
+        dispatch(reduxActions.articleAllList.getArticleAllListWaiting())
     },
-    getArticleListMore: () => {
-        dispatch(reduxActions.articleList.getArticleListMore())
+    getArticleAllListMore: () => {
+        dispatch(reduxActions.articleAllList.getArticleAllListMore())
+    },
+    delArticle: reqParams => {
+        dispatch(reduxActions.articleList.delArticle(reqParams))
+    },
+    likeArticle: reqParams => {
+        dispatch(reduxActions.articleList.likeArticle(reqParams))
     }
 })
 

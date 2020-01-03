@@ -9,7 +9,6 @@ import * as followingList from './views/message/followingList/followingListActio
 import * as commentOnMeList from './views/message/commentOnMeList/commentOnMeListActionTypes'
 import * as requestContactList from './views/message/requestContactList/requestContactListActionTypes'
 
-// import * as articleList from './views/person/articleList/articleListActionTypes'
 import * as followList from './views/person/followList/followListActionTypes'
 import * as fansList from './views/person/fansList/fansListActionTypes'
 import * as commentList from './views/person/commentList/commentListActionTypes'
@@ -22,6 +21,8 @@ import * as imageArticleList from './views/person/articleList/imageArticleList/i
 import * as seekHelpArticleList from './views/person/articleList/seekHelpArticleList/seekHelpArticleListActionTypes'
 import * as textArticleList from './views/person/articleList/textArticleList/textArticleListActionTypes'
 import * as videoArticleList from './views/person/articleList/videoArticleList/videoArticleListActionTypes'
+import * as articleList from './views/person/articleList/articleListActionTypes'
+
 
 
 export default {
@@ -43,6 +44,9 @@ export default {
     seekHelpArticleList,
     textArticleList,
     videoArticleList,
+    articleList,
+
+    
     followList,
     fansList,
     commentList,

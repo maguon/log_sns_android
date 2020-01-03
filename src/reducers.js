@@ -11,7 +11,7 @@ import likeMeListReducer from './views/message/likeMeList/likeMeListReducer'
 import commentOnMeListReducer from './views/message/commentOnMeList/commentOnMeListReducer'
 import requestContactListReducer from './views/message/requestContactList/requestContactListReducer'
 
-// import articleListReducer from './views/person/articleList/articleListReducer'
+
 import followListReducer from './views/person/followList/followListReducer'
 import fansListReducer from './views/person/fansList/fansListReducer'
 import commentListReducer from './views/person/commentList/commentListReducer'
@@ -19,7 +19,7 @@ import collectionListReducer from './views/person/collectionList/collectionListR
 import voteListReducer from './views/person/voteList/voteListReducer'
 import collectionLocationListReducer from './views/person/collectionLocationList/collectionLocationListReducer'
 
-
+import articleListReducer from './views/person/articleList/articleListReducer'
 import articleAllListReducer from './views/person/articleList/articleAllList/articleAllListReducer'
 import imageArticleListReducer from './views/person/articleList/imageArticleList/imageArticleListReducer'
 import seekHelpArticleListReducer from './views/person/articleList/seekHelpArticleList/seekHelpArticleListReducer'
@@ -49,7 +49,7 @@ export default combineReducers({
     voteListReducer,
     collectionLocationListReducer,
 
-
+    articleListReducer,
     articleAllListReducer,
     imageArticleListReducer,
     seekHelpArticleListReducer,

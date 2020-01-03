@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, RefreshControl, View } from 'react-native'
+import { FlatList, RefreshControl, View, InteractionManager } from 'react-native'
 import { Card, Content as CardContent, Footer, Header, Video, Image, Map } from '../../../../components/card'
 import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
 import { connect } from 'react-redux'
@@ -10,17 +10,18 @@ import moment from 'moment'
 
 //我的文章
 class TextArticleList extends Component {
-    componentDidMount(){
-        console.log('TextArticleListcomponentDidMount')
+    
+    componentDidMount() {
+        this.props.getTextArticleListWaiting()
+        InteractionManager.runAfterInteractions(() => this.props.getTextArticleList({ type: 1, carrier: 1 }))
     }
 
     render() {
-        const { articleListReducer } = this.props
-        // console.log('articleListReducer', articleListReducer)
+        const { textArticleListReducer } = this.props
         return (
             <FlatList
                 keyExtractor={(item, index) => `${index}`}
-                data={[]}
+                data={textArticleListReducer.data.textArticleList}
                 renderItem={params => {
                     const { item, index } = params
                     return (
@@ -29,7 +30,6 @@ class TextArticleList extends Component {
                             <Card>
                                 <Header />
                                 <CardContent />
-                                <Map />
                                 <Footer />
                             </Card>
                             <WhiteSpace size='md' />
@@ -39,21 +39,21 @@ class TextArticleList extends Component {
                 refreshControl={
                     <RefreshControl
                         colors={[styleColor]}
-                        refreshing={articleListReducer.getArticleList.isResultStatus == 1}
+                        refreshing={textArticleListReducer.getTextArticleList.isResultStatus == 1}
                         onRefresh={() => {
-                            this.props.getArticleListWaiting()
-                            this.props.getArticleList()
+                            this.props.getTextArticleListWaiting()
+                            this.props.getTextArticleList({ type: 1, carrier: 1 })
                         }}
                     />
                 }
                 onEndReachedThreshold={0.2}
                 onEndReached={() => {
-                    if (articleListReducer.getArticleList.isResultStatus == 2 && !articleListReducer.data.isCompleted) {
-                        this.props.getArticleListMore()
+                    if (textArticleListReducer.getTextArticleList.isResultStatus == 2 && !textArticleListReducer.data.isCompleted) {
+                        this.props.getTextArticleListMore({ type: 1, carrier: 1 })
                     }
                 }}
-                ListEmptyComponent={articleListReducer.getArticleList.isResultStatus != 1 && <ListEmpty title='暂无文章' />}
-                ListFooterComponent={articleListReducer.getArticleListMore.isResultStatus == 1 ? <ListFooter /> : <View />}
+                ListEmptyComponent={textArticleListReducer.getTextArticleList.isResultStatus != 1 && <ListEmpty title='暂无文章' />}
+                ListFooterComponent={textArticleListReducer.getTextArticleListMore.isResultStatus == 1 ? <ListFooter /> : <View />}
             />
         )
     }
@@ -62,19 +62,25 @@ class TextArticleList extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        articleListReducer: state.articleListReducer
+        textArticleListReducer: state.textArticleListReducer
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getArticleList: () => {
-        dispatch(reduxActions.articleList.getArticleList())
+    getTextArticleList: reqParams => {
+        dispatch(reduxActions.textArticleList.getTextArticleList(reqParams))
     },
-    getArticleListWaiting: () => {
-        dispatch(reduxActions.articleList.getArticleListWaiting())
+    getTextArticleListWaiting: () => {
+        dispatch(reduxActions.textArticleList.getTextArticleListWaiting())
     },
-    getArticleListMore: () => {
-        dispatch(reduxActions.articleList.getArticleListMore())
+    getTextArticleListMore: reqParams=> {
+        dispatch(reduxActions.textArticleList.getTextArticleListMore(reqParams))
+    },
+    delArticle: reqParams => {
+        dispatch(reduxActions.articleList.delArticle(reqParams))
+    },
+    likeArticle: reqParams => {
+        dispatch(reduxActions.articleList.likeArticle(reqParams))
     }
 })
 

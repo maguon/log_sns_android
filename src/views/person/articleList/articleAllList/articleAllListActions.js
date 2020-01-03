@@ -5,11 +5,11 @@ import { sleep } from '../../../../utils/util'
 
 const pageSize = 1
 
-export const getArticleAllList = reqParams => async (dispatch, getState) => {
+export const getArticleAllList = () => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         // console.log('reqParams', reqParams)
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages`
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?start=0&size=${pageSize}`
         // console.log('url', url)
         const res = await httpRequest.get(url)
         // console.log('res', res)
@@ -34,15 +34,15 @@ export const getArticleAllListWaiting = () => (dispatch) => {
 }
 
 export const getArticleAllListMore = () => async (dispatch, getState) => {
-    const { loginReducer, articleListReducer } = getState()
-    if (articleListReducer.getArticleListMore.isResultStatus == 1) {
+    const { loginReducer, articleAllListReducer } = getState()
+    if (articleAllListReducer.getArticleAllListMore.isResultStatus == 1) {
         await sleep(1000)
-        dispatch(getArticleListMore)
+        dispatch(getArticleAllListMore)
     } else {
-        if (!articleListReducer.data.isCompleted) {
+        if (!articleAllListReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.articleAllList.get_articleAllListMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?start=${articleAllListReducer.data.articleAllList.length}&size=${pageSize}`
                 // console.log('url', url)
                 const res = await httpRequest.get(url)
                 // console.log('res', res)

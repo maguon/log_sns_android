@@ -34,14 +34,10 @@ const PersonCenter = props => {
                 <List>
                     <Item arrow="horizontal"
                         onPress={() => { 
-                            // props.getArticleListWaiting()
                             navigation.navigate('ArticleList') 
-                            // InteractionManager.runAfterInteractions(props.getArticleList)
                         }}
                         onLongPress={() => { 
-                            // props.getArticleListWaiting()
                             navigation.navigate('ArticleList') 
-                            // InteractionManager.runAfterInteractions(props.getArticleList)
                         }}
                         thumb={<Icon name="file-text" style={{ marginRight: 15 }} />} >
                         我的文章(128)</Item>
@@ -131,12 +127,6 @@ const mapDispatchToProps = (dispatch) => ({
     },
     getFansListWaiting: () => {
         dispatch(reduxActions.fansList.getFansListWaiting())
-    },
-    getArticleList: () => {
-        dispatch(reduxActions.articleList.getArticleList())
-    },
-    getArticleListWaiting: () => {
-        dispatch(reduxActions.articleList.getArticleListWaiting())
     }
 })
 
