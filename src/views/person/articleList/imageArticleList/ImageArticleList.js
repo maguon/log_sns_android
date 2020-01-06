@@ -16,6 +16,9 @@ class ImageArticleList extends Component {
         InteractionManager.runAfterInteractions(()=>this.props.getImageArticleList({ type: 1, carrier: 2 }))
     }
 
+    componentWillUnmount(){
+        this.props.rmImageArticleList()
+    }
 
     render() {
         const { imageArticleListReducer } = this.props
@@ -83,6 +86,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     likeArticle: reqParams => {
         dispatch(reduxActions.articleList.likeArticle(reqParams))
+    },
+    rmImageArticleList:()=>{
+        dispatch(reduxActions.imageArticleList.rmImageArticleList())
     }
 })
 

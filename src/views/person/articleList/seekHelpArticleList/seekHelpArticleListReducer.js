@@ -89,5 +89,26 @@ export default handleActions({
                 isResultStatus: 1
             }
         }
+    },
+
+
+
+    [reduxActionTypes.seekHelpArticleList.rm_seekHelpArticleList]: (state, action) => {
+        return {
+            ...initialState
+        }
+    },
+
+
+
+    [reduxActionTypes.seekHelpArticleList.rm_itemForSeekHelpArticleList_byId]: (state, action) => {
+        const { payload: { messageId } } = action
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                seekHelpArticleList: state.data.seekHelpArticleList.filter(item => item._id != messageId)
+            }
+        }
     }
 }, initialState)

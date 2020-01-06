@@ -8,3 +8,4 @@ export const get_seekHelpArticleListMore_waiting = 'get_seekHelpArticleListMore_
 
 
 export const rm_itemForSeekHelpArticleList_byId='rm_itemForSeekHelpArticleList_byId'
+export const rm_seekHelpArticleList = 'rm_seekHelpArticleList'

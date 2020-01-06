@@ -9,7 +9,7 @@ export const getVideoArticleList = reqParams => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         // console.log('reqParams', reqParams)
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages${ObjectToUrl({
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages${ObjectToUrl({
             start: 0,
             size: pageSize,
             ...reqParams
@@ -46,8 +46,8 @@ export const getVideoArticleListMore = reqParams => async (dispatch, getState) =
         if (!videoArticleListReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.videoArticleList.get_videoArticleListMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages${ObjectToUrl({
-                    start: 0,
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages${ObjectToUrl({
+                    start: videoArticleListReducer.data.videoArticleList.length,
                     size: pageSize,
                     ...reqParams
                 })}`
@@ -74,4 +74,8 @@ export const getVideoArticleListMore = reqParams => async (dispatch, getState) =
             }
         }
     }
+}
+
+export const rmVideoArticleList = () =>  (dispatch) => {
+    dispatch({ type: reduxActionTypes.videoArticleList.rm_videoArticleList })
 }

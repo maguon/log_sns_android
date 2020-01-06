@@ -9,7 +9,7 @@ const pageSize = 1
 export const getTextArticleList = reqParams => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages?${ObjectToUrl({
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?${ObjectToUrl({
             start: 0,
             size: pageSize,
             ...reqParams
@@ -51,8 +51,8 @@ export const getTextArticleListMore = reqParams => async (dispatch, getState) =>
         if (!textArticleListReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.textArticleList.get_textArticleListMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/messages?${ObjectToUrl({
-                    start: 0,
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?${ObjectToUrl({
+                    start: textArticleListReducer.data.textArticleList.length,
                     size: pageSize,
                     ...reqParams
                 })}`
@@ -79,4 +79,8 @@ export const getTextArticleListMore = reqParams => async (dispatch, getState) =>
             }
         }
     }
+}
+
+export const rmTextArticleList = () => (dispatch) => {
+    dispatch({ type: reduxActionTypes.textArticleList.rm_textArticleList })
 }

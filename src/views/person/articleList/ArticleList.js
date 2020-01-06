@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { View, Text, ScrollView, InteractionManager } from 'react-native'
-import { Tabs } from '@ant-design/react-native'
+import { Tabs, Portal, Toast, Provider } from '@ant-design/react-native'
 import VideoArticleList from './videoArticleList/VideoArticleList'
 import ImageArticleList from './imageArticleList/ImageArticleList'
 import ArticleAllList from './articleAllList/ArticleAllList'
@@ -13,29 +13,31 @@ import { connect } from 'react-redux'
 const DefaultTabBar = Tabs.DefaultTabBar
 
 //我的文章
-const ArticleList = props => {
-    const tabs2 = [
-        { title: '所有' },
-        { title: '文章' },
-        { title: '视频' },
-        { title: '图片' },
-        { title: '求助' }
-    ]
-    return (
-        <View style={{ flex: 1 }}>
-            <Tabs
-                destroyInactiveTab={true}
-                renderTabBar={params => <DefaultTabBar  {...params} animated={true} page={3.5} />}
-                tabs={tabs2} tabBarPosition="top">
-                    
-                <ArticleAllList />
-                <TextArticleList />
-                <VideoArticleList />
-                <ImageArticleList refs={''} />
-                <SeekHelpArticleList />
-            </Tabs>
-        </View>
-    )
+class ArticleList extends Component {
+    render() {
+        const tabs2 = [
+            { title: '所有' },
+            { title: '文章' },
+            { title: '视频' },
+            { title: '图片' },
+            { title: '求助' }
+        ]
+        return (
+            <View style={{ flex: 1 }}>
+                <Tabs
+                    destroyInactiveTab={true}
+                    renderTabBar={params => <DefaultTabBar  {...params} animated={true} page={3.5} />}
+                    tabs={tabs2} tabBarPosition="top">
+
+                    <ArticleAllList />
+                    <TextArticleList />
+                    <VideoArticleList />
+                    <ImageArticleList refs={''} />
+                    <SeekHelpArticleList />
+                </Tabs>
+            </View>
+        )
+    }
 }
 
 const mapStateToProps = (state) => {

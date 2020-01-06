@@ -17,6 +17,10 @@ class SeekHelpArticleList extends Component {
         InteractionManager.runAfterInteractions(() => this.props.getSeekHelpArticleList({ type: 2, carrier: 1 }))
     }
 
+    componentWillUnmount(){
+        this.props.rmSeekHelpArticleList()
+    }
+
     render() {
         const { seekHelpArticleListReducer } = this.props
         return (
@@ -81,6 +85,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     likeArticle: reqParams => {
         dispatch(reduxActions.articleList.likeArticle(reqParams))
+    },
+    rmSeekHelpArticleList:()=>{
+        dispatch(reduxActions.seekHelpArticleList.rmSeekHelpArticleList())
     }
 })
 

@@ -7,3 +7,4 @@ export const get_textArticleListMore_failed = 'get_textArticleListMore_failed'
 export const get_textArticleListMore_waiting = 'get_textArticleListMore_waiting'
 
 export const rm_itemForTextArticleList_byId='rm_itemForTextArticleList_byId'
+export const rm_textArticleList = 'rm_textArticleList'

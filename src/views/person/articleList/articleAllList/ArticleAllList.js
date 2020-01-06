@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FlatList, RefreshControl, View, InteractionManager } from 'react-native'
 import { Card, Content as CardContent, Footer, Header, Video, Image, Map, FooterForDel } from '../../../../components/card'
-import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
+import { Tabs, Icon, Popover, WhiteSpace, WingBlank, Toast } from '@ant-design/react-native'
 import { connect } from 'react-redux'
 import reduxActions from '../../../../reduxActions'
 import { styleColor } from '../../../../GlobalStyles'
@@ -12,14 +12,17 @@ import moment from 'moment'
 class ArticleAllList extends Component {
 
     componentDidMount() {
-        // console.log('ArticleAllListcomponentDidMount')
         this.props.getArticleAllListWaiting()
         InteractionManager.runAfterInteractions(this.props.getArticleAllList)
     }
 
+    componentWillUnmount() {
+        this.props.rmArticleAllList()
+    }
+
     render() {
         const { articleAllListReducer } = this.props
-        // console.log('articleListReducer', articleListReducer)
+        console.log('articleAllListReducer', articleAllListReducer)
         return (
             <FlatList
                 keyExtractor={(item, index) => `${index}`}
@@ -98,6 +101,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     likeArticle: reqParams => {
         dispatch(reduxActions.articleList.likeArticle(reqParams))
+    },
+    rmArticleAllList: () => {
+        dispatch(reduxActions.articleAllList.rmArticleAllList())
     }
 })
 

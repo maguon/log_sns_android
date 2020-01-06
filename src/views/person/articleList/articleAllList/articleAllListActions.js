@@ -67,3 +67,7 @@ export const getArticleAllListMore = () => async (dispatch, getState) => {
         }
     }
 }
+
+export const rmArticleAllList = () => (dispatch) => {
+    dispatch({ type: reduxActionTypes.articleAllList.rm_articleAllList })
+}

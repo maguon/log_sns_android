@@ -16,6 +16,11 @@ class VideoArticleList extends Component {
         InteractionManager.runAfterInteractions(() => this.props.getVideoArticleList({ type: 1, carrier: 3 }))
     }
 
+    componentWillUnmount(){
+        //console.log('ArticleAllListcomponentWillUnmount')
+        this.props.rmVideoArticleList()
+    }
+
     render() {
         const { videoArticleListReducer } = this.props
         // console.log('articleListReducer', articleListReducer)
@@ -82,6 +87,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     likeArticle: reqParams => {
         dispatch(reduxActions.articleList.likeArticle(reqParams))
+    },
+    rmVideoArticleList:()=>{
+        dispatch(reduxActions.videoArticleList.rmVideoArticleList())
     }
 })
 

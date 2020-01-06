@@ -89,5 +89,26 @@ export default handleActions({
                 isResultStatus: 1
             }
         }
+    },
+
+
+
+    [reduxActionTypes.videoArticleList.rm_videoArticleList]: (state, action) => {
+        return {
+            ...initialState
+        }
+    },
+
+
+
+    [reduxActionTypes.videoArticleList.rm_itemForVideoArticleList_byId]: (state, action) => {
+        const { payload: { messageId } } = action
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                videoArticleList: state.data.videoArticleList.filter(item => item._id != messageId)
+            }
+        }
     }
 }, initialState)

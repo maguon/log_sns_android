@@ -7,3 +7,5 @@ export const get_articleAllListMore_failed = 'get_articleAllListMore_failed'
 export const get_articleAllListMore_waiting = 'get_articleAllListMore_waiting'
 
 export const rm_itemForArticleAllList_byId='rm_itemForArticleAllList_byId'
+
+export const rm_articleAllList = 'rm_articleAllList'

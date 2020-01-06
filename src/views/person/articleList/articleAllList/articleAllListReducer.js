@@ -89,5 +89,26 @@ export default handleActions({
                 isResultStatus: 1
             }
         }
+    },
+
+
+
+    [reduxActionTypes.articleAllList.rm_articleAllList]: (state, action) => {
+        return {
+            ...initialState
+        }
+    },
+
+
+
+    [reduxActionTypes.articleAllList.rm_itemForArticleAllList_byId]: (state, action) => {
+        const { payload: { messageId } } = action
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                articleAllList: state.data.articleAllList.filter(item => item._id != messageId)
+            }
+        }
     }
 }, initialState)
