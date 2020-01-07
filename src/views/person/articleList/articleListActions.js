@@ -19,16 +19,16 @@ export const delArticle = reqParams => async (dispatch, getState) => {
             dispatch({ type: reduxActionTypes.seekHelpArticleList.rm_itemForSeekHelpArticleList_byId, payload: { messageId: reqParams.messageId } })
             dispatch({ type: reduxActionTypes.textArticleList.rm_itemForTextArticleList_byId, payload: { messageId: reqParams.messageId } })
             Portal.remove(delLoading)
-            Toast.success("删除成功！")
+            Toast.success("删除成功！", 0.5)
         } else {
             dispatch({ type: reduxActionTypes.articleList.del_articleForMyself_failed, payload: { failedMsg: `${res.msg}` } })
             Portal.remove(delLoading)
-            Toast.success("删除失败！")
+            Toast.success("删除失败！", 0.5)
         }
     } catch (err) {
         dispatch({ type: reduxActionTypes.articleList.del_articleForMyself_failed, payload: { failedMsg: `${err}` } })
         Portal.remove(delLoading)
-        Toast.success("删除失败！")
+        Toast.success("删除失败！", 0.5)
     }
 }
 
@@ -38,26 +38,38 @@ export const likeArticle = reqParams => async (dispatch, getState) => {
         const { loginReducer } = getState()
         dispatch({ type: reduxActionTypes.articleList.like_articleForMyself_waiting, payload: {} })
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/userPraise`
-        console.log('url', url)
-        const res = await httpRequest.put(url, {
+        const res = await httpRequest.post(url, {
             type: 1,
             _messageId: reqParams.messageId
         })
-        console.log('res', res)
         if (res.success) {
-            dispatch({ type: reduxActionTypes.articleList.like_articleForMyself_success, payload: {} })
-            Portal.remove(likeLoading)
-            Toast.success("点赞成功！")
+            const urlArticle = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?${reqParams.messageId}`
+            const resArticle = await httpRequest.get(urlArticle)
+            if (res.success) {
+                dispatch({ type: reduxActionTypes.articleAllList.update_itemForArticleAllList_byId, payload: { article: resArticle.result[0] } })
+                dispatch({ type: reduxActionTypes.imageArticleList.update_itemForImageArticleList_byId, payload: { article: resArticle.result[0] } })
+                dispatch({ type: reduxActionTypes.textArticleList.update_itemForTextArticleList_byId, payload: { article: resArticle.result[0] } })
+                dispatch({ type: reduxActionTypes.videoArticleList.update_itemForVideoArticleList_byId, payload: { article: resArticle.result[0] } })
+                dispatch({ type: reduxActionTypes.seekHelpArticleList.update_itemForSeekHelpArticleList_byId, payload: { article: resArticle.result[0] } })
+                dispatch({ type: reduxActionTypes.articleList.like_articleForMyself_success, payload: {} })
+
+                Portal.remove(likeLoading)
+                Toast.success("点赞成功！", 0.5)
+            } else {
+                dispatch({ type: reduxActionTypes.articleList.like_articleForMyself_failed, payload: { failedMsg: `${resArticle.msg}` } })
+                Portal.remove(likeLoading)
+                Toast.success("点赞失败！", 0.5)
+            }
+
         } else {
             dispatch({ type: reduxActionTypes.articleList.like_articleForMyself_failed, payload: { failedMsg: `${res.msg}` } })
             Portal.remove(likeLoading)
-            Toast.success("点赞失败！")
+            Toast.success("点赞失败！", 0.5)
         }
     } catch (err) {
-        console.log('err', err)
         dispatch({ type: reduxActionTypes.articleList.like_articleForMyself_failed, payload: { failedMsg: `${err}` } })
         Portal.remove(likeLoading)
-        Toast.success("点赞失败！")
+        Toast.success("点赞失败！", 0.5)
 
     }
 }

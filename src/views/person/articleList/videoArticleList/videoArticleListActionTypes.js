@@ -7,4 +7,6 @@ export const get_videoArticleListMore_failed = 'get_videoArticleListMore_failed'
 export const get_videoArticleListMore_waiting = 'get_videoArticleListMore_waiting'
 
 export const rm_itemForVideoArticleList_byId='rm_itemForVideoArticleList_byId'
+export const update_itemForVideoArticleList_byId = 'update_itemForVideoArticleList_byId'
+
 export const rm_videoArticleList = 'rm_videoArticleList'

@@ -110,5 +110,25 @@ export default handleActions({
                 seekHelpArticleList: state.data.seekHelpArticleList.filter(item => item._id != messageId)
             }
         }
+    },
+
+
+
+
+    [reduxActionTypes.seekHelpArticleList.update_itemForSeekHelpArticleList_byId]: (state, action) => {
+        const { payload: { article } } = action
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                seekHelpArticleList: state.data.seekHelpArticleList.map(item => {
+                    if (item._id == article._id) {
+                        return article
+                    } else {
+                        return item
+                    }
+                })
+            }
+        }
     }
 }, initialState)

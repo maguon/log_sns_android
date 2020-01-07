@@ -11,19 +11,16 @@ import moment from 'moment'
 //我的文章
 class VideoArticleList extends Component {
     componentDidMount() {
-        // console.log('VideoArticleListcomponentDidMount')
         this.props.getVideoArticleListWaiting()
         InteractionManager.runAfterInteractions(() => this.props.getVideoArticleList({ type: 1, carrier: 3 }))
     }
 
     componentWillUnmount(){
-        //console.log('ArticleAllListcomponentWillUnmount')
         this.props.rmVideoArticleList()
     }
 
     render() {
         const { videoArticleListReducer } = this.props
-        // console.log('articleListReducer', articleListReducer)
         return (
             <FlatList
                 keyExtractor={(item, index) => `${index}`}

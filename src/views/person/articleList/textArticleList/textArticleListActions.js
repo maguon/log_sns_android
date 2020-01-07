@@ -3,8 +3,7 @@ import httpRequest from '../../../../utils/HttpRequest'
 import * as host from '../../../../utils/host'
 import { sleep, ObjectToUrl } from '../../../../utils/util'
 
-
-const pageSize = 1
+const pageSize = 20
 
 export const getTextArticleList = reqParams => async (dispatch, getState) => {
     try {

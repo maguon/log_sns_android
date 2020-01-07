@@ -12,7 +12,6 @@ import moment from 'moment'
 class SeekHelpArticleList extends Component {
 
     componentDidMount() {
-        // console.log('SeekHelpArticleListcomponentDidMount')
         this.props.getSeekHelpArticleListWaiting()
         InteractionManager.runAfterInteractions(() => this.props.getSeekHelpArticleList({ type: 2, carrier: 1 }))
     }

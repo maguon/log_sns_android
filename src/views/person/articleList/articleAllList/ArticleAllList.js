@@ -22,14 +22,12 @@ class ArticleAllList extends Component {
 
     render() {
         const { articleAllListReducer } = this.props
-        console.log('articleAllListReducer', articleAllListReducer)
         return (
             <FlatList
                 keyExtractor={(item, index) => `${index}`}
                 data={articleAllListReducer.data.articleAllList}
                 renderItem={params => {
                     const { item, index } = params
-                    // console.log('item', item)
                     return (
                         <WingBlank size='md'>
                             {index == 0 && <WhiteSpace size='md' />}

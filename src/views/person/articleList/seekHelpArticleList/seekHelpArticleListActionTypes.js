@@ -7,5 +7,7 @@ export const get_seekHelpArticleListMore_failed = 'get_seekHelpArticleListMore_f
 export const get_seekHelpArticleListMore_waiting = 'get_seekHelpArticleListMore_waiting'
 
 
-export const rm_itemForSeekHelpArticleList_byId='rm_itemForSeekHelpArticleList_byId'
+export const rm_itemForSeekHelpArticleList_byId = 'rm_itemForSeekHelpArticleList_byId'
+export const update_itemForSeekHelpArticleList_byId = 'update_itemForSeekHelpArticleList_byId'
+
 export const rm_seekHelpArticleList = 'rm_seekHelpArticleList'

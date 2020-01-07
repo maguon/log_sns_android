@@ -8,5 +8,7 @@ export const get_imageArticleListMore_waiting = 'get_imageArticleListMore_waitin
 
 
 export const rm_itemForImageArticleList_byId='rm_itemForImageArticleList_byId'
+export const update_itemForImageArticleList_byId = 'update_itemForImageArticleList_byId'
+
 export const rm_imageArticleList = 'rm_imageArticleList'
 

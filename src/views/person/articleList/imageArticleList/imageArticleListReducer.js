@@ -110,5 +110,25 @@ export default handleActions({
                 imageArticleList: state.data.imageArticleList.filter(item => item._id != messageId)
             }
         }
+    },
+
+
+
+
+    [reduxActionTypes.imageArticleList.update_itemForImageArticleList_byId]: (state, action) => {
+        const { payload: { article } } = action
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                imageArticleList: state.data.imageArticleList.map(item => {
+                    if (item._id == article._id) {
+                        return article
+                    } else {
+                        return item
+                    }
+                })
+            }
+        }
     }
 }, initialState)

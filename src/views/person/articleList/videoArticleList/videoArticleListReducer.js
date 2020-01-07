@@ -110,5 +110,25 @@ export default handleActions({
                 videoArticleList: state.data.videoArticleList.filter(item => item._id != messageId)
             }
         }
+    },
+
+
+
+
+    [reduxActionTypes.videoArticleList.update_itemForVideoArticleList_byId]: (state, action) => {
+        const { payload: { article } } = action
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                videoArticleList: state.data.videoArticleList.map(item => {
+                    if (item._id == article._id) {
+                        return article
+                    } else {
+                        return item
+                    }
+                })
+            }
+        }
     }
 }, initialState)
