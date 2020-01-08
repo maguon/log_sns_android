@@ -26,6 +26,14 @@ import seekHelpArticleListReducer from './views/person/articleList/seekHelpArtic
 import textArticleListReducer from './views/person/articleList/textArticleList/textArticleListReducer'
 import videoArticleListReducer from './views/person/articleList/videoArticleList/videoArticleListReducer'
 
+import friendInfoReducer from './views/articleListOfFriend/friendInfo/friendInfoReducer'
+import articleListOfFriendReducer from './views/articleListOfFriend/articleListOfFriendReducer'
+
+import followingListForHomeReducer from './views/home/followingListForHome/followingListForHomeReducer'
+import hotListForHomeReducer from './views/home/hotListForHome/hotListForHomeReducer'
+import nearbyListForHomeReducer from './views/home/nearbyListForHome/nearbyListForHomeReducer'
+
+
 
 export default combineReducers({
     formReducer,
@@ -40,8 +48,6 @@ export default combineReducers({
     commentOnMeListReducer,
     requestContactListReducer,
 
-
-
     fansListReducer,
     followListReducer,
     commentListReducer,
@@ -54,5 +60,12 @@ export default combineReducers({
     imageArticleListReducer,
     seekHelpArticleListReducer,
     textArticleListReducer,
-    videoArticleListReducer
+    videoArticleListReducer,
+
+    friendInfoReducer,
+    articleListOfFriendReducer,
+
+    followingListForHomeReducer,
+    hotListForHomeReducer,
+    nearbyListForHomeReducer
 })

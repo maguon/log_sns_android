@@ -22,6 +22,12 @@ import * as textArticleList from './views/person/articleList/textArticleList/tex
 import * as videoArticleList from './views/person/articleList/videoArticleList/videoArticleListActions'
 import * as articleList from './views/person/articleList/articleListActions'
 
+import * as friendInfo from './views/articleListOfFriend/friendInfo/friendInfoActions'
+import * as articleListOfFriend from './views/articleListOfFriend/articleListOfFriendActions'
+
+import * as followingListForHome from './views/home/followingListForHome/followingListForHomeActions'
+import * as hotListForHome from './views/home/hotListForHome/hotListForHomeActions'
+import * as nearbyListForHome from './views/home/nearbyListForHome/nearbyListForHomeActions'
 
 export default {
     home,
@@ -47,5 +53,15 @@ export default {
     commentList,
     collectionList,
     voteList,
-    collectionLocationList
+    collectionLocationList,
+
+
+    friendInfo,
+    articleListOfFriend,
+
+
+
+    followingListForHome,
+    hotListForHome,
+    nearbyListForHome
 }

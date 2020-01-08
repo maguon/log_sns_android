@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, Image } from 'react-native'
 import { Button, Icon, WhiteSpace, WingBlank } from '@ant-design/react-native'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import { connect } from 'react-redux'
 
 const FriendInfo = props => {
     return (
@@ -34,4 +35,12 @@ const FriendInfo = props => {
     )
 }
 
-export default FriendInfo
+
+const mapStateToProps = (state) => {
+    return {
+        friendInfoReducer: state.friendInfoReducer
+    }
+}
+
+
+export default connect(mapStateToProps)(FriendInfo)

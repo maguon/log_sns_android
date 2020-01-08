@@ -18,7 +18,6 @@ import RequestContactList from '../views/message/requestContactList/RequestConta
 import Blog from '../views/blog/Blog' //微博详情
 import BlogPicture from '../views/blogPicture/BlogPicture' //微博照片详情
 import BlogVideo from '../views/blogVideo/BlogVideo' //微博视频详情
-import Friend from '../views/friend/Friend' //网友详情
 import CollectionAddr from '../views/collectionAddr/CollectionAddr' //收藏地址
 import SeekHelp from '../views/seekHelp/SeekHelp' //发帮助
 import Scan from '../views/scan/Scan' //扫一扫
@@ -127,12 +126,6 @@ export default createStackNavigator({
         screen: BlogVideo,
         navigationOptions: {
             title: '微博视频',
-        }
-    },
-    Friend: {
-        screen: Friend,
-        navigationOptions: {
-            title: '网友详情'
         }
     },
     Scan: {
