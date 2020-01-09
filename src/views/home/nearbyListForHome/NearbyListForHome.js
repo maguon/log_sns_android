@@ -1,17 +1,56 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, FlatList } from 'react-native'
+import { Card, Content as CardContent, Footer, Header, Video, Image, Map } from '../../../components/card'
+import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
+import { ListEmpty, ListFooter } from '../../../components/list'
 import { connect } from 'react-redux'
+import reduxActions from '../../../reduxActions'
 
+class NearbyListForHome extends Component {
+    
+    componentDidMount() {
+        // this.props.getArticleAllListWaiting()
+        // InteractionManager.runAfterInteractions(this.props.getArticleAllList)
+    }
 
-class NearbyListForHome extends Component{
-    render(){
+    componentWillUnmount() {
+        // this.props.rmArticleAllList()
+    }
+
+    render() {
         return (
-            <View>
-                <Text>NearbyListForHome</Text>
-            </View>
+            <ScrollView style={{ flex: 1 }}>
+                <WhiteSpace size='md' />
+                <WingBlank size='md'>
+                    <Card>
+                        <Header />
+                        <CardContent />
+                        <Video />
+                        <Footer />
+                    </Card>
+                    <WhiteSpace size='md' />
+                </WingBlank>
+            </ScrollView>
         )
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        nearbyListForHomeReducer: state.nearbyListForHomeReducer
+    }
+}
 
-export default NearbyListForHome
+const mapDispatchToProps = (dispatch) => ({
+    getNearbyListForHome: () => {
+        dispatch(reduxActions.nearbyListForHome.getNearbyListForHome())
+    },
+    getNearbyListForHomeWaiting: () => {
+        dispatch(reduxActions.nearbyListForHome.getNearbyListForHomeWaiting())
+    },
+    getNearbyListForHomeMore: () => {
+        dispatch(reduxActions.nearbyListForHome.getNearbyListForHomeMore())
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(NearbyListForHome)

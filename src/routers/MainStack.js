@@ -25,6 +25,8 @@ import PublishBlog from '../views/publishBlog/PublishBlog' //写文章
 import NavBar from './navBar/NavBar'
 import NavPulishBlog from './navBar/NavPulishBlog'
 
+import ArticleListOfFriend from '../views/articleListOfFriend/ArticleListOfFriend'
+
 export default createStackNavigator({
     TabsStack: {
         screen: TabsStack,
@@ -144,6 +146,12 @@ export default createStackNavigator({
         screen: SeekHelp,
         navigationOptions: {
             title: '发布帮助',
+        }
+    },
+    ArticleListOfFriend: {
+        screen: ArticleListOfFriend,
+        navigationOptions: {
+            title: '',
         }
     },
     PublishBlog: {

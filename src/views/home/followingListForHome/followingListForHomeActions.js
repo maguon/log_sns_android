@@ -10,9 +10,9 @@ export const getFollowingListForHome = () => async (dispatch, getState) => {
         const { loginReducer } = getState()
         // console.log('reqParams', reqParams)
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?start=0&size=${pageSize}`
-        console.log('url', url)
+        // console.log('url', url)
         const res = await httpRequest.get(url)
-        console.log('res', res)
+        // console.log('res', res)
         if (res.success) {
             dispatch({
                 type: reduxActionTypes.followingListForHome.get_followingListForHome_success, payload: {
@@ -24,7 +24,7 @@ export const getFollowingListForHome = () => async (dispatch, getState) => {
             dispatch({ type: reduxActionTypes.followingListForHome.get_followingListForHome_failed, payload: { failedMsg: `${res.msg}` } })
         }
     } catch (err) {
-        console.log('err', err)
+        // console.log('err', err)
         dispatch({ type: reduxActionTypes.followingListForHome.get_followingListForHome_failed, payload: { failedMsg: `${err}` } })
     }
 }
@@ -43,9 +43,9 @@ export const getFollowingListForHomeMore = () => async (dispatch, getState) => {
             dispatch({ type: reduxActionTypes.followingListForHome.get_followingListForHomeMore_waiting, payload: {} })
             try {
                 const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?start=${followingListForHomeReducer.data.articleList.length}&size=${pageSize}`
-                console.log('url', url)
+                // console.log('url', url)
                 const res = await httpRequest.get(url)
-                console.log('res', res)
+                // console.log('res', res)
 
                 if (res.success) {
                     const isCompleted = res.result.length == 0 || res.result.length % pageSize != 0

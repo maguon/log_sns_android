@@ -61,9 +61,9 @@ export default handleActions({
         const { payload: { articleList, isCompleted } } = action
         // console.log('articleList', articleList)
         return {
-            ...initialState,
+            ...state,
             data: {
-                ...initialState.data,
+                ...state.data,
                 articleList: [...state.data.articleList, ...articleList],
                 isCompleted
             },

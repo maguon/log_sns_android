@@ -5,6 +5,7 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import { connect } from 'react-redux'
 
 const FriendInfo = props => {
+    console.log('props',props)
     return (
         <View style={{ backgroundColor: '#6e6e6e' }}>
             <WingBlank size="lg">
