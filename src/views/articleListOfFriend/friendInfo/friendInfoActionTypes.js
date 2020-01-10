@@ -17,3 +17,7 @@ export const applyContactForFriend_waiting = 'applyContactForFriend_waiting'
 export const followForFriend_success = 'followForFriend_success'
 export const followForFriend_failed = 'followForFriend_failed'
 export const followForFriend_waiting = 'followForFriend_waiting'
+
+export const remove_followForFriend_success = 'remove_followForFriend_success'
+export const remove_followForFriend_failed = 'remove_followForFriend_failed'
+export const remove_followForFriend_waiting = 'remove_followForFriend_waiting'

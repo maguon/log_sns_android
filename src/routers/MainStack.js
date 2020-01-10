@@ -26,6 +26,7 @@ import NavBar from './navBar/NavBar'
 import NavPulishBlog from './navBar/NavPulishBlog'
 
 import ArticleListOfFriend from '../views/articleListOfFriend/ArticleListOfFriend'
+import TextArticleInfo from '../views/person/articleInfo/textArticleInfo/TextArticleInfo'
 
 export default createStackNavigator({
     TabsStack: {
@@ -152,6 +153,12 @@ export default createStackNavigator({
         screen: ArticleListOfFriend,
         navigationOptions: {
             title: '',
+        }
+    },
+    TextArticleInfo: {
+        screen: TextArticleInfo,
+        navigationOptions: {
+            title: '文章',
         }
     },
     PublishBlog: {

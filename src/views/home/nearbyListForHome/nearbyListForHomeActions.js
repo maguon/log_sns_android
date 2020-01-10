@@ -9,7 +9,7 @@ export const getNearbyListForHome = () => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         // console.log('reqParams', reqParams)
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?start=0&size=${pageSize}`
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?start=0&size=${pageSize}`
         console.log('url', url)
         const res = await httpRequest.get(url)
         console.log('res', res)
@@ -43,7 +43,7 @@ export const getNearbyListForHomeMore = () => async (dispatch, getState) => {
         if (!nearbyListForHomeReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.nearbyListForHome.get_nearbyListForHomeMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?start=${nearbyListForHomeReducer.data.articleList.length}&size=${pageSize}`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?start=${nearbyListForHomeReducer.data.articleList.length}&size=${pageSize}`
                 console.log('url', url)
                 const res = await httpRequest.get(url)
                 console.log('res', res)

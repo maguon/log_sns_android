@@ -13,6 +13,10 @@ const initialState = {
     getArticleListOfFriendMore: {
         isResultStatus: 0,
         failedMsg: ''
+    },
+    likeArticle: {
+        isResultStatus: 0,
+        failedMsg: ''
     }
 }
 
@@ -20,14 +24,14 @@ export default handleActions({
     [reduxActionTypes.articleListOfFriend.get_articleListOfFriend_success]: (state, action) => {
         const { payload: { articleList, isCompleted } } = action
         return {
-            ...initialState,
+            ...state,
             data: {
-                ...initialState.data,
+                ...state.data,
                 articleList,
                 isCompleted
             },
             getArticleListOfFriend: {
-                ...initialState.getArticleListOfFriend,
+                ...state.getArticleListOfFriend,
                 isResultStatus: 2
             }
         }
@@ -54,16 +58,13 @@ export default handleActions({
         }
     },
 
-
-
-
     [reduxActionTypes.articleListOfFriend.get_articleListOfFriendMore_success]: (state, action) => {
         const { payload: { articleList, isCompleted } } = action
         // console.log('articleList', articleList)
         return {
-            ...initialState,
+            ...state,
             data: {
-                ...initialState.data,
+                ...state.data,
                 articleList: [...state.data.articleList, ...articleList],
                 isCompleted
             },
@@ -90,6 +91,44 @@ export default handleActions({
             ...state,
             getArticleListOfFriendMore: {
                 ...state.getArticleListOfFriendMore,
+                isResultStatus: 1
+            }
+        }
+    },
+
+
+    [reduxActionTypes.articleListOfFriend.like_articleForFriend_success]: (state, action) => {
+        const { payload: { articleList, isCompleted } } = action
+        // console.log('articleList', articleList)
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                articleList: [...state.data.articleList, ...articleList],
+                isCompleted
+            },
+            likeArticle: {
+                ...state.likeArticle,
+                isResultStatus: 2
+            }
+        }
+    },
+    [reduxActionTypes.articleListOfFriend.like_articleForFriend_failed]: (state, action) => {
+        const { payload: { failedMsg } } = action
+        return {
+            ...state,
+            likeArticle: {
+                ...state.likeArticle,
+                isResultStatus: 3,
+                failedMsg
+            }
+        }
+    },
+    [reduxActionTypes.articleListOfFriend.like_articleForFriend_waiting]: (state, action) => {
+        return {
+            ...state,
+            likeArticle: {
+                ...state.likeArticle,
                 isResultStatus: 1
             }
         }

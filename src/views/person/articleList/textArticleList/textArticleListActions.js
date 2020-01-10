@@ -8,7 +8,7 @@ const pageSize = 20
 export const getTextArticleList = reqParams => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?${ObjectToUrl({
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?${ObjectToUrl({
             start: 0,
             size: pageSize,
             ...reqParams
@@ -50,7 +50,7 @@ export const getTextArticleListMore = reqParams => async (dispatch, getState) =>
         if (!textArticleListReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.textArticleList.get_textArticleListMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?${ObjectToUrl({
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?${ObjectToUrl({
                     start: textArticleListReducer.data.textArticleList.length,
                     size: pageSize,
                     ...reqParams

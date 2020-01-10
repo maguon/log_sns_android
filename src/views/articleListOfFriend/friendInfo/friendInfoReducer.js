@@ -26,6 +26,10 @@ const initialState = {
     follow: {
         isResultStatus: 0,
         failedMsg: ''
+    },
+    removeFollow: {
+        isResultStatus: 0,
+        failedMsg: ''
     }
 }
 
@@ -103,12 +107,12 @@ export default handleActions({
     },
 
     [reduxActionTypes.friendInfo.get_relationInfoForFriend_success]: (state, action) => {
-        const { payload: { felationInfo } } = action
+        const { payload: { relationInfo } } = action
         return {
             ...state,
             data: {
                 ...state.data,
-                felationInfo
+                relationInfo
             },
             getFelationInfo: {
                 ...state.getFelationInfo,
@@ -205,6 +209,43 @@ export default handleActions({
             ...state,
             applyContact: {
                 ...state.applyContact,
+                isResultStatus: 1
+            }
+        }
+    },
+
+
+
+    [reduxActionTypes.friendInfo.remove_followForFriend_success]: (state, action) => {
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                relationInfo:{}
+            },
+            removeFollow: {
+                ...state.removeFollow,
+                isResultStatus: 2
+            }
+        }
+    },
+    [reduxActionTypes.friendInfo.remove_followForFriend_failed]: (state, action) => {
+        const { payload: { failedMsg } } = action
+
+        return {
+            ...state,
+            removeFollow: {
+                ...state.removeFollow,
+                isResultStatus: 3,
+                failedMsg
+            }
+        }
+    },
+    [reduxActionTypes.friendInfo.remove_followForFriend_waiting]: (state, action) => {
+        return {
+            ...state,
+            removeFollow: {
+                ...state.removeFollow,
                 isResultStatus: 1
             }
         }

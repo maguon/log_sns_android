@@ -9,7 +9,7 @@ export const getSeekHelpArticleList = reqParams => async (dispatch, getState) =>
     try {
         const { loginReducer } = getState()
         // console.log('reqParams', reqParams)
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?${ObjectToUrl({
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?${ObjectToUrl({
             start: 0,
             size: pageSize,
             ...reqParams
@@ -46,7 +46,7 @@ export const getSeekHelpArticleListMore = reqParams => async (dispatch, getState
         if (!seekHelpArticleListReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.seekHelpArticleList.get_seekHelpArticleListMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages${ObjectToUrl({
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg${ObjectToUrl({
                     start: seekHelpArticleListReducer.data.seekHelpArticleList.length,
                     size: pageSize,
                     ...reqParams

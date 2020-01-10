@@ -9,7 +9,7 @@ export const getFollowingListForHome = () => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         // console.log('reqParams', reqParams)
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?start=0&size=${pageSize}`
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?start=0&size=${pageSize}`
         // console.log('url', url)
         const res = await httpRequest.get(url)
         // console.log('res', res)
@@ -42,7 +42,7 @@ export const getFollowingListForHomeMore = () => async (dispatch, getState) => {
         if (!followingListForHomeReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.followingListForHome.get_followingListForHomeMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?start=${followingListForHomeReducer.data.articleList.length}&size=${pageSize}`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?start=${followingListForHomeReducer.data.articleList.length}&size=${pageSize}`
                 // console.log('url', url)
                 const res = await httpRequest.get(url)
                 // console.log('res', res)

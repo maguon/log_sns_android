@@ -9,7 +9,7 @@ export const getImageArticleList = reqParams => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         // console.log('reqParams', reqParams)
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages${ObjectToUrl({
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg${ObjectToUrl({
             start: 0,
             size: pageSize,
             ...reqParams
@@ -46,7 +46,7 @@ export const getImageArticleListMore = reqParams => async (dispatch, getState) =
         if (!imageArticleListReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.imageArticleList.get_imageArticleListMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages${ObjectToUrl({
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg${ObjectToUrl({
                     start: imageArticleListReducer.data.imageArticleList.length,
                     size: pageSize,
                     ...reqParams

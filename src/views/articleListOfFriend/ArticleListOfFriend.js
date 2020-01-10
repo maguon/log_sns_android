@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, InteractionManager } from 'react-native'
-import { Card, Content as CardContent, Footer, HeaderForFollow, Video, Image, Map } from '../../components/card'
+import { View, Text, FlatList, InteractionManager, RefreshControl, TouchableOpacity } from 'react-native'
+import { Card, Content as CardContent, Footer, Header, Video, Image, Map } from '../../components/card'
 import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
 import FriendInfo from './friendInfo/FriendInfo'
 import reduxActions from '../../reduxActions'
@@ -13,7 +13,7 @@ class ArticleListOfFriend extends Component {
 
     componentDidMount() {
         const { navigation: { state: { params: { userInfo } } } } = this.props
-        // this.props.getArticleListOfFriendWaiting()
+        this.props.getArticleListOfFriendWaiting()
         this.props.getFriendInfoWaiting()
         this.props.getFelationInfoWaiting()
         this.props.getContactInfoWaiting()
@@ -21,47 +21,70 @@ class ArticleListOfFriend extends Component {
             this.props.getFriendInfo({ friendId: userInfo._user_id })
             this.props.getFelationInfo({ friendId: userInfo._user_id })
             this.props.getContactInfo({ friendId: userInfo._user_id })
+            this.props.getArticleListOfFriend({ friendId: userInfo._user_id })
         })
     }
 
     render() {
         console.log('props', this.props)
+        const { articleListOfFriendReducer, navigation: { state: { params: { userInfo } } }, navigation } = this.props
         return (
             <View style={{ flex: 1 }}>
                 {/* <WhiteSpace size='md' /> */}
                 <FlatList
                     keyExtractor={(item, index) => `${index}`}
                     ListHeaderComponent={<View><FriendInfo {...this.props} /><WhiteSpace size='md' /></View>}
-                    data={[1, 2, 3, 4, 5]}
+                    data={articleListOfFriendReducer.data.articleList}
                     renderItem={({ item }) => {
                         return (<WingBlank size='md'>
                             <Card>
-                                <HeaderForFollow />
-                                <CardContent />
-                                <Video />
-                                <Footer />
+                                <Header
+                                    params={{
+                                        nick: item.user_detail_info[0].nick_name,
+                                        date: item.created_at,
+                                        address: item.address_name,
+                                        avatar: item.user_detail_info[0].avatar
+                                    }}
+                                />
+                                <TouchableOpacity
+                                    onPress={() => navigation.navigate('TextArticleInfo')}
+                                    onLongPress={() => navigation.navigate('TextArticleInfo')}
+                                >
+                                    <CardContent
+                                        params={{ content: item.info }}
+                                    />
+                                    {item.type == 1 && item.carrier == 4 && <Map />}
+                                    {item.type == 1 && item.carrier == 2 && <Image />}
+                                    {item.type == 1 && item.carrier == 3 && <Video />}
+                                </TouchableOpacity>
+                                <Footer
+                                    msgCount={item.commentsNum}
+                                    likeCount={item.agreeNum}
+                                    // msgOnPress={() => { console.log('msgOnPress') }}
+                                    likeOnPress={() => { this.props.likeArticle({ messageId: item._id }) }}
+                                />
                             </Card>
                             <WhiteSpace size='md' />
                         </WingBlank>)
                     }}
-                // refreshControl={
-                //     <RefreshControl
-                //         colors={[styleColor]}
-                //         refreshing={articleAllListReducer.getArticleAllList.isResultStatus == 1}
-                //         onRefresh={() => {
-                //             props.getArticleListOfFriendWaiting()
-                //             props.getArticleListOfFriend()
-                //         }}
-                //     />
-                // }
-                // onEndReachedThreshold={0.2}
-                // onEndReached={() => {
-                //     if (articleAllListReducer.getArticleAllList.isResultStatus == 2 && !articleAllListReducer.data.isCompleted) {
-                //         props.getArticleAllListMore()
-                //     }
-                // }}
-                // ListEmptyComponent={articleAllListReducer.getArticleAllList.isResultStatus != 1 && <ListEmpty title='暂无文章' />}
-                // ListFooterComponent={articleAllListReducer.getArticleAllListMore.isResultStatus == 1 ? <ListFooter /> : <View />}
+                    refreshControl={
+                        <RefreshControl
+                            colors={[styleColor]}
+                            refreshing={articleListOfFriendReducer.getArticleListOfFriend.isResultStatus == 1}
+                            onRefresh={() => {
+                                this.props.getArticleListOfFriendWaiting()
+                                this.props.getArticleListOfFriend({ friendId: userInfo._user_id })
+                            }}
+                        />
+                    }
+                    onEndReachedThreshold={0.2}
+                    onEndReached={() => {
+                        if (articleListOfFriendReducer.getArticleListOfFriend.isResultStatus == 2 && !articleListOfFriendReducer.data.isCompleted) {
+                            this.props.getArticleListOfFriendMore({ friendId: userInfo._user_id })
+                        }
+                    }}
+                    ListEmptyComponent={articleListOfFriendReducer.getArticleListOfFriend.isResultStatus != 1 && <ListEmpty title='暂无文章' />}
+                    ListFooterComponent={articleListOfFriendReducer.getArticleListOfFriendMore.isResultStatus == 1 ? <ListFooter /> : <View />}
                 />
             </View>
         )
@@ -70,7 +93,7 @@ class ArticleListOfFriend extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        friendInfoReducer: state.friendInfoReducer
+        articleListOfFriendReducer: state.articleListOfFriendReducer
     }
 }
 
@@ -101,6 +124,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     getContactInfo: reqParams => {
         dispatch(reduxActions.friendInfo.getContactInfo(reqParams))
+    },
+    likeArticle: reqParams => {
+        dispatch(reduxActions.articleListOfFriend.likeArticle(reqParams))
     }
 })
 

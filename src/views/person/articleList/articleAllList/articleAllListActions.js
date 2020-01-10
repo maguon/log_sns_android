@@ -9,7 +9,7 @@ export const getArticleAllList = () => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         // console.log('reqParams', reqParams)
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?start=0&size=${pageSize}`
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?start=0&size=${pageSize}`
         // console.log('url', url)
         const res = await httpRequest.get(url)
         // console.log('res', res)
@@ -42,7 +42,7 @@ export const getArticleAllListMore = () => async (dispatch, getState) => {
         if (!articleAllListReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.articleAllList.get_articleAllListMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?start=${articleAllListReducer.data.articleAllList.length}&size=${pageSize}`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?start=${articleAllListReducer.data.articleAllList.length}&size=${pageSize}`
                 // console.log('url', url)
                 const res = await httpRequest.get(url)
                 // console.log('res', res)
