@@ -5,6 +5,7 @@ import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-na
 import HotListForHome from './hotListForHome/HotListForHome'
 import FollowingListForHome from './followingListForHome/FollowingListForHome'
 import NearbyListForHome from './nearbyListForHome/NearbyListForHome'
+import TextArticleInfo from '../person/articleInfo/textArticleInfo/TextArticleInfo'
 
 const Home = props => {
   const { navigation } = props
@@ -74,7 +75,7 @@ const Home = props => {
             </React.Fragment>
           </View>
         )}>
-        <HotListForHome {...props}/>
+        <HotListForHome {...props} />
         <FollowingListForHome />
         <NearbyListForHome />
       </Tabs>

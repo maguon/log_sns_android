@@ -33,6 +33,7 @@ import followingListForHomeReducer from './views/home/followingListForHome/follo
 import hotListForHomeReducer from './views/home/hotListForHome/hotListForHomeReducer'
 import nearbyListForHomeReducer from './views/home/nearbyListForHome/nearbyListForHomeReducer'
 
+import textArticleInfoReducer from './views/person/articleInfo/textArticleInfo/textArticleInfoReducer'
 
 
 export default combineReducers({
@@ -67,5 +68,8 @@ export default combineReducers({
 
     followingListForHomeReducer,
     hotListForHomeReducer,
-    nearbyListForHomeReducer
+    nearbyListForHomeReducer,
+
+
+    textArticleInfoReducer
 })

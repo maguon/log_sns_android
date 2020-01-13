@@ -47,12 +47,19 @@ class HotListForHome extends Component {
                                         }}
                                     />
                                 </TouchableOpacity>
-                                <CardContent
-                                    params={{ content: item.info }}
-                                />
-                                {item.type == 1 && item.carrier == 4 && <Map />}
-                                {item.type == 1 && item.carrier == 2 && <Image />}
-                                {item.type == 1 && item.carrier == 3 && <Video />}
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        navigation.navigate('TextArticleInfo', {
+                                            articleInfo: item
+                                        })
+                                    }}>
+                                    <CardContent
+                                        params={{ content: item.info }}
+                                    />
+                                    {item.type == 1 && item.carrier == 4 && <Map />}
+                                    {item.type == 1 && item.carrier == 2 && <Image />}
+                                    {item.type == 1 && item.carrier == 3 && <Video />}
+                                </TouchableOpacity>
                                 <Footer
                                     msgCount={item.commentsNum}
                                     likeCount={item.agreeNum}

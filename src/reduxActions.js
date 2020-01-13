@@ -29,6 +29,10 @@ import * as followingListForHome from './views/home/followingListForHome/followi
 import * as hotListForHome from './views/home/hotListForHome/hotListForHomeActions'
 import * as nearbyListForHome from './views/home/nearbyListForHome/nearbyListForHomeActions'
 
+
+import * as textArticleInfo from './views/person/articleInfo/textArticleInfo/textArticleInfoActions'
+
+
 export default {
     home,
     login,
@@ -63,5 +67,8 @@ export default {
 
     followingListForHome,
     hotListForHome,
-    nearbyListForHome
+    nearbyListForHome,
+
+
+    textArticleInfo
 }

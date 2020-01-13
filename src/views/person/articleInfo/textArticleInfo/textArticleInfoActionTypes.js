@@ -1,0 +1,11 @@
+export const get_commentForTextArticleInfo_success = 'get_msgCommentForTextArticleInfo_success'
+export const get_commentForTextArticleInfo_failed = 'get_msgCommentForTextArticleInfo_failed'
+export const get_commentForTextArticleInfo_waiting = 'get_msgCommentForTextArticleInfo_waiting'
+
+export const get_commentForTextArticleInfoMore_success = 'get_commentForTextArticleInfoMore_success'
+export const get_commentForTextArticleInfoMore_failed = 'get_commentForTextArticleInfoMore_failed'
+export const get_commentForTextArticleInfoMore_waiting = 'get_commentForTextArticleInfoMore_waiting'
+
+export const get_textArticleInfo_success = 'get_textArticleInfo_success'
+export const get_textArticleInfo_failed = 'get_textArticleInfo_failed'
+export const get_textArticleInfo_waiting = 'get_textArticleInfo_waiting'
