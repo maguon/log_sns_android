@@ -34,7 +34,7 @@ export const getCommentWaiting = () => (dispatch) => {
 
 }
 
-export const getCommentMore = () => async (dispatch, getState) => {
+export const getCommentMore = reqParams => async (dispatch, getState) => {
     const { loginReducer, textArticleInfoReducer } = getState()
     if (textArticleInfoReducer.getCommentMore.isResultStatus == 1) {
         await sleep(1000)
@@ -65,24 +65,28 @@ export const getCommentMore = () => async (dispatch, getState) => {
                     dispatch({ type: reduxActionTypes.textArticleInfo.get_commentForTextArticleInfoMore_failed, payload: { failedMsg: `${res.msg}` } })
                 }
             } catch (err) {
+                console.log('err', err)
+
                 dispatch({ type: reduxActionTypes.textArticleInfo.get_commentForTextArticleInfoMore_failed, payload: { failedMsg: `${err}` } })
             }
         }
     }
 }
 
-export const getTextArticleInfo = () => async (dispatch, getState) => {
+export const getTextArticleInfo = reqParams => async (dispatch, getState) => {
     try {
-        // const url = `${host.base_host}/user/${loginReducer.data.user._id}/userMsgComment?msgId=${reqParams.msgId}&msgType=1&level=1&start=0&size=${pageSize}`
+        const { loginReducer } = getState()
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?msgId=${reqParams.msgId}`
         // console.log('url', url)
-        // const res = await httpRequest.get(url)
+        const res = await httpRequest.get(url)
         // console.log('res', res)
-        // if(res.success){
-
-        // }else{
-        //     dispatch({ type: reduxActionTypes.textArticleInfo.get_textArticleInfo_failed, payload: { failedMsg: `${res.msg}` } })
-        // }
+        if (res.success) {
+            dispatch({ type: reduxActionTypes.textArticleInfo.get_textArticleInfo_success, payload: { articleInfo: res.result[0] } })
+        } else {
+            dispatch({ type: reduxActionTypes.textArticleInfo.get_textArticleInfo_failed, payload: { failedMsg: `${res.msg}` } })
+        }
     } catch (err) {
+        // console.log('err',err)
         dispatch({ type: reduxActionTypes.textArticleInfo.get_textArticleInfo_failed, payload: { failedMsg: `${err}` } })
     }
 }
