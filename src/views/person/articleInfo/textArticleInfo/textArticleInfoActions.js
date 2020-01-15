@@ -3,13 +3,13 @@ import httpRequest from '../../../../utils/HttpRequest'
 import * as host from '../../../../utils/host'
 import { sleep } from '../../../../utils/util'
 
-const pageSize = 1
+const pageSize = 20
 
 export const getComment = reqParams => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         // console.log('reqParams', reqParams)
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/userMsgComment?msgId=${reqParams.msgId}&msgType=1&level=1&start=0&size=${pageSize}`
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMsgComment?msgId=${reqParams.msgId}&msgType=1&level=1&start=0&size=${pageSize}`
         console.log('url', url)
         const res = await httpRequest.get(url)
         console.log('res', res)
@@ -43,8 +43,7 @@ export const getCommentMore = reqParams => async (dispatch, getState) => {
         if (!textArticleInfoReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.textArticleInfo.get_commentForTextArticleInfoMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/userMsgComment?
-                msgId=${reqParams.msgId}&msgType=1&level=1&start=${textArticleInfoReducer.data.commentList.length}&size=${pageSize}`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMsgComment?msgId=${reqParams.msgId}&msgType=1&level=1&start=${textArticleInfoReducer.data.commentList.length}&size=${pageSize}`
 
                 console.log('url', url)
                 const res = await httpRequest.get(url)
@@ -77,9 +76,9 @@ export const getTextArticleInfo = reqParams => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?msgId=${reqParams.msgId}`
-        // console.log('url', url)
+        console.log('url', url)
         const res = await httpRequest.get(url)
-        // console.log('res', res)
+        console.log('res', res)
         if (res.success) {
             dispatch({ type: reduxActionTypes.textArticleInfo.get_textArticleInfo_success, payload: { articleInfo: res.result[0] } })
         } else {

@@ -1,12 +1,12 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import ArticleListOfFriend from '../articleListOfFriend/ArticleListOfFriend'
+import CommentList from '../person/commentList/CommentList'
 
 const Community = props => {
     return (
         <View style={{ flex: 1 }}>
             {/* <Text>Community</Text> */}
-            <ArticleListOfFriend />
+            <CommentList />
         </View>
     )
 }

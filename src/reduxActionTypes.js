@@ -32,6 +32,9 @@ import * as nearbyListForHome from './views/home/nearbyListForHome/nearbyListFor
 
 import * as textArticleInfo from './views/person/articleInfo/textArticleInfo/textArticleInfoActionTypes'
 
+import * as myCommentList from './views/person/myCommentList/myCommentListActionTypes'
+
+
 
 
 export default {
@@ -74,5 +77,6 @@ export default {
     nearbyListForHome,
 
     
-    textArticleInfo
+    textArticleInfo,
+    myCommentList
 }

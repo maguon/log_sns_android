@@ -79,8 +79,8 @@ const PersonCenter = props => {
                         thumb={<Icon name="star" style={{ marginRight: 15 }} />} >
                         我的收藏(128)</Item>
                     <Item arrow="horizontal"
-                        onPress={() => { navigation.navigate('CommentList') }}
-                        onLongPress={() => { navigation.navigate('CommentList') }}
+                        onPress={() => { navigation.navigate('MyCommentList') }}
+                        onLongPress={() => { navigation.navigate('MyCommentList') }}
                         thumb={<Icon name="edit" style={{ marginRight: 15 }} />} >
                         我的评价</Item>
                     <Item arrow="horizontal"

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, InteractionManager, RefreshControl, Image, KeyboardAvoidingView, TextInput } from 'react-native'
+import { View, Text, FlatList, InteractionManager, RefreshControl, Image, TextInput, TouchableOpacity } from 'react-native'
 import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
 import { connect } from 'react-redux'
 import reduxActions from '../../../../reduxActions'
@@ -24,8 +24,9 @@ class TextArticleInfo extends Component {
     render() {
         const { navigation, textArticleInfoReducer } = this.props
         const { data: { articleInfo } } = textArticleInfoReducer
+
         return (
-            <View style={{flex:1}}>
+            <View style={{ flex: 1 }}>
                 <FlatList
                     keyExtractor={(item, index) => `${index}`}
                     data={textArticleInfoReducer.data.commentList}
@@ -65,9 +66,11 @@ class TextArticleInfo extends Component {
                                     <Text>{item.comment ? `${item.comment}` : ''}</Text>
                                     <WhiteSpace size='sm' />
                                     {item.comment_num > 0 && <View>
-                                        <View style={{ backgroundColor: '#f0f0f0', padding: 5 }}>
+                                        <TouchableOpacity
+                                            onPress={() => { navigation.navigate('CommentList', { parentCommentInfo: item }) }}
+                                            style={{ backgroundColor: '#f0f0f0', padding: 5 }}>
                                             <Text>共{item.comment_num ? `${item.comment_num}` : '0'}条回复 ></Text>
-                                        </View>
+                                        </TouchableOpacity>
                                         <WhiteSpace size='sm' />
                                     </View>}
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 0.5, paddingBottom: 5 }}>
@@ -109,8 +112,8 @@ class TextArticleInfo extends Component {
                     ref="input2"
                     style={{
                         height: 60,
-                        width:'100%',
-                    
+                        width: '100%',
+
                         color: '#333333',
                         backgroundColor: '#eee',
                         borderRadius: 60,

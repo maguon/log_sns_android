@@ -34,6 +34,7 @@ import hotListForHomeReducer from './views/home/hotListForHome/hotListForHomeRed
 import nearbyListForHomeReducer from './views/home/nearbyListForHome/nearbyListForHomeReducer'
 
 import textArticleInfoReducer from './views/person/articleInfo/textArticleInfo/textArticleInfoReducer'
+import myCommentListReducer from './views/person/myCommentList/myCommentListReducer'
 
 
 export default combineReducers({
@@ -71,5 +72,6 @@ export default combineReducers({
     nearbyListForHomeReducer,
 
 
-    textArticleInfoReducer
+    textArticleInfoReducer,
+    myCommentListReducer
 })
