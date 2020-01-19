@@ -12,6 +12,7 @@ const Brief = Item.Brief
 
 const FansList = props => {
     const { fansListReducer } = props
+    console.log('fansListReducer',fansListReducer)
     return (
         <FlatList
             keyExtractor={(item, index) => `${index}`}
@@ -25,8 +26,8 @@ const FansList = props => {
                                 style={{ width: 40, height: 40, borderRadius: 20, marginRight: 15, borderWidth: 0.5, borderColor: '#ddd' }} />
                         }
                         extra={item.type == 1
-                            ? <Button size='small' type='ghost' onPress={() => props.removeFollowFans({ followUserId: item._userId })}>取消关注</Button>
-                            : <Button size='small' type='primary' onPress={() => props.followFans({ followUserId: item._userId })}>关注</Button>}
+                            ? <Button size='small' type='ghost' onPress={() => props.removeFollowFans({ followUserId: item._user_id })}>取消关注</Button>
+                            : <Button size='small' type='primary' onPress={() => props.followFans({ followUserId: item._user_id })}>关注</Button>}
                     >
                         {item.attention_user_detail_info[0].nick_name ? `${item.attention_user_detail_info[0].nick_name}` : `${item.attention_user_login_info[0].phone}`}
                         <Brief>{item.created_at ? `${moment(item.created_at).format('YYYY-MM-DD')}` : ''}</Brief>

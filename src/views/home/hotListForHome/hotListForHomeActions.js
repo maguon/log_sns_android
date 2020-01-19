@@ -77,18 +77,18 @@ export const likeArticle = reqParams => async (dispatch, getState) => {
         const { loginReducer } = getState()
         dispatch({ type: reduxActionTypes.hotListForHome.like_commentForHotList_waiting, payload: {} })
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/userPraise`
-        console.log('url', url)
+        // console.log('url', url)
         const res = await httpRequest.post(url, {
             type: 1,
             msgId: reqParams.msgId,
             msgUserId: reqParams.msgUserId
         })
-        console.log('res', res)
+        // console.log('res', res)
         if (res.success) {
             const urlArticle = `${host.base_host}/user/${loginReducer.data.user._id}/msg?msgId=${reqParams.msgId}`
-            console.log('urlArticle', urlArticle)
+            // console.log('urlArticle', urlArticle)
             const resArticle = await httpRequest.get(urlArticle)
-            console.log('resArticle', resArticle)
+            // console.log('resArticle', resArticle)
             if (resArticle.success) {
                 dispatch({ type: reduxActionTypes.hotListForHome.like_commentForHotList_success, payload: { articleInfo: resArticle.result[0] } })
                 Portal.remove(likeLoading)
@@ -104,7 +104,7 @@ export const likeArticle = reqParams => async (dispatch, getState) => {
             Toast.success("点赞失败！", 0.5)
         }
     } catch (err) {
-        console.log('err', err)
+        // console.log('err', err)
         dispatch({ type: reduxActionTypes.hotListForHome.like_commentForHotList_failed, payload: { failedMsg: `${err}` } })
         Portal.remove(likeLoading)
         Toast.success("点赞失败！", 0.5)

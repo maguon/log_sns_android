@@ -84,7 +84,10 @@ export const removeFollowFans = reqParams => async (dispatch, getState) => {
         const { followUserId } = reqParams
         dispatch({ type: reduxActionTypes.fansList.removeFollowFans_waiting, payload: {} })
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/followUser/${followUserId}/del`
+        console.log('url',url)
         const res = await httpRequest.del(url)
+        console.log('res',res)
+
         if (res.success) {
             dispatch({ type: reduxActionTypes.fansList.removeFollowFans_success, payload: { followUserId } })
         } else {

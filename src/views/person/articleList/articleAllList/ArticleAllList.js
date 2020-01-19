@@ -43,11 +43,14 @@ class ArticleAllList extends Component {
                                 {item.type == 1 && item.carrier == 2 && <Image />}
                                 {item.type == 1 && item.carrier == 3 && <Video />}
                                 <FooterForDel
-                                    msgCount={item.commentsNum}
-                                    likeCount={item.agreeNum}
+                                    msgCount={item.comment_num}
+                                    likeCount={item.agree_num}
                                     delOnPress={() => { this.props.delArticle({ messageId: item._id }) }}
                                     msgOnPress={() => { console.log('msgOnPress') }}
-                                    likeOnPress={() => { this.props.likeArticle({ messageId: item._id }) }} />
+                                    likeOnPress={() => { this.props.likeArticle({ 
+                                        msgId: item._id,
+                                        msgUserId: item._user_id
+                                     }) }} />
                             </Card>
                             <WhiteSpace size='md' />
                         </WingBlank>

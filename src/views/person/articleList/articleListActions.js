@@ -40,10 +40,11 @@ export const likeArticle = reqParams => async (dispatch, getState) => {
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/userPraise`
         const res = await httpRequest.post(url, {
             type: 1,
-            _messageId: reqParams.messageId
+            msgId: reqParams.msgId,
+            msgUserId: reqParams.msgUserId
         })
         if (res.success) {
-            const urlArticle = `${host.base_host}/user/${loginReducer.data.user._id}/allMessages?${reqParams.messageId}`
+            const urlArticle = `${host.base_host}/user/${loginReducer.data.user._id}/msg?msgId=${reqParams.msgId}`
             const resArticle = await httpRequest.get(urlArticle)
             if (res.success) {
                 dispatch({ type: reduxActionTypes.articleAllList.update_itemForArticleAllList_byId, payload: { article: resArticle.result[0] } })
@@ -52,7 +53,6 @@ export const likeArticle = reqParams => async (dispatch, getState) => {
                 dispatch({ type: reduxActionTypes.videoArticleList.update_itemForVideoArticleList_byId, payload: { article: resArticle.result[0] } })
                 dispatch({ type: reduxActionTypes.seekHelpArticleList.update_itemForSeekHelpArticleList_byId, payload: { article: resArticle.result[0] } })
                 dispatch({ type: reduxActionTypes.articleList.like_articleForMyself_success, payload: {} })
-
                 Portal.remove(likeLoading)
                 Toast.success("点赞成功！", 0.5)
             } else {
@@ -60,7 +60,6 @@ export const likeArticle = reqParams => async (dispatch, getState) => {
                 Portal.remove(likeLoading)
                 Toast.success("点赞失败！", 0.5)
             }
-
         } else {
             dispatch({ type: reduxActionTypes.articleList.like_articleForMyself_failed, payload: { failedMsg: `${res.msg}` } })
             Portal.remove(likeLoading)
@@ -70,6 +69,5 @@ export const likeArticle = reqParams => async (dispatch, getState) => {
         dispatch({ type: reduxActionTypes.articleList.like_articleForMyself_failed, payload: { failedMsg: `${err}` } })
         Portal.remove(likeLoading)
         Toast.success("点赞失败！", 0.5)
-
     }
 }

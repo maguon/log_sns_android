@@ -35,7 +35,7 @@ const TabScreens = createBottomTabNavigator(
         }
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'Message',
         defaultNavigationOptions: ({ navigation }) => ({
             tabBarIcon: ({ focused, horizontal, tintColor }) => {
                 const { routeName } = navigation.state

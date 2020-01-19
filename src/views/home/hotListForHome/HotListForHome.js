@@ -20,7 +20,7 @@ class HotListForHome extends Component {
 
     render() {
         const { hotListForHomeReducer, navigation } = this.props
-        console.log('hotListForHomeReducer', hotListForHomeReducer)
+        // console.log('hotListForHomeReducer', hotListForHomeReducer)
         // console.log('this.props', this.props)
         return (
             <FlatList

@@ -1,15 +1,54 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React,{Component} from 'react'
+import { ScrollView, View } from 'react-native'
+import { Card, ReplyContent, ReplyHeader } from '../../../components/card'
+import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
+import globalStyles from '../../../GlobalStyles'
 import { connect } from 'react-redux'
 import reduxActions from '../../../reduxActions'
 
-//我的评论
-const MyCommentList = props => {
-    return (
-        <View>
-            <Text>MyCommentList</Text>
-        </View>
-    )
+class MyCommentList extends Component{
+    componentDidMount(){
+
+    }
+    
+    render(){
+        return (
+            <View style={globalStyles.container}>
+                <ScrollView style={{ flex: 1 }}>
+                    <Card style={{ backgroundColor: '#fff' }}>
+                        <ReplyHeader />
+                        <ReplyContent />
+                    </Card>
+                    <WhiteSpace size='md' />
+    
+                    <Card style={{ backgroundColor: '#fff' }}>
+                        <ReplyHeader />
+                        <ReplyContent />
+                    </Card>
+                    <WhiteSpace size='md' />
+    
+                    <Card style={{ backgroundColor: '#fff' }}>
+                        <ReplyHeader />
+                        <ReplyContent />
+                    </Card>
+                    <WhiteSpace size='md' />
+    
+                    <Card style={{ backgroundColor: '#fff' }}>
+                        <ReplyHeader />
+                        <ReplyContent />
+                    </Card>
+                    <WhiteSpace size='md' />
+    
+                    <Card style={{ backgroundColor: '#fff' }}>
+                        <ReplyHeader />
+                        <ReplyContent />
+                    </Card>
+                    <WhiteSpace size='md' />
+    
+                </ScrollView>
+            </View>
+        )
+    }
 }
 
 const mapStateToProps = (state) => {

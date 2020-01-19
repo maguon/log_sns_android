@@ -132,6 +132,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
+        multiDexEnabled true
         versionName "1.0"
         missingDimensionStrategy 'react-native-camera', 'general'
     }
@@ -181,6 +182,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "androidx.multidex:multidex:2.0.0"
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     if (enableHermes) {

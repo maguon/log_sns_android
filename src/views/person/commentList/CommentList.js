@@ -8,7 +8,7 @@ import { styleColor } from '../../../GlobalStyles'
 import { ListEmpty, ListFooter } from '../../../components/list'
 import moment from 'moment'
 
-//我的评论
+//二级评论
 class CommentList extends Component {
 
     componentDidMount() {

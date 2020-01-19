@@ -32,7 +32,7 @@ class ArticleList extends Component {
                     <ArticleAllList />
                     <TextArticleList />
                     <VideoArticleList />
-                    <ImageArticleList refs={''} />
+                    <ImageArticleList  />
                     <SeekHelpArticleList />
                 </Tabs>
             </View>
