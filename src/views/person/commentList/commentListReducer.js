@@ -4,14 +4,17 @@ import reduxActionTypes from '../../../reduxActionTypes'
 const initialState = {
     data: {
         commentList: [],
-        isCompleted: false,
-        articleInfo: {}
+        isCompleted: false
     },
     getCommentList: {
         isResultStatus: 0,
         failedMsg: ''
     },
     getCommentListMore: {
+        isResultStatus: 0,
+        failedMsg: ''
+    },
+    likeComment: {
         isResultStatus: 0,
         failedMsg: ''
     }
@@ -60,7 +63,6 @@ export default handleActions({
 
     [reduxActionTypes.commentList.get_commentListMore_success]: (state, action) => {
         const { payload: { commentList, isCompleted } } = action
-        // console.log('articleList', articleList)
         return {
             ...state,
             data: {
@@ -97,5 +99,45 @@ export default handleActions({
     },
 
 
+    [reduxActionTypes.commentList.like_commentForCommentList_success]: (state, action) => {
+        const { payload: { commentInfo } } = action
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                commentList: state.data.commentList.map(item => {
+                    if (item._id != commentInfo._id) {
+                        return item
+                    } else {
+                        return commentInfo
+                    }
+                })
+            },
+            likeComment: {
+                ...state.likeComment,
+                isResultStatus: 2
+            }
+        }
+    },
+    [reduxActionTypes.commentList.like_commentForCommentList_failed]: (state, action) => {
+        const { payload: { failedMsg } } = action
 
+        return {
+            ...state,
+            likeComment: {
+                ...state.likeComment,
+                isResultStatus: 3,
+                failedMsg
+            }
+        }
+    },
+    [reduxActionTypes.commentList.like_commentForCommentList_waiting]: (state, action) => {
+        return {
+            ...state,
+            likeComment: {
+                ...state.likeComment,
+                isResultStatus: 1
+            }
+        }
+    }
 }, initialState)

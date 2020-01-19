@@ -5,8 +5,8 @@ import CommentList from '../person/commentList/CommentList'
 const Community = props => {
     return (
         <View style={{ flex: 1 }}>
-            {/* <Text>Community</Text> */}
-            <CommentList />
+            <Text>Community</Text>
+            {/* <CommentList /> */}
         </View>
     )
 }

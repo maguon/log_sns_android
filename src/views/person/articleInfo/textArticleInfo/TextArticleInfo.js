@@ -56,6 +56,7 @@ class TextArticleInfo extends Component {
                         </View>
                     }
                     renderItem={({ item }) => {
+                        console.log('item', item)
                         return (
                             <WingBlank size='md' style={{ flexDirection: 'row' }}>
                                 <View style={{ height: 48, width: 48 }} >
@@ -77,8 +78,18 @@ class TextArticleInfo extends Component {
                                         <Text>{item.created_at ? `${moment(item.created_at).format('YYYY-MM-DD HH:mm')}` : ''}</Text>
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                             <SimpleLineIcons name="speech" />
-                                            <SimpleLineIcons name="like" style={{ marginLeft: 20 }} />
-                                            <Text style={{ marginLeft: 5 }}>{item.agree_num ? `${item.agree_num}` : '0'}</Text>
+                                            <TouchableOpacity onPress={() => {
+                                                this.props.likeComment({
+                                                    msgId: item._msg_id,
+                                                    msgUserId: item._msg_user_id,
+                                                    msgComId: item._id,
+                                                    msgComUserId: item._user_id
+                                                })
+                                            }} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                <SimpleLineIcons name="like" style={{ marginLeft: 20 }} />
+                                                <Text style={{ marginLeft: 5 }}>{item.agree_num ? `${item.agree_num}` : '0'}</Text>
+                                            </TouchableOpacity>
+
                                         </View>
                                     </View>
                                     <WhiteSpace size='lg' />
@@ -149,6 +160,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     getTextArticleInfoWaiting: () => {
         dispatch(reduxActions.textArticleInfo.getTextArticleInfoWaiting())
+    },
+    likeComment: reqParams => {
+        dispatch(reduxActions.textArticleInfo.likeComment(reqParams))
     }
 })
 

@@ -18,6 +18,10 @@ const initialState = {
     getTextArticleInfo: {
         isResultStatus: 0,
         failedMsg: ''
+    },
+    likeComment: {
+        isResultStatus: 0,
+        failedMsg: ''
     }
 }
 
@@ -133,6 +137,51 @@ export default handleActions({
             ...state,
             getTextArticleInfo: {
                 ...state.getTextArticleInfo,
+                isResultStatus: 1
+            }
+        }
+    },
+
+
+
+
+    [reduxActionTypes.textArticleInfo.like_commentForTextArticleInfo_success]: (state, action) => {
+        const { payload: { commentInfo } } = action
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                commentList: state.data.commentList.map(item => {
+                    if (item._id != commentInfo._id) {
+                        return item
+                    } else {
+                        return commentInfo
+                    }
+                })
+            },
+            likeComment: {
+                ...state.likeComment,
+                isResultStatus: 2
+            }
+        }
+    },
+    [reduxActionTypes.textArticleInfo.like_commentForTextArticleInfo_failed]: (state, action) => {
+        const { payload: { failedMsg } } = action
+
+        return {
+            ...state,
+            likeComment: {
+                ...state.likeComment,
+                isResultStatus: 3,
+                failedMsg
+            }
+        }
+    },
+    [reduxActionTypes.textArticleInfo.like_commentForTextArticleInfo_waiting]: (state, action) => {
+        return {
+            ...state,
+            likeComment: {
+                ...state.likeComment,
                 isResultStatus: 1
             }
         }

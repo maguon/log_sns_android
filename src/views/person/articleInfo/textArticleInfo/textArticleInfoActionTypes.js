@@ -9,3 +9,7 @@ export const get_commentForTextArticleInfoMore_waiting = 'get_commentForTextArti
 export const get_textArticleInfo_success = 'get_textArticleInfo_success'
 export const get_textArticleInfo_failed = 'get_textArticleInfo_failed'
 export const get_textArticleInfo_waiting = 'get_textArticleInfo_waiting'
+
+export const like_commentForTextArticleInfo_success = 'like_commentForTextArticleInfo_success'
+export const like_commentForTextArticleInfo_failed = 'like_commentForTextArticleInfo_failed'
+export const like_commentForTextArticleInfo_waiting = 'like_commentForTextArticleInfo_waiting'

@@ -20,7 +20,7 @@ class HotListForHome extends Component {
 
     render() {
         const { hotListForHomeReducer, navigation } = this.props
-        // console.log('hotListForHomeReducer', hotListForHomeReducer)
+        console.log('hotListForHomeReducer', hotListForHomeReducer)
         // console.log('this.props', this.props)
         return (
             <FlatList
@@ -28,6 +28,7 @@ class HotListForHome extends Component {
                 data={hotListForHomeReducer.data.articleList}
                 renderItem={params => {
                     const { item, index } = params
+                    // console.log('item', item)
                     return (
                         <WingBlank size='md'>
                             {index == 0 && <WhiteSpace size='md' />}
@@ -61,11 +62,16 @@ class HotListForHome extends Component {
                                     {item.type == 1 && item.carrier == 3 && <Video />}
                                 </TouchableOpacity>
                                 <Footer
-                                    msgCount={item.commentsNum}
-                                    likeCount={item.agreeNum}
-                                // delOnPress={() => { this.props.delArticle({ messageId: item._id }) }}
-                                // msgOnPress={() => { console.log('msgOnPress') }}
-                                // likeOnPress={() => { this.props.likeArticle({ messageId: item._id }) }}
+                                    msgCount={item.comment_num}
+                                    likeCount={item.agree_num}
+                                    // delOnPress={() => { this.props.delArticle({ messageId: item._id }) }}
+                                    // msgOnPress={() => { console.log('msgOnPress') }}
+                                    likeOnPress={() => {
+                                        this.props.likeArticle({
+                                            msgId: item._id,
+                                            msgUserId: item._user_id
+                                        })
+                                    }}
                                 />
                             </Card>
                             <WhiteSpace size='md' />
@@ -110,6 +116,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     getHotListForHomeMore: () => {
         dispatch(reduxActions.hotListForHome.getHotListForHomeMore())
+    },
+    likeArticle: reqParams => {
+        dispatch(reduxActions.hotListForHome.likeArticle(reqParams))
     }
 })
 

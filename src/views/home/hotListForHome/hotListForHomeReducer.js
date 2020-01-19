@@ -13,6 +13,10 @@ const initialState = {
     getHotListForHomeMore: {
         isResultStatus: 0,
         failedMsg: ''
+    },
+    likeComment: {
+        isResultStatus: 0,
+        failedMsg: ''
     }
 }
 
@@ -90,6 +94,50 @@ export default handleActions({
             ...state,
             getHotListForHomeMore: {
                 ...state.getHotListForHomeMore,
+                isResultStatus: 1
+            }
+        }
+    },
+
+
+
+    [reduxActionTypes.hotListForHome.like_commentForHotList_success]: (state, action) => {
+        const { payload: { articleInfo } } = action
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                articleList: state.data.articleList.map(item => {
+                    if (item._id != articleInfo._id) {
+                        return item
+                    } else {
+                        return articleInfo
+                    }
+                })
+            },
+            likeComment: {
+                ...state.likeComment,
+                isResultStatus: 2
+            }
+        }
+    },
+    [reduxActionTypes.hotListForHome.like_commentForHotList_failed]: (state, action) => {
+        const { payload: { failedMsg } } = action
+
+        return {
+            ...state,
+            likeComment: {
+                ...state.likeComment,
+                isResultStatus: 3,
+                failedMsg
+            }
+        }
+    },
+    [reduxActionTypes.hotListForHome.like_commentForHotList_waiting]: (state, action) => {
+        return {
+            ...state,
+            likeComment: {
+                ...state.likeComment,
                 isResultStatus: 1
             }
         }
