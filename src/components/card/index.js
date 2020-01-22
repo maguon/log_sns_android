@@ -7,8 +7,7 @@ import Footer from './Footer'
 import FooterForDel from './FooterForDel'
 import Image from './Image'
 import Map from './Map'
-import ReplyContent from './ReplyContent'
-import ReplyHeader from './ReplyHeader'
+
 
 export {
     Card,
@@ -19,7 +18,5 @@ export {
     Footer,
     Image,
     Map,
-    ReplyContent,
-    ReplyHeader,
     FooterForDel
 }

@@ -9,6 +9,7 @@ export const getFansList = () => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/attentionUserInfo?start=0&size=${pageSize}`
+        
         const res = await httpRequest.get(url)
         if (res.success) {
             dispatch({
@@ -67,7 +68,7 @@ export const followFans = reqParams => async (dispatch, getState) => {
         const { followUserId } = reqParams
         dispatch({ type: reduxActionTypes.fansList.followFans_waiting, payload: {} })
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/userRelation`
-        const res = await httpRequest.post(url, { _userById: followUserId })
+        const res = await httpRequest.post(url, { userById: followUserId })
         if (res.success) {
             dispatch({ type: reduxActionTypes.fansList.followFans_success, payload: { followUserId } })
         } else {
@@ -84,10 +85,7 @@ export const removeFollowFans = reqParams => async (dispatch, getState) => {
         const { followUserId } = reqParams
         dispatch({ type: reduxActionTypes.fansList.removeFollowFans_waiting, payload: {} })
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/followUser/${followUserId}/del`
-        console.log('url',url)
         const res = await httpRequest.del(url)
-        console.log('res',res)
-
         if (res.success) {
             dispatch({ type: reduxActionTypes.fansList.removeFollowFans_success, payload: { followUserId } })
         } else {

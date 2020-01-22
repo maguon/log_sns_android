@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { ScrollView, View, InteractionManager, FlatList, RefreshControl } from 'react-native'
-import { Container, ReplyContent, ReplyHeader } from '../../../components/reply'
+import { Container, ArticleContainer, ArticleMini, Reply, ReplyMini } from '../../../components/reply'
 import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
 import globalStyles, { styleColor } from '../../../GlobalStyles'
 import { connect } from 'react-redux'
 import reduxActions from '../../../reduxActions'
 import { ListEmpty, ListFooter } from '../../../components/list'
+import moment from 'moment'
+import { commentToReply, commentToReplyMini, commentToArticle } from './util'
 
 class CommentOnMeList extends Component {
     componentDidMount() {
@@ -14,7 +16,7 @@ class CommentOnMeList extends Component {
     }
 
     render() {
-        const { commentOnMeListReducer } = this.props
+        const { commentOnMeListReducer, loginReducer } = this.props
         console.log('commentOnMeListReducer', commentOnMeListReducer)
         return (
             <FlatList
@@ -25,8 +27,11 @@ class CommentOnMeList extends Component {
                     return (
                         <View>
                             <Container style={{ backgroundColor: '#fff' }}>
-                                <ReplyHeader />
-                                <ReplyContent />
+                                <Reply data={commentToReply(item)} replyButtonIsVisible={item.level < 2} />
+                                <ArticleContainer >
+                                    {item.level > 1 && <ReplyMini data={commentToReplyMini(item, loginReducer.data.user._id)} />}
+                                    {item.msg_info.length > 0 && item.msg_user_detail_info.length > 0 && <ArticleMini data={commentToArticle(item)} />}
+                                </ArticleContainer>
                             </Container>
                             <WhiteSpace size='md' />
                         </View>
@@ -52,47 +57,14 @@ class CommentOnMeList extends Component {
                 ListEmptyComponent={commentOnMeListReducer.getCommentOnMeList.isResultStatus != 1 && <ListEmpty title='暂无文章' />}
                 ListFooterComponent={commentOnMeListReducer.getCommentOnMeListMore.isResultStatus == 1 ? <ListFooter /> : <View />}
             />
-            // <View style={globalStyles.container}>
-            //     <ScrollView style={{ flex: 1 }}>
-            //         <Card style={{ backgroundColor: '#fff' }}>
-            //             <ReplyHeader />
-            //             <ReplyContent />
-            //         </Card>
-            //         <WhiteSpace size='md' />
-
-            //         <Card style={{ backgroundColor: '#fff' }}>
-            //             <ReplyHeader />
-            //             <ReplyContent />
-            //         </Card>
-            //         <WhiteSpace size='md' />
-
-            //         <Card style={{ backgroundColor: '#fff' }}>
-            //             <ReplyHeader />
-            //             <ReplyContent />
-            //         </Card>
-            //         <WhiteSpace size='md' />
-
-            //         <Card style={{ backgroundColor: '#fff' }}>
-            //             <ReplyHeader />
-            //             <ReplyContent />
-            //         </Card>
-            //         <WhiteSpace size='md' />
-
-            //         <Card style={{ backgroundColor: '#fff' }}>
-            //             <ReplyHeader />
-            //             <ReplyContent />
-            //         </Card>
-            //         <WhiteSpace size='md' />
-
-            //     </ScrollView>
-            // </View>
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        commentOnMeListReducer: state.commentOnMeListReducer
+        commentOnMeListReducer: state.commentOnMeListReducer,
+        loginReducer: state.loginReducer
     }
 }
 

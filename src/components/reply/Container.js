@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Text ,StyleSheet} from 'react-native'
 
-
 const Container = props => {
     // console.log('props', props)
     const { children ,style=styles.container} = props

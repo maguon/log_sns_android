@@ -108,7 +108,7 @@ export default handleActions({
             data: {
                 ...state.data,
                 followList: state.data.followList.map(item => {
-                    if (item._userById == followUserId) {
+                    if (item._user_by_id == followUserId) {
                         return { ...item, follow_status: 1 }
                     } else {
                         return item
@@ -151,7 +151,7 @@ export default handleActions({
             data: {
                 ...state.data,
                 followList: state.data.followList.map(item => {
-                    if (item._userById == followUserId) {
+                    if (item._user_by_id == followUserId) {
                         return { ...item, follow_status: 0 }
                     } else {
                         return item

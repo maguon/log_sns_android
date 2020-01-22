@@ -41,7 +41,7 @@ export const getCommentListMore = () => async (dispatch, getState) => {
         if (!myCommentListReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.myCommentList.get_myCommentListMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/userMsgComment?start=${(myCommentListReducer.data.commentList.length)}&size=${pageSize}`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/userMsgComment?start=${myCommentListReducer.data.commentList.length}&size=${pageSize}`
                 console.log('url', url)
                 const res = await httpRequest.get(url)
                 console.log('res', res)
@@ -52,7 +52,7 @@ export const getCommentListMore = () => async (dispatch, getState) => {
                     // }
                     dispatch({
                         type: reduxActionTypes.myCommentList.get_myCommentListMore_success, payload: {
-                            followList: res.result,
+                            commentList: res.result,
                             isCompleted,
                         }
                     })

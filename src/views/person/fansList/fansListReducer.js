@@ -107,7 +107,7 @@ export default handleActions({
             data: {
                 ...state.data,
                 fansList: state.data.fansList.map(item => {
-                    if (item._userId == followUserId) {
+                    if (item._user_id == followUserId) {
                         return { ...item, type: 1 }
                     } else {
                         return item
@@ -149,7 +149,7 @@ export default handleActions({
             data: {
                 ...state.data,
                 fansList: state.data.fansList.map(item => {
-                    if (item._userId == followUserId) {
+                    if (item._user_id == followUserId) {
                         return { ...item, type: 0 }
                     } else {
                         return item

@@ -9,9 +9,9 @@ export const getFollowList = () => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/followUserInfo?start=0&size=${pageSize}`
-        console.log('url',url)
+        console.log('url', url)
         const res = await httpRequest.get(url)
-        console.log('res',res)
+        console.log('res', res)
 
         if (res.success) {
             dispatch({
@@ -42,9 +42,9 @@ export const getFollowListMore = () => async (dispatch, getState) => {
             dispatch({ type: reduxActionTypes.followList.get_followListMore_waiting, payload: {} })
             try {
                 const url = `${host.base_host}/user/${loginReducer.data.user._id}/followUserInfo?start=${(followListReducer.data.followList.length - followListReducer.data.removeCount)}&size=${pageSize}`
-                console.log('url',url)
+                console.log('url', url)
                 const res = await httpRequest.get(url)
-                console.log('res',res)
+                console.log('res', res)
                 if (res.success) {
                     const isCompleted = res.result.length == 0 || res.result.length % pageSize != 0
                     // if (isCompleted) {
@@ -71,15 +71,16 @@ export const follow = reqParams => async (dispatch, getState) => {
     const { followUserId } = reqParams
     try {
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/userRelation`
-        console.log('url',url)
-        const res = await httpRequest.post(url, { _userById: followUserId })
-        console.log('res',res)
+        console.log('url', url)
+        const res = await httpRequest.post(url, { userById: followUserId })
+        console.log('res', res)
         if (res.success) {
             dispatch({ type: reduxActionTypes.followList.follow_success, payload: { followUserId } })
         } else {
             dispatch({ type: reduxActionTypes.followList.follow_failed, payload: { failedMsg: `${res.msg}` } })
         }
     } catch (err) {
+        console.log('err', err)
         dispatch({ type: reduxActionTypes.followList.follow_failed, payload: { failedMsg: `${err}` } })
     }
 }
@@ -89,15 +90,16 @@ export const removeFollow = reqParams => async (dispatch, getState) => {
     const { followUserId } = reqParams
     try {
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/followUser/${followUserId}/del`
-        console.log('url',url)
+        console.log('url', url)
         const res = await httpRequest.del(url)
-        console.log('res',res)
+        console.log('res', res)
         if (res.success) {
             dispatch({ type: reduxActionTypes.followList.removeFollow_success, payload: { followUserId } })
         } else {
             dispatch({ type: reduxActionTypes.followList.removeFollow_failed, payload: { failedMsg: `${res.msg}` } })
         }
     } catch (err) {
+        console.log('err', err)
         dispatch({ type: reduxActionTypes.followList.removeFollow_failed, payload: { failedMsg: `${err}` } })
     }
 }

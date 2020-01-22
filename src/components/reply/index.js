@@ -1,9 +1,15 @@
 import Container from './Container'
-import ReplyContent from './ReplyContent'
-import ReplyHeader from './ReplyHeader' 
+import ArticleContainer from './ArticleContainer'
+import ArticleMini from './ArticleMini' 
+import Reply from './Reply' 
+import ReplyMini from './ReplyMini' 
+import ReplySimple from './ReplySimple' 
 
 export {
     Container,
-    ReplyContent,
-    ReplyHeader
+    ArticleContainer,
+    ArticleMini,
+    Reply,
+    ReplyMini,
+    ReplySimple
 }

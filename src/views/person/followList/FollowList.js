@@ -25,8 +25,8 @@ const FollowList = props => {
                                 style={{ width: 40, height: 40, borderRadius: 20, marginRight: 15, borderWidth: 0.5, borderColor: '#ddd' }} />
                         }
                         extra={item.follow_status == 1
-                            ? <Button size='small' type='ghost' onPress={() => removeFollow({ followUserId: item._userById })}>取消关注</Button>
-                            : <Button size='small' type='primary' onPress={() => follow({ followUserId: item._userById })}>关注</Button>}
+                            ? <Button size='small' type='ghost' onPress={() => removeFollow({ followUserId: item._user_by_id })}>取消关注</Button>
+                            : <Button size='small' type='primary' onPress={() => follow({ followUserId: item._user_by_id })}>关注</Button>}
                     >
                         {item.follow_user_detail_info[0].nick_name ? `${item.follow_user_detail_info[0].nick_name}` : `${item.follow_user_login_info[0].phone}`}
                         <Brief>{item.created_at ? `${moment(item.created_at).format('YYYY-MM-DD')}` : ''}</Brief>
