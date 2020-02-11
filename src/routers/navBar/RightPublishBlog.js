@@ -1,15 +1,24 @@
 import React from 'react'
 import { View } from 'react-native'
 import { Button } from '@ant-design/react-native'
+import { submit } from 'redux-form'
+import { connect } from 'react-redux'
 
 const RightPublishBlog = props => {
+    console.log('props', props)
     return (
         <View style={{ marginRight: 16 }}>
-            <Button type="ghost" size='small' >
+            <Button type="ghost" size='small' onPress={props.submit} onLongPress={props.submit}>
                 发布
             </Button>
         </View>
     )
 }
 
-export default RightPublishBlog
+const mapDispatchToProps = (dispatch) => ({
+    submit: () => {
+        dispatch(submit('publishBlog'))
+    }
+})
+
+export default connect(null, mapDispatchToProps)(RightPublishBlog)

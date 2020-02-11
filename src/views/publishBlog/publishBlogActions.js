@@ -4,15 +4,37 @@ import * as host from '../../utils/host'
 
 const geoWebapiKey = '22d16ea40b6fdb3ebc3daa1b48db3287'
 
-export const createArticle = reqParams => async (dispatch) => {
+export const createArticle = reqParams => async (dispatch, getState) => {
     try {
+        console.log('reqParams', reqParams)
+        const { publishBlogReducer: { data }, loginReducer } = getState()
         dispatch({ type: reduxActionTypes.publishBlog.create_article_waiting })
-        const url = `${host.base_host}`
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg`
         console.log('url', url)
-        const res = await httpRequest.post(url, {})
+        let params = {}
+        if (reqParams.addressShow) {
+            params = {
+                type: 1,
+                carrier: 1,
+                info: reqParams.info,
+                address: [data.longitude, data.latitude],
+                addressName: data.currentAddrName,
+                addressReal: data.currentAddrReal,
+                addressShow: 1,
+            }
+        } else {
+            params = {
+                type: 1,
+                carrier: 1,
+                info: reqParams.info,
+                addressShow: 0,
+            }
+        }
+        console.log('params', params)
+        const res = await httpRequest.post(url, params)
         console.log('res', res)
         if (res.success) {
-
+            dispatch({ type: reduxActionTypes.publishBlog.create_article_success })
         } else {
             dispatch({ type: reduxActionTypes.publishBlog.create_article_failed, payload: { failedMsg: `${res.msg}` } })
         }
@@ -32,18 +54,21 @@ export const getCurrentAddr = reqParams => async (dispatch) => {
             console.log('ok')
             dispatch({
                 type: reduxActionTypes.publishBlog.get_currentAddr_success, payload: {
-                    currentAddr: res.regeocode.formatted_address,
+                    currentAddrName: res.regeocode.formatted_address,
+                    currentAddrReal: `${res.regeocode.addressComponent.province ? res.regeocode.addressComponent.province : ''}${res.regeocode.addressComponent.city ? res.regeocode.addressComponent.city : ''}${res.regeocode.addressComponent.district ? res.regeocode.addressComponent.district : ''}${res.regeocode.addressComponent.township ? res.regeocode.addressComponent.township : ''}${res.regeocode.addressComponent.streetNumber.street ? res.regeocode.addressComponent.streetNumber.street : ''}${res.regeocode.addressComponent.streetNumber.number ? res.regeocode.addressComponent.streetNumber.number : ''}`,
                     longitude: reqParams.longitude,
                     latitude: reqParams.latitude
                 }
             })
         } else {
-        
             dispatch({ type: reduxActionTypes.publishBlog.get_currentAddr_failed, payload: { failedMsg: `${res.infocode}` } })
-
         }
     } catch (err) {
-        console.log('err',err)
+        console.log('err', err)
         dispatch({ type: reduxActionTypes.publishBlog.get_currentAddr_failed, payload: { failedMsg: `${err}` } })
     }
+}
+
+export const removeCurrentAddr = () => (dispatch) => {
+    dispatch({ type: reduxActionTypes.publishBlog.remove_currentAddr })
 }

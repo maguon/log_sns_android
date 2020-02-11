@@ -39,7 +39,7 @@ import publishBlogReducer from './views/publishBlog/publishBlogReducer'
 
 
 export default combineReducers({
-    formReducer,
+    form: formReducer,
     homeReducer,
     initReducer,
     loginReducer,

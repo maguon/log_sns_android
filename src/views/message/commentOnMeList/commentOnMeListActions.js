@@ -9,9 +9,9 @@ export const getCommentOnMeList = () => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/userBeMsgComment?start=0&size=${pageSize}`
-        console.log('url', url)
+        // console.log('url', url)
         const res = await httpRequest.get(url)
-        console.log('res', res)
+        // console.log('res', res)
 
         if (res.success) {
             dispatch({
