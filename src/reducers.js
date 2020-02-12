@@ -38,6 +38,10 @@ import myCommentListReducer from './views/person/myCommentList/myCommentListRedu
 import publishBlogReducer from './views/publishBlog/publishBlogReducer'
 
 
+import newestArticleListForCommunityReducer from './views/community/newest/newestArticleListForCommunityReducer'
+import seekHelpListForCommunityReducer from './views/community/seekHelp/seekHelpListForCommunityReducer'
+import videoArticleListForCommunityReducer from './views/community/video/videoArticleListForCommunityReducer'
+
 export default combineReducers({
     form: formReducer,
     homeReducer,
@@ -75,5 +79,10 @@ export default combineReducers({
 
     textArticleInfoReducer,
     myCommentListReducer,
-    publishBlogReducer
+    publishBlogReducer,
+
+
+    newestArticleListForCommunityReducer,
+    seekHelpListForCommunityReducer,
+    videoArticleListForCommunityReducer
 })

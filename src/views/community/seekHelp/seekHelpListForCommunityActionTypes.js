@@ -1,0 +1,7 @@
+export const get_seekHelpListForCommunity_success = 'get_seekHelpListForCommunity_success'
+export const get_seekHelpListForCommunity_failed = 'get_seekHelpListForCommunity_failed'
+export const get_seekHelpListForCommunity_error = 'get_seekHelpListForCommunity_error'
+
+export const get_seekHelpListForCommunityMore_success = 'get_seekHelpListForCommunityMore_success'
+export const get_seekHelpListForCommunityMore_failed = 'get_seekHelpListForCommunityMore_failed'
+export const get_seekHelpListForCommunityMore_error = 'get_seekHelpListForCommunityMore_error'

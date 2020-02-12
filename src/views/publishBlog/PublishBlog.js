@@ -15,8 +15,7 @@ class PublishBlog extends Component {
     }
 
     render() {
-        const { navigation, handleSubmit, publishBlogReducer: { data: { currentAddrName } }, publishBlogForm = {} } = this.props
-        console.log('this.props', this.props)
+        const { publishBlogReducer: { data: { currentAddrName } }, publishBlogForm = {} } = this.props
         return (
             <ScrollView
                 style={{ flex: 1 }}
@@ -38,7 +37,6 @@ class PublishBlog extends Component {
                             <Field name='addressShow' component={({ input: { value, onChange } }) => {
                                 return (
                                     <Switch checked={value} onChange={async (checked) => {
-                                        // console.log('checked', checked)
                                         onChange(checked)
                                         if (checked) {
                                             try {
@@ -67,7 +65,7 @@ class PublishBlog extends Component {
 const mapStateToProps = (state) => {
     return {
         publishBlogReducer: state.publishBlogReducer,
-        // publishBlogForm: getFormValues('publishBlog')(state)
+        publishBlogForm: getFormValues('publishBlog')(state)
     }
 }
 

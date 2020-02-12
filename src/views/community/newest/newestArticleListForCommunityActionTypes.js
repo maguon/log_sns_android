@@ -1,0 +1,7 @@
+export const get_newestArticleListForCommunity_success = 'get_newestArticleListForCommunity_success'
+export const get_newestArticleListForCommunity_failed = 'get_newestArticleListForCommunity_failed'
+export const get_newestArticleListForCommunity_error = 'get_newestArticleListForCommunity_error'
+
+export const get_newestArticleListForCommunityMore_success = 'get_newestArticleListForCommunityMore_success'
+export const get_newestArticleListForCommunityMore_failed = 'get_newestArticleListForCommunityMore_failed'
+export const get_newestArticleListForCommunityMore_error = 'get_newestArticleListForCommunityMore_error'

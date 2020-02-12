@@ -34,6 +34,10 @@ import * as textArticleInfo from './views/person/articleInfo/textArticleInfo/tex
 import * as myCommentList from './views/person/myCommentList/myCommentListActions'
 import * as publishBlog from './views/publishBlog/publishBlogActions'
 
+import * as newestArticleListForCommunity from './views/community/newest/newestArticleListForCommunityActions'
+import * as seekHelpListForCommunity from './views/community/seekHelp/seekHelpListForCommunityActions'
+import * as videoArticleListForCommunity from './views/community/video/videoArticleListForCommunityActions'
+
 
 export default {
     home,
@@ -74,5 +78,9 @@ export default {
 
     textArticleInfo,
     myCommentList,
-    publishBlog
+    publishBlog,
+
+    newestArticleListForCommunity,
+    seekHelpListForCommunity,
+    videoArticleListForCommunity
 }

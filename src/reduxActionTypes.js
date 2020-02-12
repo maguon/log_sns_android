@@ -35,11 +35,11 @@ import * as textArticleInfo from './views/person/articleInfo/textArticleInfo/tex
 import * as myCommentList from './views/person/myCommentList/myCommentListActionTypes'
 import * as publishBlog from './views/publishBlog/publishBlogActionTypes'
 
-
-
+import * as newestArticleListForCommunity from './views/community/newest/newestArticleListForCommunityActionTypes'
+import * as seekHelpListForCommunity from './views/community/seekHelp/seekHelpListForCommunityActionTypes'
+import * as videoArticleListForCommunity from './views/community/video/videoArticleListForCommunityActionTypes'
 
 export default {
-
     home,
     login,
     retrievePassword,
@@ -51,7 +51,6 @@ export default {
     commentOnMeList,
     requestContactList,
 
-
     articleAllList,
     imageArticleList,
     seekHelpArticleList,
@@ -59,7 +58,6 @@ export default {
     videoArticleList,
     articleList,
 
-    
     followList,
     fansList,
     commentList,
@@ -67,18 +65,18 @@ export default {
     voteList,
     collectionLocationList,
 
-
     friendInfo,
     articleListOfFriend,
-
-
 
     followingListForHome,
     hotListForHome,
     nearbyListForHome,
 
-    
     textArticleInfo,
     myCommentList,
-    publishBlog
+    publishBlog,
+
+    newestArticleListForCommunity,
+    seekHelpListForCommunity,
+    videoArticleListForCommunity
 }
