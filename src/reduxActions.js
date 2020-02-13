@@ -37,6 +37,7 @@ import * as publishBlog from './views/publishBlog/publishBlogActions'
 import * as newestArticleListForCommunity from './views/community/newest/newestArticleListForCommunityActions'
 import * as seekHelpListForCommunity from './views/community/seekHelp/seekHelpListForCommunityActions'
 import * as videoArticleListForCommunity from './views/community/video/videoArticleListForCommunityActions'
+import * as voteListForCommunity from './views/community/vote/voteListForCommunityActions'
 
 
 export default {
@@ -82,5 +83,7 @@ export default {
 
     newestArticleListForCommunity,
     seekHelpListForCommunity,
-    videoArticleListForCommunity
+    videoArticleListForCommunity,
+    voteListForCommunity
+    
 }

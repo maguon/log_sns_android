@@ -9,40 +9,40 @@ export const getVideoArticleList = () => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/userBeMsgComment?start=0&size=${pageSize}`
-        // console.log('url', url)
+        console.log('url', url)
         const res = await httpRequest.get(url)
-        // console.log('res', res)
+        console.log('res', res)
 
         if (res.success) {
             dispatch({
-                type: reduxActionTypes.commentOnMeList.get_commentOnMeList_success, payload: {
-                    commentOnMeList: res.result,
+                type: reduxActionTypes.videoArticleListForCommunity.get_videoArticleListForCommunity_success, payload: {
+                    articleList: res.result,
                     isCompleted: (res.result.length == 0 || res.result.length % pageSize != 0)
                 }
             })
         } else {
-            dispatch({ type: reduxActionTypes.commentOnMeList.get_commentOnMeList_failed, payload: {} })
+            dispatch({ type: reduxActionTypes.videoArticleListForCommunity.get_videoArticleListForCommunity_failed, payload: { failedMsg: `${res.msg}` } })
         }
     } catch (err) {
         console.log('err', err)
-        dispatch({ type: reduxActionTypes.commentOnMeList.get_commentOnMeList_failed, payload: {} })
+        dispatch({ type: reduxActionTypes.videoArticleListForCommunity.get_videoArticleListForCommunity_failed, payload: { failedMsg: `${err}` } })
     }
 }
 
 export const getVideoArticleListWaiting = () => (dispatch) => {
-    dispatch({ type: reduxActionTypes.commentOnMeList.get_commentOnMeList_waiting })
+    dispatch({ type: reduxActionTypes.videoArticleListForCommunity.get_videoArticleListForCommunity_waiting })
 }
 
 export const getVideoArticleListMore = () => async (dispatch, getState) => {
-    const { loginReducer, commentOnMeListReducer } = getState()
-    if (commentOnMeListReducer.getCommentOnMeListMore.isResultStatus == 1) {
+    const { loginReducer, videoArticleListForCommunityReducer } = getState()
+    if (videoArticleListForCommunityReducer.getVideoArticleListMore.isResultStatus == 1) {
         await sleep(1000)
-        dispatch(getSeekHelpListMore)
+        dispatch(getVideoArticleListMore)
     } else {
-        if (!commentOnMeListReducer.data.isCompleted) {
-            dispatch({ type: reduxActionTypes.commentOnMeList.get_commentOnMeListMore_waiting, payload: {} })
+        if (!videoArticleListForCommunityReducer.data.isCompleted) {
+            dispatch({ type: reduxActionTypes.videoArticleListForCommunity.get_videoArticleListForCommunityMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/userBeMsgComment?start=${(commentOnMeListReducer.data.commentOnMeList.length)}&size=${pageSize}`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/userBeMsgComment?start=${(videoArticleListForCommunityReducer.data.articleList.length)}&size=${pageSize}`
                 console.log('url', url)
                 const res = await httpRequest.get(url)
                 console.log('res', res)
@@ -52,18 +52,18 @@ export const getVideoArticleListMore = () => async (dispatch, getState) => {
                     //     ToastAndroid.show('已全部加载完毕！', 10)
                     // }
                     dispatch({
-                        type: reduxActionTypes.commentOnMeList.get_commentOnMeListMore_success, payload: {
-                            commentOnMeList: res.result,
+                        type: reduxActionTypes.videoArticleListForCommunity.get_videoArticleListForCommunityMore_success, payload: {
+                            articleList: res.result,
                             isCompleted,
                         }
                     })
                 } else {
-                    dispatch({ type: reduxActionTypes.commentOnMeList.get_commentOnMeListMore_failed, payload: { failedMsg: `${res.msg}` } })
+                    dispatch({ type: reduxActionTypes.videoArticleListForCommunity.get_videoArticleListForCommunityMore_failed, payload: { failedMsg: `${res.msg}` } })
                 }
             } catch (err) {
                 console.log('err', err)
 
-                dispatch({ type: reduxActionTypes.commentOnMeList.get_commentOnMeListMore_failed, payload: { failedMsg: `${err}` } })
+                dispatch({ type: reduxActionTypes.videoArticleListForCommunity.get_videoArticleListForCommunityMore_failed, payload: { failedMsg: `${err}` } })
             }
         }
     }

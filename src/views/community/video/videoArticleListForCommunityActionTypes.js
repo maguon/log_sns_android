@@ -1,7 +1,7 @@
 export const get_videoArticleListForCommunity_success = 'get_videoArticleListForCommunity_success'
 export const get_videoArticleListForCommunity_failed = 'get_videoArticleListForCommunity_failed'
-export const get_videoArticleListForCommunity_error = 'get_videoArticleListForCommunity_error'
+export const get_videoArticleListForCommunity_waiting = 'get_videoArticleListForCommunity_waiting'
 
 export const get_videoArticleListForCommunityMore_success = 'get_videoArticleListForCommunityMore_success'
 export const get_videoArticleListForCommunityMore_failed = 'get_videoArticleListForCommunityMore_failed'
-export const get_videoArticleListForCommunityMore_error = 'get_videoArticleListForCommunityMore_error'
+export const get_videoArticleListForCommunityMore_waiting = 'get_videoArticleListForCommunityMore_waiting'

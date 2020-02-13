@@ -9,40 +9,40 @@ export const getNewestArticleList = () => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/userBeMsgComment?start=0&size=${pageSize}`
-        // console.log('url', url)
+        console.log('url', url)
         const res = await httpRequest.get(url)
-        // console.log('res', res)
+        console.log('res', res)
 
         if (res.success) {
             dispatch({
-                type: reduxActionTypes.commentOnMeList.get_commentOnMeList_success, payload: {
-                    commentOnMeList: res.result,
+                type: reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunity_success, payload: {
+                    articleList: res.result,
                     isCompleted: (res.result.length == 0 || res.result.length % pageSize != 0)
                 }
             })
         } else {
-            dispatch({ type: reduxActionTypes.commentOnMeList.get_commentOnMeList_failed, payload: {} })
+            dispatch({ type: reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunity_failed, payload: {} })
         }
     } catch (err) {
         console.log('err', err)
-        dispatch({ type: reduxActionTypes.commentOnMeList.get_commentOnMeList_failed, payload: {} })
+        dispatch({ type: reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunity_failed, payload: {} })
     }
 }
 
 export const getNewestArticleListWaiting = () => (dispatch) => {
-    dispatch({ type: reduxActionTypes.commentOnMeList.get_commentOnMeList_waiting })
+    dispatch({ type: reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunity_waiting })
 }
 
 export const getNewestArticleListMore = () => async (dispatch, getState) => {
-    const { loginReducer, commentOnMeListReducer } = getState()
-    if (commentOnMeListReducer.getCommentOnMeListMore.isResultStatus == 1) {
+    const { loginReducer, newestArticleListForCommunityReducer } = getState()
+    if (newestArticleListForCommunityReducer.getNewestArticleListMore.isResultStatus == 1) {
         await sleep(1000)
-        dispatch(getCommentOnMeListMore)
+        dispatch(getNewestArticleListMore)
     } else {
-        if (!commentOnMeListReducer.data.isCompleted) {
-            dispatch({ type: reduxActionTypes.commentOnMeList.get_commentOnMeListMore_waiting, payload: {} })
+        if (!newestArticleListForCommunityReducer.data.isCompleted) {
+            dispatch({ type: reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunityMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/userBeMsgComment?start=${(commentOnMeListReducer.data.commentOnMeList.length)}&size=${pageSize}`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/userBeMsgComment?start=${(newestArticleListForCommunityReducer.data.articleList.length)}&size=${pageSize}`
                 console.log('url', url)
                 const res = await httpRequest.get(url)
                 console.log('res', res)
@@ -52,18 +52,18 @@ export const getNewestArticleListMore = () => async (dispatch, getState) => {
                     //     ToastAndroid.show('已全部加载完毕！', 10)
                     // }
                     dispatch({
-                        type: reduxActionTypes.commentOnMeList.get_commentOnMeListMore_success, payload: {
-                            commentOnMeList: res.result,
+                        type: reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunityMore_success, payload: {
+                            articleList: res.result,
                             isCompleted,
                         }
                     })
                 } else {
-                    dispatch({ type: reduxActionTypes.commentOnMeList.get_commentOnMeListMore_failed, payload: { failedMsg: `${res.msg}` } })
+                    dispatch({ type: reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunityMore_failed, payload: { failedMsg: `${res.msg}` } })
                 }
             } catch (err) {
                 console.log('err', err)
 
-                dispatch({ type: reduxActionTypes.commentOnMeList.get_commentOnMeListMore_failed, payload: { failedMsg: `${err}` } })
+                dispatch({ type: reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunityMore_failed, payload: { failedMsg: `${err}` } })
             }
         }
     }

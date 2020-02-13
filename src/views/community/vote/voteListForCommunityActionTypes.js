@@ -1,0 +1,7 @@
+export const get_voteListForCommunity_success = 'get_voteListForCommunity_success'
+export const get_voteListForCommunity_failed = 'get_voteListForCommunity_failed'
+export const get_voteListForCommunity_waiting = 'get_voteListForCommunity_waiting'
+
+export const get_voteListForCommunityMore_success = 'get_voteListForCommunityMore_success'
+export const get_voteListForCommunityMore_failed = 'get_voteListForCommunityMore_failed'
+export const get_voteListForCommunityMore_waiting = 'get_voteListForCommunityMore_waiting'

@@ -18,38 +18,38 @@ const initialState = {
 
 //isResultStatus(执行结果状态):[0(未执行),1(等待)，2(成功)，3(失败)]
 export default handleActions({
-    [reduxActionTypes.commentOnMeList.get_commentOnMeList_success]: (state, action) => {
-        const { payload: { commentOnMeList, isCompleted } } = action
+    [reduxActionTypes.seekHelpListForCommunity.get_seekHelpListForCommunity_success]: (state, action) => {
+        const { payload: { articleList, isCompleted } } = action
         return {
             ...state,
             data: {
                 ...state.data,
-                commentOnMeList,
+                articleList,
                 isCompleted
             },
-            getCommentOnMeList: {
-                ...state.getCommentOnMeList,
+            getSeekHelpList: {
+                ...state.getSeekHelpList,
                 isResultStatus: 2
             }
         }
     },
-    [reduxActionTypes.commentOnMeList.get_commentOnMeList_failed]: (state, action) => {
+    [reduxActionTypes.seekHelpListForCommunity.get_seekHelpListForCommunity_failed]: (state, action) => {
         const { payload: { failedMsg } } = action
 
         return {
             ...state,
-            getCommentOnMeList: {
-                ...state.getCommentOnMeList,
+            getSeekHelpList: {
+                ...state.getSeekHelpList,
                 isResultStatus: 3,
                 failedMsg
             }
         }
     },
-    [reduxActionTypes.commentOnMeList.get_commentOnMeList_waiting]: (state, action) => {
+    [reduxActionTypes.seekHelpListForCommunity.get_seekHelpListForCommunity_waiting]: (state, action) => {
         return {
             ...state,
-            getCommentOnMeList: {
-                ...state.getCommentOnMeList,
+            getSeekHelpList: {
+                ...state.getSeekHelpList,
                 isResultStatus: 1
             }
         }
@@ -58,38 +58,38 @@ export default handleActions({
 
 
 
-    [reduxActionTypes.commentOnMeList.get_commentOnMeListMore_success]: (state, action) => {
-        const { payload: { commentOnMeList, isCompleted } } = action
+    [reduxActionTypes.seekHelpListForCommunity.get_seekHelpListForCommunityMore_success]: (state, action) => {
+        const { payload: { articleList, isCompleted } } = action
         return {
             ...state,
             data: {
                 ...state.data,
-                commentOnMeList: [...state.data.commentOnMeList, ...commentOnMeList],
+                articleList: [...state.data.articleList, ...articleList],
                 isCompleted
             },
-            getCommentOnMeListMore: {
-                ...state.getCommentOnMeListMore,
+            getSeekHelpListMore: {
+                ...state.getSeekHelpListMore,
                 isResultStatus: 2
             }
         }
     },
-    [reduxActionTypes.commentOnMeList.get_commentOnMeListMore_failed]: (state, action) => {
+    [reduxActionTypes.seekHelpListForCommunity.get_seekHelpListForCommunityMore_failed]: (state, action) => {
         const { payload: { failedMsg } } = action
 
         return {
             ...state,
-            getCommentOnMeListMore: {
-                ...state.getCommentOnMeListMore,
+            getSeekHelpListMore: {
+                ...state.getSeekHelpListMore,
                 isResultStatus: 3,
                 failedMsg
             }
         }
     },
-    [reduxActionTypes.commentOnMeList.get_commentOnMeListMore_waiting]: (state, action) => {
+    [reduxActionTypes.seekHelpListForCommunity.get_seekHelpListForCommunityMore_waiting]: (state, action) => {
         return {
             ...state,
-            getCommentOnMeListMore: {
-                ...state.getCommentOnMeListMore,
+            getSeekHelpListMore: {
+                ...state.getSeekHelpListMore,
                 isResultStatus: 1
             }
         }

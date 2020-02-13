@@ -18,38 +18,38 @@ const initialState = {
 
 //isResultStatus(执行结果状态):[0(未执行),1(等待)，2(成功)，3(失败)]
 export default handleActions({
-    [reduxActionTypes.commentOnMeList.get_commentOnMeList_success]: (state, action) => {
-        const { payload: { commentOnMeList, isCompleted } } = action
+    [reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunity_success]: (state, action) => {
+        const { payload: { articleList, isCompleted } } = action
         return {
             ...state,
             data: {
                 ...state.data,
-                commentOnMeList,
+                articleList,
                 isCompleted
             },
-            getCommentOnMeList: {
-                ...state.getCommentOnMeList,
+            getNewestArticleList: {
+                ...state.getNewestArticleList,
                 isResultStatus: 2
             }
         }
     },
-    [reduxActionTypes.commentOnMeList.get_commentOnMeList_failed]: (state, action) => {
+    [reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunity_failed]: (state, action) => {
         const { payload: { failedMsg } } = action
 
         return {
             ...state,
-            getCommentOnMeList: {
-                ...state.getCommentOnMeList,
+            getNewestArticleList: {
+                ...state.getNewestArticleList,
                 isResultStatus: 3,
                 failedMsg
             }
         }
     },
-    [reduxActionTypes.commentOnMeList.get_commentOnMeList_waiting]: (state, action) => {
+    [reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunity_waiting]: (state, action) => {
         return {
             ...state,
-            getCommentOnMeList: {
-                ...state.getCommentOnMeList,
+            getNewestArticleList: {
+                ...state.getNewestArticleList,
                 isResultStatus: 1
             }
         }
@@ -58,38 +58,38 @@ export default handleActions({
 
 
 
-    [reduxActionTypes.commentOnMeList.get_commentOnMeListMore_success]: (state, action) => {
-        const { payload: { commentOnMeList, isCompleted } } = action
+    [reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunityMore_success]: (state, action) => {
+        const { payload: { articleList, isCompleted } } = action
         return {
             ...state,
             data: {
                 ...state.data,
-                commentOnMeList: [...state.data.commentOnMeList, ...commentOnMeList],
+                articleList: [...state.data.articleList, ...articleList],
                 isCompleted
             },
-            getCommentOnMeListMore: {
-                ...state.getCommentOnMeListMore,
+            getNewestArticleListMore: {
+                ...state.getNewestArticleListMore,
                 isResultStatus: 2
             }
         }
     },
-    [reduxActionTypes.commentOnMeList.get_commentOnMeListMore_failed]: (state, action) => {
+    [reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunityMore_failed]: (state, action) => {
         const { payload: { failedMsg } } = action
 
         return {
             ...state,
-            getCommentOnMeListMore: {
-                ...state.getCommentOnMeListMore,
+            getNewestArticleListMore: {
+                ...state.getNewestArticleListMore,
                 isResultStatus: 3,
                 failedMsg
             }
         }
     },
-    [reduxActionTypes.commentOnMeList.get_commentOnMeListMore_waiting]: (state, action) => {
+    [reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunityMore_waiting]: (state, action) => {
         return {
             ...state,
-            getCommentOnMeListMore: {
-                ...state.getCommentOnMeListMore,
+            getNewestArticleListMore: {
+                ...state.getNewestArticleListMore,
                 isResultStatus: 1
             }
         }

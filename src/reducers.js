@@ -41,6 +41,7 @@ import publishBlogReducer from './views/publishBlog/publishBlogReducer'
 import newestArticleListForCommunityReducer from './views/community/newest/newestArticleListForCommunityReducer'
 import seekHelpListForCommunityReducer from './views/community/seekHelp/seekHelpListForCommunityReducer'
 import videoArticleListForCommunityReducer from './views/community/video/videoArticleListForCommunityReducer'
+import voteListForCommunityReducer from './views/community/vote/voteListForCommunityReducer'
 
 export default combineReducers({
     form: formReducer,
@@ -84,5 +85,6 @@ export default combineReducers({
 
     newestArticleListForCommunityReducer,
     seekHelpListForCommunityReducer,
-    videoArticleListForCommunityReducer
+    videoArticleListForCommunityReducer,
+    voteListForCommunityReducer
 })
