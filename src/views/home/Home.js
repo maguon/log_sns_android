@@ -49,6 +49,8 @@ const Home = props => {
                   {tab.title}
                 </Text>
               </TouchableOpacity>
+
+
             ))}
             <React.Fragment>
               <Popover

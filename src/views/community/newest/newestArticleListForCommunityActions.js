@@ -8,10 +8,10 @@ const pageSize = 1
 export const getNewestArticleList = () => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/userBeMsgComment?start=0&size=${pageSize}`
-        console.log('url', url)
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/popularMsg?status=1&start=0&size=${pageSize}`
+        // console.log('url', url)
         const res = await httpRequest.get(url)
-        console.log('res', res)
+        // console.log('res', res)
 
         if (res.success) {
             dispatch({
@@ -43,9 +43,9 @@ export const getNewestArticleListMore = () => async (dispatch, getState) => {
             dispatch({ type: reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunityMore_waiting, payload: {} })
             try {
                 const url = `${host.base_host}/user/${loginReducer.data.user._id}/userBeMsgComment?start=${(newestArticleListForCommunityReducer.data.articleList.length)}&size=${pageSize}`
-                console.log('url', url)
+                // console.log('url', url)
                 const res = await httpRequest.get(url)
-                console.log('res', res)
+                // console.log('res', res)
                 if (res.success) {
                     const isCompleted = res.result.length == 0 || res.result.length % pageSize != 0
                     // if (isCompleted) {

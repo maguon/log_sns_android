@@ -8,7 +8,7 @@ const pageSize = 1
 export const getSeekHelpList = () => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/userBeMsgComment?start=0&size=${pageSize}`
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?type=2&start=0&size=${pageSize}`
         console.log('url', url)
         const res = await httpRequest.get(url)
         console.log('res', res)
@@ -30,7 +30,7 @@ export const getSeekHelpList = () => async (dispatch, getState) => {
 }
 
 export const getSeekHelpListWaiting = () => (dispatch) => {
-    dispatch({ type: reduxActionTypes.seekHelpListForCommunity.getseekHelpListForCommunity_waiting })
+    dispatch({ type: reduxActionTypes.seekHelpListForCommunity.get_seekHelpListForCommunity_waiting })
 }
 
 export const getSeekHelpListMore = () => async (dispatch, getState) => {
@@ -42,7 +42,7 @@ export const getSeekHelpListMore = () => async (dispatch, getState) => {
         if (!seekHelpListForCommunityReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.seekHelpListForCommunity.get_seekHelpListForCommunityMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/userBeMsgComment?start=${(seekHelpListForCommunityReducer.data.articleList.length)}&size=${pageSize}`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?type=2&start=${(seekHelpListForCommunityReducer.data.articleList.length)}&size=${pageSize}`
                 console.log('url', url)
                 const res = await httpRequest.get(url)
                 console.log('res', res)
