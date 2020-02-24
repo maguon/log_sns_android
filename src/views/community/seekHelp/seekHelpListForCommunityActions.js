@@ -79,7 +79,7 @@ export const likeArticle = reqParams => async (dispatch, getState) => {
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/userPraise`
         // console.log('url', url)
         const res = await httpRequest.post(url, {
-            type: 1,
+            type: 2,
             msgId: reqParams.msgId,
             msgUserId: reqParams.msgUserId
         })

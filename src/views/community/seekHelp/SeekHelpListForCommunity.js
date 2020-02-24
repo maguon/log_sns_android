@@ -65,10 +65,10 @@ class SeekHelpListForCommunity extends Component {
                                     // delOnPress={() => { this.props.delArticle({ messageId: item._id }) }}
                                     // msgOnPress={() => { console.log('msgOnPress') }}
                                     likeOnPress={() => {
-                                        // this.props.likeArticle({
-                                        //     msgId: item._id,
-                                        //     msgUserId: item._user_id
-                                        // })
+                                        this.props.likeArticle({
+                                            msgId: item._id,
+                                            msgUserId: item._user_id
+                                        })
                                     }}
                                 />
                             </Card>
@@ -116,6 +116,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     getSeekHelpListMore: () => {
         dispatch(reduxActions.seekHelpListForCommunity.getSeekHelpListMore())
+    },
+    likeArticle: reqParams => {
+        dispatch(reduxActions.seekHelpListForCommunity.likeArticle(reqParams))
     }
 })
 
