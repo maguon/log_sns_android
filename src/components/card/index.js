@@ -7,6 +7,9 @@ import Footer from './Footer'
 import FooterForDel from './FooterForDel'
 import Image from './Image'
 import Map from './Map'
+import Vote from './vote/Vote'
+import VoteHeader from './vote/VoteHeader'
+import VoteFooter from './vote/VoteFooter'
 
 
 export {
@@ -18,5 +21,8 @@ export {
     Footer,
     Image,
     Map,
-    FooterForDel
+    FooterForDel,
+    Vote,
+    VoteHeader,
+    VoteFooter
 }

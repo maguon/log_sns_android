@@ -40,6 +40,10 @@ import * as seekHelpListForCommunity from './views/community/seekHelp/seekHelpLi
 import * as videoArticleListForCommunity from './views/community/video/videoArticleListForCommunityActionTypes'
 import * as voteListForCommunity from './views/community/vote/voteListForCommunityActionTypes'
 
+
+import * as voteInfo from './views/voteInfo/voteInfoActionTypes'
+
+
 export default {
     home,
     login,
@@ -80,5 +84,8 @@ export default {
     newestArticleListForCommunity,
     seekHelpListForCommunity,
     videoArticleListForCommunity,
-    voteListForCommunity
+    voteListForCommunity,
+
+
+    voteInfo
 }
