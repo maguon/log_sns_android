@@ -13,6 +13,10 @@ const initialState = {
     getSeekHelpListMore: {
         isResultStatus: 0,
         failedMsg: ''
+    },
+    likeComment: {
+        isResultStatus: 0,
+        failedMsg: ''
     }
 }
 
@@ -90,6 +94,50 @@ export default handleActions({
             ...state,
             getSeekHelpListMore: {
                 ...state.getSeekHelpListMore,
+                isResultStatus: 1
+            }
+        }
+    },
+
+
+
+
+    [reduxActionTypes.seekHelpListForCommunity.like_commentForCommunitySeekHelp_success]: (state, action) => {
+        const { payload: { articleInfo } } = action
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                articleList: state.data.articleList.map(item => {
+                    if (item._id != articleInfo._id) {
+                        return item
+                    } else {
+                        return articleInfo
+                    }
+                })
+            },
+            likeComment: {
+                ...state.likeComment,
+                isResultStatus: 2
+            }
+        }
+    },
+    [reduxActionTypes.seekHelpListForCommunity.like_commentForCommunitySeekHelp_failed]: (state, action) => {
+        const { payload: { failedMsg } } = action
+        return {
+            ...state,
+            likeComment: {
+                ...state.likeComment,
+                isResultStatus: 3,
+                failedMsg
+            }
+        }
+    },
+    [reduxActionTypes.seekHelpListForCommunity.like_commentForCommunitySeekHelp_waiting]: (state, action) => {
+        return {
+            ...state,
+            likeComment: {
+                ...state.likeComment,
                 isResultStatus: 1
             }
         }

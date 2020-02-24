@@ -5,3 +5,7 @@ export const get_seekHelpListForCommunity_waiting = 'get_seekHelpListForCommunit
 export const get_seekHelpListForCommunityMore_success = 'get_seekHelpListForCommunityMore_success'
 export const get_seekHelpListForCommunityMore_failed = 'get_seekHelpListForCommunityMore_failed'
 export const get_seekHelpListForCommunityMore_waiting = 'get_seekHelpListForCommunityMore_waiting'
+
+export const like_commentForCommunitySeekHelp_waiting = 'like_commentForCommunitySeekHelp_waiting'
+export const like_commentForCommunitySeekHelp_failed = 'like_commentForCommunitySeekHelp_failed'
+export const like_commentForCommunitySeekHelp_success = 'like_commentForCommunitySeekHelp_success'

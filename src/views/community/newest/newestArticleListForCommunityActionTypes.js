@@ -5,3 +5,7 @@ export const get_newestArticleListForCommunity_waiting = 'get_newestArticleListF
 export const get_newestArticleListForCommunityMore_success = 'get_newestArticleListForCommunityMore_success'
 export const get_newestArticleListForCommunityMore_failed = 'get_newestArticleListForCommunityMore_failed'
 export const get_newestArticleListForCommunityMore_waiting = 'get_newestArticleListForCommunityMore_waiting'
+
+export const like_commentForCommunityNewest_waiting = 'like_commentForCommunityNewest_waiting'
+export const like_commentForCommunityNewest_failed = 'like_commentForCommunityNewest_failed'
+export const like_commentForCommunityNewest_success = 'like_commentForCommunityNewest_success'

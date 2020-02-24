@@ -13,6 +13,10 @@ const initialState = {
     getNewestArticleListMore: {
         isResultStatus: 0,
         failedMsg: ''
+    },
+    likeComment: {
+        isResultStatus: 0,
+        failedMsg: ''
     }
 }
 
@@ -90,6 +94,49 @@ export default handleActions({
             ...state,
             getNewestArticleListMore: {
                 ...state.getNewestArticleListMore,
+                isResultStatus: 1
+            }
+        }
+    },
+
+
+
+    [reduxActionTypes.newestArticleListForCommunity.like_commentForCommunityNewest_success]: (state, action) => {
+        const { payload: { articleInfo } } = action
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                articleList: state.data.articleList.map(item => {
+                    if (item._id != articleInfo._id) {
+                        return item
+                    } else {
+                        return articleInfo
+                    }
+                })
+            },
+            likeComment: {
+                ...state.likeComment,
+                isResultStatus: 2
+            }
+        }
+    },
+    [reduxActionTypes.newestArticleListForCommunity.like_commentForCommunityNewest_failed]: (state, action) => {
+        const { payload: { failedMsg } } = action
+        return {
+            ...state,
+            likeComment: {
+                ...state.likeComment,
+                isResultStatus: 3,
+                failedMsg
+            }
+        }
+    },
+    [reduxActionTypes.newestArticleListForCommunity.like_commentForCommunityNewest_waiting]: (state, action) => {
+        return {
+            ...state,
+            likeComment: {
+                ...state.likeComment,
                 isResultStatus: 1
             }
         }
