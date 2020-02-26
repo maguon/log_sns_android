@@ -16,7 +16,7 @@ class SeekHelpListForCommunity extends Component {
 
     render() {
         const { seekHelpListForCommunityReducer, navigation } = this.props
-        console.log('seekHelpListForCommunityReducer', seekHelpListForCommunityReducer)
+        //console.log('seekHelpListForCommunityReducer', seekHelpListForCommunityReducer)
         return (
             // <View style={{ flex: 1 }}>
             //     <Text>NewestArticleListForCommunity</Text>

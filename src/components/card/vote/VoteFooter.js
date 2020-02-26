@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 
 
 const VoteFooter = props => {
-    const { partakeCount = 0, Status = false,
+    const { params = {},
         partakeOnPress = () => console.log("partakeOnPress") } = props
     return (
         <View style={{
@@ -11,10 +11,10 @@ const VoteFooter = props => {
             justifyContent: 'space-between', alignItems: 'center'
         }}>
             <View style={{ padding: 10 }}>
-                <Text>参与人数：328</Text>
+                <Text>参与人数：{params.participantsNum}</Text>
             </View>
             <View style={{ padding: 10 }}>
-                <Text>点击参与</Text>
+                <Text style={{ color: '#008dc3' }}>点击参与</Text>
             </View>
         </View>
     )

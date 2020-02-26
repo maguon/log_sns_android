@@ -28,6 +28,7 @@ import NavPulishBlog from './navBar/NavPulishBlog'
 
 import ArticleListOfFriend from '../views/articleListOfFriend/ArticleListOfFriend'
 import TextArticleInfo from '../views/person/articleInfo/textArticleInfo/TextArticleInfo'
+import VoteInfo from '../views/voteInfo/VoteInfo'
 
 export default createStackNavigator({
     TabsStack: {
@@ -166,6 +167,12 @@ export default createStackNavigator({
         screen: TextArticleInfo,
         navigationOptions: {
             title: '文章',
+        }
+    },
+    VoteInfo: {
+        screen: VoteInfo,
+        navigationOptions: {
+            title: '投票详情'
         }
     },
     PublishBlog: {

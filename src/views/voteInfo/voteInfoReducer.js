@@ -5,7 +5,7 @@ const initialState = {
     data: {
         voteInfo:{}
     },
-    getVoteInfo: {
+    Vote: {
         isResultStatus: 0,
         failedMsg: ''
     }
@@ -13,16 +13,21 @@ const initialState = {
 
 
 export default handleActions({
-    [reduxActionTypes.voteInfo.get_voteInfo_success]: (state, action) => {
+    [reduxActionTypes.voteInfo.vote_success]: (state, action) => {
+        const { payload: { voteInfo } } = action
         return {
             ...state,
+            data: {
+                ...state.data,
+                voteInfo
+            },
             getVoteInfo: {
                 ...state.getVoteInfo,
                 isResultStatus: 2
             },
         }
     },
-    [reduxActionTypes.voteInfo.get_voteInfo_failed]: (state, action) => {
+    [reduxActionTypes.voteInfo.vote_failed]: (state, action) => {
         const { payload: { failedMsg } } = action
         return {
             ...state,
@@ -33,12 +38,24 @@ export default handleActions({
             },
         }
     },
-    [reduxActionTypes.voteInfo.get_voteInfo_waiting]: (state, action) => {
+    [reduxActionTypes.voteInfo.vote_waiting]: (state, action) => {
         return {
             ...state,
             getVoteInfo: {
                 ...state.getVoteInfo,
                 isResultStatus: 1
+            },
+        }
+    },
+
+
+    [reduxActionTypes.voteInfo.set_voteInfo]: (state, action) => {
+        const { payload: { voteInfo } } = action
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                voteInfo
             },
         }
     }
