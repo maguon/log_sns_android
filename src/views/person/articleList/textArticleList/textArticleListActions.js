@@ -38,11 +38,6 @@ export const getTextArticleListWaiting = () => (dispatch) => {
 
 export const getTextArticleListMore = reqParams => async (dispatch, getState) => {
     const { loginReducer, textArticleListReducer } = getState()
-    // console.log('reqParams', ObjectToUrl({
-    //     start: 0,
-    //     size: pageSize,
-    //     ...reqParams
-    // }))
     if (textArticleListReducer.getTextArticleListMore.isResultStatus == 1) {
         await sleep(1000)
         dispatch(getTextArticleListMore)

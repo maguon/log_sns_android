@@ -40,34 +40,21 @@ class VoteListForCommunity extends Component {
                 data={voteListForCommunityReducer.data.voteList}
                 renderItem={params => {
                     const { item, index } = params
-                    
                     return (
                         <WingBlank size='md'>
                             {index == 0 && <WhiteSpace size='md' />}
                             <Card>
-                                <TouchableOpacity
-                                // onPress={() => {
-                                //     navigation.navigate('ArticleListOfFriend', {
-                                //         userInfo: item.user_detail_info[0]
-                                //     })
-                                // }}
-                                >
-                                    <VoteHeader />
-                                    {/* <Header
+                                <View>
+                                    <VoteHeader
                                         params={{
-                                            nick: item.user_detail_info[0].nick_name,
-                                            date: item.created_at,
-                                            address: item.address_name,
-                                            avatar: item.user_detail_info[0].avatar
-                                        }}
-                                    /> */}
-                                </TouchableOpacity>
+                                            title: item.title ? `${item.title}` : '',
+                                            status: item.status
+                                        }} />
+                                </View>
                                 <TouchableOpacity
                                     onPress={() => {
                                         this.props.setVote(item)
-                                        navigation.navigate('VoteInfo', {
-                                            voteInfo: item
-                                        })
+                                        navigation.navigate('VoteInfo')
                                     }}
                                 >
                                     <Vote params={{
@@ -76,7 +63,8 @@ class VoteListForCommunity extends Component {
                                 </TouchableOpacity>
                                 <VoteFooter
                                     params={{
-                                        participantsNum: item.participants_num ? `${item.participants_num}` : '0'
+                                        participantsNum: item.participants_num ? `${item.participants_num}` : '0',
+                                        status: item.user_votes.length > 0
                                     }}
                                 />
                             </Card>

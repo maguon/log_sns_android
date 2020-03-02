@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 const VoteFooter = props => {
     const { params = {},
@@ -14,7 +13,10 @@ const VoteFooter = props => {
                 <Text>参与人数：{params.participantsNum}</Text>
             </View>
             <View style={{ padding: 10 }}>
-                <Text style={{ color: '#008dc3' }}>点击参与</Text>
+                {params.status && <Text>已参与</Text>}
+                {!params.status && <TouchableOpacity onPress={partakeOnPress}>
+                    <Text style={{ color: '#008dc3' }}>点击参与</Text>
+                </TouchableOpacity>}
             </View>
         </View>
     )
