@@ -45,7 +45,7 @@ const Community = props => {
                             if (param == '发布文章') {
                                 navigation.navigate('PublishBlog')
                             } else if (param == '发布求助') {
-                                navigation.navigate('SeekHelp')
+                                navigation.navigate('PublishSeekHelp')
                             } else if (param == '扫一扫') {
                                 navigation.navigate('Scan')
                             } else if (param == '收藏定位') {

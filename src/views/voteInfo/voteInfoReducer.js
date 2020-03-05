@@ -11,11 +11,15 @@ const initialState = {
     }
 }
 
-
 export default handleActions({
     [reduxActionTypes.voteInfo.vote_success]: (state, action) => {
+        const { payload: { voteInfo } } = action
         return {
             ...state,
+            data: {
+                ...state.data,
+                voteInfo
+            },
             getVoteInfo: {
                 ...state.getVoteInfo,
                 isResultStatus: 2
@@ -51,7 +55,7 @@ export default handleActions({
             data: {
                 ...state.data,
                 voteInfo
-            },
+            }
         }
     }
 }, initialState)

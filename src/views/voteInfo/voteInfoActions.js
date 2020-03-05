@@ -11,11 +11,22 @@ export const vote = reqParams => async (dispatch, getState) => {
         const { loginReducer } = getState()
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/userVote`
         const res = await httpRequest.post(url, reqParams)
-        console.log('res', res)
+        // console.log('res', res)
         if (res.success) {
-            dispatch({ type: reduxActionTypes.voteInfo.vote_success, payload: {} })
-            Portal.remove(delLoading)
-            Toast.success("投票成功！", 0.5)
+            const getVoteInfoUrl = `${host.base_host}/user/${loginReducer.data.user._id}/vote?voteId=${reqParams.voteId}`
+            // console.log('getVoteInfoUrl', getVoteInfoUrl)
+            const getVoteInfoRes = await httpRequest.get(getVoteInfoUrl)
+            // console.log('getvoteInfoRes', getVoteInfoRes)
+            if (getVoteInfoRes.success) {
+                dispatch({ type: reduxActionTypes.voteInfo.vote_success, payload: { voteInfo: getVoteInfoRes.result[0] } })
+                dispatch({ type: reduxActionTypes.voteListForCommunity.update_voteInfoById, payload: { voteInfo: getVoteInfoRes.result[0] } })
+                Portal.remove(delLoading)
+                Toast.success("投票成功！", 0.5)
+            } else {
+                dispatch({ type: reduxActionTypes.voteInfo.vote_failed, payload: { failedMsg: `${getVoteInfoRes.msg}` } })
+                Portal.remove(delLoading)
+                Toast.success(`投票失败：${res.msg}`, 0.5)
+            }
         } else {
             dispatch({ type: reduxActionTypes.voteInfo.vote_failed, payload: { failedMsg: `${res.msg}` } })
             Portal.remove(delLoading)

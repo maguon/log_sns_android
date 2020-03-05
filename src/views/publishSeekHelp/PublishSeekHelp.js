@@ -26,13 +26,15 @@ const infoField = props => {
     )
 }
 
-class PublishBlog extends Component {
+class PublishSeekHelp extends Component {
     constructor(props) {
         super(props)
     }
 
     render() {
-        const { publishBlogReducer: { data: { currentAddrName } }, publishBlogForm = {} } = this.props
+        const { publishSeekHelpReducer: { data: { currentAddrName } }, publishSeekHelpForm = {} } = this.props
+        console.log('publishSeekHelpForm',publishSeekHelpForm)
+        console.log('props',this.props)
         return (
             <ScrollView
                 style={{ flex: 1 }}
@@ -74,7 +76,7 @@ class PublishBlog extends Component {
                                 )
                             }} />
                         </View>
-                        {publishBlogForm.addressShow && <Brief>{currentAddrName ? `${currentAddrName}` : ''}</Brief>}
+                        {publishSeekHelpForm.addressShow && <Brief>{currentAddrName ? `${currentAddrName}` : ''}</Brief>}
                     </Item>
                 </List>
             </ScrollView>
@@ -85,25 +87,26 @@ class PublishBlog extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        publishBlogReducer: state.publishBlogReducer,
-        publishBlogForm: getFormValues('publishBlog')(state)
+        publishSeekHelpReducer: state.publishSeekHelpReducer,
+        publishSeekHelpForm: getFormValues('publishSeekHelp')(state)
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
     getCurrentAddr: reqParams => {
-        dispatch(reduxActions.publishBlog.getCurrentAddr(reqParams))
+        console.log('reqParams',reqParams)
+        dispatch(reduxActions.publishSeekHelp.getCurrentAddr(reqParams))
     },
     removeCurrentAddr: () => {
-        dispatch(reduxActions.publishBlog.removeCurrentAddr())
+        dispatch(reduxActions.publishSeekHelp.removeCurrentAddr())
     }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
-        form: 'publishBlog',
+        form: 'publishSeekHelp',
         onSubmit: (values, dispatch, props) => {
             // console.log('onSubmit')
-            dispatch(reduxActions.publishBlog.createArticle(values))
+            dispatch(reduxActions.publishSeekHelp.createSeekHelp(values))
         }
-    })(PublishBlog))
+    })(PublishSeekHelp))

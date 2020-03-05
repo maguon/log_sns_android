@@ -42,6 +42,7 @@ import * as voteListForCommunity from './views/community/vote/voteListForCommuni
 
 
 import * as voteInfo from './views/voteInfo/voteInfoActionTypes'
+import * as publishSeekHelp from './views/publishSeekHelp/publishSeekHelpActionTypes'
 
 
 export default {
@@ -87,5 +88,6 @@ export default {
     voteListForCommunity,
 
 
-    voteInfo
+    voteInfo,
+    publishSeekHelp
 }

@@ -4,17 +4,17 @@ import * as host from '../../utils/host'
 
 const geoWebapiKey = '22d16ea40b6fdb3ebc3daa1b48db3287'
 
-export const createArticle = reqParams => async (dispatch, getState) => {
+export const createSeekHelp = reqParams => async (dispatch, getState) => {
     try {
         console.log('reqParams', reqParams)
         const { publishBlogReducer: { data }, loginReducer } = getState()
-        dispatch({ type: reduxActionTypes.publishBlog.create_article_waiting })
+        dispatch({ type: reduxActionTypes.publishSeekHelp.create_seekHelp_waiting })
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg`
         console.log('url', url)
         let params = {}
         if (reqParams.addressShow) {
             params = {
-                type: 1,
+                type: 2,
                 carrier: 1,
                 info: reqParams.info,
                 address: [data.longitude, data.latitude],
@@ -24,7 +24,7 @@ export const createArticle = reqParams => async (dispatch, getState) => {
             }
         } else {
             params = {
-                type: 1,
+                type: 2,
                 carrier: 1,
                 info: reqParams.info,
                 addressShow: 0,
@@ -34,18 +34,18 @@ export const createArticle = reqParams => async (dispatch, getState) => {
         const res = await httpRequest.post(url, params)
         console.log('res', res)
         if (res.success) {
-            dispatch({ type: reduxActionTypes.publishBlog.create_article_success })
+            dispatch({ type: reduxActionTypes.publishSeekHelp.create_seekHelp_success })
         } else {
-            dispatch({ type: reduxActionTypes.publishBlog.create_article_failed, payload: { failedMsg: `${res.msg}` } })
+            dispatch({ type: reduxActionTypes.publishSeekHelp.create_seekHelp_failed, payload: { failedMsg: `${res.msg}` } })
         }
     } catch (err) {
-        dispatch({ type: reduxActionTypes.publishBlog.create_article_failed, payload: { failedMsg: `${err}` } })
+        dispatch({ type: reduxActionTypes.publishSeekHelp.create_seekHelp_failed, payload: { failedMsg: `${err}` } })
     }
 }
 
 export const getCurrentAddr = reqParams => async (dispatch) => {
     try {
-        dispatch({ type: reduxActionTypes.publishBlog.get_currentAddr_waiting })
+        dispatch({ type: reduxActionTypes.publishSeekHelp.get_currentAddrForSeekHelp_waiting })
         const url = `https://restapi.amap.com/v3/geocode/regeo?key=${geoWebapiKey}&location=${reqParams.longitude},${reqParams.latitude}&extensions=base&batch=false`
         console.log('url', url)
         const res = await httpRequest.get(url)
@@ -53,7 +53,7 @@ export const getCurrentAddr = reqParams => async (dispatch) => {
         if (res.info == 'OK') {
             // console.log('ok')
             dispatch({
-                type: reduxActionTypes.publishBlog.get_currentAddr_success, payload: {
+                type: reduxActionTypes.publishSeekHelp.get_currentAddrForSeekHelp_success, payload: {
                     currentAddrName: res.regeocode.formatted_address,
                     currentAddrReal: `${res.regeocode.addressComponent.province ? res.regeocode.addressComponent.province : ''}${res.regeocode.addressComponent.city ? res.regeocode.addressComponent.city : ''}${res.regeocode.addressComponent.district ? res.regeocode.addressComponent.district : ''}${res.regeocode.addressComponent.township ? res.regeocode.addressComponent.township : ''}${res.regeocode.addressComponent.streetNumber.street ? res.regeocode.addressComponent.streetNumber.street : ''}${res.regeocode.addressComponent.streetNumber.number ? res.regeocode.addressComponent.streetNumber.number : ''}`,
                     longitude: reqParams.longitude,
@@ -61,14 +61,14 @@ export const getCurrentAddr = reqParams => async (dispatch) => {
                 }
             })
         } else {
-            dispatch({ type: reduxActionTypes.publishBlog.get_currentAddr_failed, payload: { failedMsg: `${res.infocode}` } })
+            dispatch({ type: reduxActionTypes.publishSeekHelp.get_currentAddrForSeekHelp_failed, payload: { failedMsg: `${res.infocode}` } })
         }
     } catch (err) {
-        // console.log('err', err)
-        dispatch({ type: reduxActionTypes.publishBlog.get_currentAddr_failed, payload: { failedMsg: `${err}` } })
+        console.log('err', err)
+        dispatch({ type: reduxActionTypes.publishSeekHelp.get_currentAddrForSeekHelp_failed, payload: { failedMsg: `${err}` } })
     }
 }
 
 export const removeCurrentAddr = () => (dispatch) => {
-    dispatch({ type: reduxActionTypes.publishBlog.remove_currentAddr })
+    dispatch({ type: reduxActionTypes.publishSeekHelp.remove_currentAddrForSeekHelp })
 }

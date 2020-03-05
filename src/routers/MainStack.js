@@ -29,6 +29,8 @@ import NavPulishBlog from './navBar/NavPulishBlog'
 import ArticleListOfFriend from '../views/articleListOfFriend/ArticleListOfFriend'
 import TextArticleInfo from '../views/person/articleInfo/textArticleInfo/TextArticleInfo'
 import VoteInfo from '../views/voteInfo/VoteInfo'
+import PublishSeekHelp from '../views/publishSeekHelp/PublishSeekHelp'
+import NavPulishSeekHelp from './navBar/NavPulishSeekHelp'
 
 export default createStackNavigator({
     TabsStack: {
@@ -151,10 +153,14 @@ export default createStackNavigator({
             title: '微博照片'
         }
     },
-    SeekHelp: {
-        screen: SeekHelp,
+    PublishSeekHelp: {
+        screen: PublishSeekHelp,
         navigationOptions: {
-            title: '发布帮助',
+            title: '发布求助',
+            header: ({ scene, previous, navigation }) => {
+                // console.log('props',props)
+                return <NavPulishSeekHelp scene={scene} previous={previous} navigation={navigation} />
+            }
         }
     },
     ArticleListOfFriend: {

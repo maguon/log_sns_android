@@ -93,5 +93,16 @@ export default handleActions({
                 isResultStatus: 1
             }
         }
+    },
+
+    [reduxActionTypes.voteListForCommunity.update_voteInfoById]: (state, action) => {
+        const { payload: { voteInfo } } = action
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                voteList: state.data.voteList.map(item => item._id == voteInfo._id ? voteInfo : item)
+            },
+        }
     }
 }, initialState)

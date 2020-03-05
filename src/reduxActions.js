@@ -40,6 +40,7 @@ import * as videoArticleListForCommunity from './views/community/video/videoArti
 import * as voteListForCommunity from './views/community/vote/voteListForCommunityActions'
 
 import * as voteInfo from './views/voteInfo/voteInfoActions'
+import * as publishSeekHelp from './views/publishSeekHelp/publishSeekHelpActions'
 
 
 
@@ -90,6 +91,7 @@ export default {
     voteListForCommunity,
 
 
-    voteInfo
+    voteInfo,
+    publishSeekHelp
     
 }

@@ -45,6 +45,7 @@ import voteListForCommunityReducer from './views/community/vote/voteListForCommu
 
 
 import voteInfoReducer from './views/voteInfo/voteInfoReducer'
+import publishSeekHelpReducer from './views/publishSeekHelp/publishSeekHelpReducer'
 
 export default combineReducers({
     form: formReducer,
@@ -92,5 +93,6 @@ export default combineReducers({
     voteListForCommunityReducer,
 
 
-    voteInfoReducer
+    voteInfoReducer,
+    publishSeekHelpReducer
 })

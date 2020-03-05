@@ -3,7 +3,7 @@ import httpRequest from '../../../utils/HttpRequest'
 import * as host from '../../../utils/host'
 import { sleep } from '../../../utils/util'
 
-const pageSize = 1
+const pageSize = 20
 
 export const getVoteList = () => async (dispatch, getState) => {
     try {
@@ -12,7 +12,6 @@ export const getVoteList = () => async (dispatch, getState) => {
         // console.log('url', url)
         const res = await httpRequest.get(url)
         // console.log('res', res)
-
         if (res.success) {
             dispatch({
                 type: reduxActionTypes.voteListForCommunity.get_voteListForCommunity_success, payload: {
@@ -24,7 +23,7 @@ export const getVoteList = () => async (dispatch, getState) => {
             dispatch({ type: reduxActionTypes.voteListForCommunity.get_voteListForCommunity_failed, payload: { failedMsg: `${res.msg}` } })
         }
     } catch (err) {
-        console.log('err', err)
+        // console.log('err', err)
         dispatch({ type: reduxActionTypes.voteListForCommunity.get_voteListForCommunity_failed, payload: { failedMsg: `${err}` } })
     }
 }
@@ -43,9 +42,9 @@ export const getVoteListMore = () => async (dispatch, getState) => {
             dispatch({ type: reduxActionTypes.voteListForCommunity.get_voteListForCommunityMore_waiting, payload: {} })
             try {
                 const url = `${host.base_host}/user/${loginReducer.data.user._id}/vote?start=${(voteListForCommunityReducer.data.voteList.length)}&size=${pageSize}`
-                console.log('url', url)
+                // console.log('url', url)
                 const res = await httpRequest.get(url)
-                console.log('res', res)
+                // console.log('res', res)
                 if (res.success) {
                     const isCompleted = res.result.length == 0 || res.result.length % pageSize != 0
                     // if (isCompleted) {
@@ -61,8 +60,7 @@ export const getVoteListMore = () => async (dispatch, getState) => {
                     dispatch({ type: reduxActionTypes.voteListForCommunity.get_voteListForCommunityMore_failed, payload: { failedMsg: `${res.msg}` } })
                 }
             } catch (err) {
-                console.log('err', err)
-
+                // console.log('err', err)
                 dispatch({ type: reduxActionTypes.voteListForCommunity.get_voteListForCommunityMore_failed, payload: { failedMsg: `${err}` } })
             }
         }

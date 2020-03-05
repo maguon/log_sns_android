@@ -5,3 +5,5 @@ export const get_voteListForCommunity_waiting = 'get_voteListForCommunity_waitin
 export const get_voteListForCommunityMore_success = 'get_voteListForCommunityMore_success'
 export const get_voteListForCommunityMore_failed = 'get_voteListForCommunityMore_failed'
 export const get_voteListForCommunityMore_waiting = 'get_voteListForCommunityMore_waiting'
+
+export const update_voteInfoById='update_voteInfoById'

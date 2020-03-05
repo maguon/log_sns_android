@@ -67,7 +67,7 @@ class VoteCheck extends Component {
         return (
             <View>
                 <View style={{ marginHorizontal: 10, marginTop: 10, padding: 10, borderWidth: 0.5, borderColor: '#ccc' }}>
-                    <Text>最多可选1票</Text>
+                    <Text>最多可选{`${this.props.voteInfo.max_num}`}票</Text>
                 </View>
                 <Field
                     name="checkboxList"
