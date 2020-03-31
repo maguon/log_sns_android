@@ -46,7 +46,7 @@ const MessageList = props => {
                         thumb={<Icon name="like" style={{ marginRight: 15 }} />} >
                         赞我</Item>
                 </List>
-                <WhiteSpace size='md' style={globalStyles.containerBackgroundColor} />
+                {/* <WhiteSpace size='md' style={globalStyles.containerBackgroundColor} />
                 <List>
                     <Item arrow="horizontal"
                         extra={
@@ -58,7 +58,7 @@ const MessageList = props => {
                         onLongPress={() => { navigation.navigate('RequestContactList') }}
                         thumb={<Icon name="phone" style={{ marginRight: 15 }} />} >
                         申请联系方式</Item>
-                </List>
+                </List> */}
                 <WhiteSpace size='md' style={globalStyles.containerBackgroundColor} />
                 <List>
                     <Item

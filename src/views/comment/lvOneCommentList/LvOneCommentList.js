@@ -1,46 +1,33 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, InteractionManager, RefreshControl, KeyboardAwareScrollView, Image, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, RefreshControl, InteractionManager, FlatList } from 'react-native'
 import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
-import { connect } from 'react-redux'
-import reduxActions from '../../../../reduxActions'
-import { ListEmpty, ListFooter } from '../../../../components/list'
-import { styleColor } from '../../../../GlobalStyles'
-import moment from 'moment'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import { connect } from 'react-redux'
+import reduxActions from '../../../reduxActions'
+import moment from 'moment'
+import { ListEmpty, ListFooter } from '../../../components/list'
+import { styleColor } from '../../../GlobalStyles'
 
-class TextArticleInfo extends Component {
-
+class LvOneCommentList extends Component {
     componentDidMount() {
-
         const { navigation } = this.props
-        this.props.getCommentWaiting()
-        this.props.getTextArticleInfoWaiting()
-        InteractionManager.runAfterInteractions(() => {
-            this.props.getComment({ msgId: navigation.state.params.articleInfo._id })
-            this.props.getTextArticleInfo({ msgId: navigation.state.params.articleInfo._id })
-        })
+        this.props.getLvOneCommentListWaiting()
+        InteractionManager.runAfterInteractions(() => this.props.getLvOneCommentList({ msgId: navigation.state.params.articleInfo._id }))
     }
 
+    componentWillUnmount() {
+        // this.props.rmArticleAllList()
+    }
     render() {
-        const { navigation, textArticleInfoReducer } = this.props
-        const { data: { articleInfo } } = textArticleInfoReducer
-
+        // console.log('this.props', this.props)
+        const { LvOneCommentListReducer, navigation: { state: { params: { articleInfo } } }, navigation } = this.props
         return (
             <View style={{ flex: 1 }}>
                 <FlatList
                     keyExtractor={(item, index) => `${index}`}
-                    data={textArticleInfoReducer.data.commentList}
+                    data={LvOneCommentListReducer.data.lvOneCommentList}
                     ListHeaderComponent={
                         <View>
-                            <WingBlank size='md'>
-                                <WhiteSpace size='md' />
-                                <Text>{articleInfo.created_at ? `${moment(articleInfo.created_at).format('YYYY-MM-DD HH:mm')}` : ''}</Text>
-                                <WhiteSpace size='md' />
-                                <Text>{articleInfo.info ? `${articleInfo.info}` : ''}</Text>
-                                <WhiteSpace size='md' />
-                                <View style={{ backgroundColor: '#000', height: 200 }} />
-                            </WingBlank>
-                            <WhiteSpace size='md' />
                             <View style={{ backgroundColor: '#f0f0f0', padding: 5 }}>
                                 <WingBlank size='md' style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <View>
@@ -68,7 +55,9 @@ class TextArticleInfo extends Component {
                                     <WhiteSpace size='sm' />
                                     {item.comment_num > 0 && <View>
                                         <TouchableOpacity
-                                            onPress={() => { navigation.navigate('LvTwoCommentList', { parentCommentInfo: item }) }}
+                                            onPress={() => {
+                                                navigation.navigate('LvTwoCommentList', { parentCommentInfo: item })
+                                            }}
                                             style={{ backgroundColor: '#f0f0f0', padding: 5 }}>
                                             <Text>共{item.comment_num ? `${item.comment_num}` : '0'}条回复 ></Text>
                                         </TouchableOpacity>
@@ -83,21 +72,19 @@ class TextArticleInfo extends Component {
                                                     navigation.navigate('Comment', { lvOneComment: item, level: 2 })
                                                     // console.log("speech")
                                                 }}>
-
                                                 <SimpleLineIcons name="speech" />
                                             </TouchableOpacity>
                                             <TouchableOpacity onPress={() => {
-                                                this.props.likeComment({
+                                                this.props.likeLvOneComment({
                                                     msgId: item._msg_id,
                                                     msgUserId: item._msg_user_id,
                                                     msgComId: item._id,
                                                     msgComUserId: item._user_id
                                                 })
-                                            }} style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                                <SimpleLineIcons name="like" style={{ marginLeft: 20 }} />
+                                            }} style={{ flexDirection: 'row', alignItems: 'center', width: 50, justifyContent: 'flex-end' }}>
+                                                <SimpleLineIcons name="like" />
                                                 <Text style={{ marginLeft: 5 }}>{item.agree_num ? `${item.agree_num}` : '0'}</Text>
                                             </TouchableOpacity>
-
                                         </View>
                                     </View>
                                     <WhiteSpace size='lg' />
@@ -108,56 +95,75 @@ class TextArticleInfo extends Component {
                     refreshControl={
                         <RefreshControl
                             colors={[styleColor]}
-                            refreshing={textArticleInfoReducer.getComment.isResultStatus == 1}
+                            refreshing={LvOneCommentListReducer.getLvOneCommentList.isResultStatus == 1}
                             onRefresh={() => {
-                                this.props.getCommentWaiting()
-                                this.props.getTextArticleInfoWaiting()
-                                this.props.getComment({ msgId: navigation.state.params.articleInfo._id })
-                                this.props.getTextArticleInfo({ msgId: navigation.state.params.articleInfo._id })
+                                this.props.getLvOneCommentListWaiting()
+                                InteractionManager.runAfterInteractions(() => this.props.getLvOneCommentList({ msgId: navigation.state.params.articleInfo._id }))
                             }}
                         />
                     }
                     onEndReachedThreshold={0.2}
                     onEndReached={() => {
-                        // console.log('onEndReached')
-                        if (textArticleInfoReducer.getComment.isResultStatus == 2 && !textArticleInfoReducer.data.isCompleted) {
-                            this.props.getCommentMore({ msgId: navigation.state.params.articleInfo._id })
+                        if (LvOneCommentListReducer.getLvOneCommentList.isResultStatus == 2 && !LvOneCommentListReducer.data.isCompleted) {
+                            this.props.getLvOneCommentListMore({ msgId: navigation.state.params.articleInfo._id })
                         }
                     }}
-                    ListEmptyComponent={textArticleInfoReducer.getComment.isResultStatus != 1 && <ListEmpty title='暂无文章' />}
-                    ListFooterComponent={textArticleInfoReducer.getCommentMore.isResultStatus == 1 ? <ListFooter /> : <View />}
+                    ListEmptyComponent={LvOneCommentListReducer.getLvOneCommentList.isResultStatus != 1 && <ListEmpty title='暂无文章' />}
+                    ListFooterComponent={LvOneCommentListReducer.getLvOneCommentListMore.isResultStatus == 1 ? <ListFooter /> : <View />}
                 />
-
-            </View>
+                <View style={{ height: 50, flexDirection: 'row', borderWidth: 0.5 }} >
+                    <TouchableOpacity
+                        style={{
+                            flex: 1, backgroundColor: '#f0f0f0', flexDirection: 'row',
+                            justifyContent: 'center', alignItems: 'center', borderRightWidth: 0.5
+                        }}
+                        onPress={() => {
+                            navigation.navigate('Comment', { articleInfo, level: 1 })
+                        }}>
+                        <Icon name="message" color='#777' />
+                        <Text style={{ marginLeft: 5, color: '#777' }}>评论</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={{
+                            flex: 1, justifyContent: 'center', flexDirection: 'row',
+                            alignItems: 'center', backgroundColor: '#f0f0f0'
+                        }}
+                        onPress={() => {
+                            console.log('like')
+                            this.props.likeLvOneComment({
+                                type: 1,
+                                msgId: articleInfo._id,
+                                msgUserId: articleInfo._user_id
+                            })
+                        }}>
+                        <Icon name="like" color='#777' />
+                        <Text style={{ marginLeft: 5, color: '#777' }}>赞</Text>
+                    </TouchableOpacity>
+                </View>
+            </View >
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        textArticleInfoReducer: state.textArticleInfoReducer
+        LvOneCommentListReducer: state.LvOneCommentListReducer
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getComment: reqParams => {
-        dispatch(reduxActions.textArticleInfo.getComment(reqParams))
+    getLvOneCommentList: (reqParams) => {
+        dispatch(reduxActions.lvOneCommentList.getLvOneCommentList(reqParams))
     },
-    getCommentMore: reqParams => {
-        dispatch(reduxActions.textArticleInfo.getCommentMore(reqParams))
+    getLvOneCommentListWaiting: () => {
+        dispatch(reduxActions.lvOneCommentList.getLvOneCommentListWaiting())
     },
-    getCommentWaiting: () => {
-        dispatch(reduxActions.textArticleInfo.getCommentWaiting())
+    getLvOneCommentListMore: (reqParams) => {
+        dispatch(reduxActions.lvOneCommentList.getLvOneCommentListMore(reqParams))
     },
-    getTextArticleInfo: reqParams => {
-        dispatch(reduxActions.textArticleInfo.getTextArticleInfo(reqParams))
-    },
-    getTextArticleInfoWaiting: () => {
-        dispatch(reduxActions.textArticleInfo.getTextArticleInfoWaiting())
-    },
-    likeComment: reqParams => {
-        dispatch(reduxActions.textArticleInfo.likeComment(reqParams))
+    likeLvOneComment: reqParams => {
+        dispatch(reduxActions.lvOneCommentList.likeLvOneComment(reqParams))
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TextArticleInfo)
+export default connect(mapStateToProps, mapDispatchToProps)(LvOneCommentList)

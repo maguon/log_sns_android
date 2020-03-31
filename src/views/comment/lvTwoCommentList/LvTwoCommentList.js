@@ -9,23 +9,23 @@ import { ListEmpty, ListFooter } from '../../../components/list'
 import moment from 'moment'
 
 //二级评论
-class CommentList extends Component {
+class LvTwoCommentList extends Component {
 
     componentDidMount() {
         const { navigation } = this.props
-        this.props.getCommentListWaiting()
+        this.props.getLvTwoCommentListWaiting()
         InteractionManager.runAfterInteractions(() => {
-            this.props.getCommentList({ parentCommentId: navigation.state.params.parentCommentInfo._id })
+            this.props.getLvTwoCommentList({ parentCommentId: navigation.state.params.parentCommentInfo._id })
         })
     }
 
     render() {
-        const { commentListReducer, navigation } = this.props
-        // console.log('commentListReducer', commentListReducer)
+        const { lvTwoCommentListReducer, navigation } = this.props
+        // console.log('lvTwoCommentListReducer', lvTwoCommentListReducer)
         return (
             <FlatList
                 keyExtractor={(item, index) => `${index}`}
-                data={commentListReducer.data.commentList}
+                data={lvTwoCommentListReducer.data.lvTwoCommentList}
                 renderItem={params => {
                     const { item, index } = params
 
@@ -44,7 +44,7 @@ class CommentList extends Component {
                                         </View>
                                         <TouchableOpacity
                                             onPress={() => {
-                                                this.props.likeComment({
+                                                this.props.lvTwoCommentList({
                                                     msgId: item._msg_id,
                                                     msgUserId: item._msg_user_id,
                                                     msgComId: item._id,
@@ -67,21 +67,21 @@ class CommentList extends Component {
                 refreshControl={
                     <RefreshControl
                         colors={[styleColor]}
-                        refreshing={commentListReducer.getCommentList.isResultStatus == 1}
+                        refreshing={lvTwoCommentListReducer.getLvTwoCommentList.isResultStatus == 1}
                         onRefresh={() => {
-                            this.props.getCommentListWaiting()
-                            this.props.getCommentList({ parentCommentId: navigation.state.params.parentCommentInfo._id })
+                            this.props.getLvTwoCommentListWaiting()
+                            this.props.getLvTwoCommentList({ parentCommentId: navigation.state.params.parentCommentInfo._id })
                         }}
                     />
                 }
                 onEndReachedThreshold={0.2}
                 onEndReached={() => {
-                    if (commentListReducer.getCommentList.isResultStatus == 2 && !commentListReducer.data.isCompleted) {
-                        this.props.getCommentListMore({ parentCommentId: navigation.state.params.parentCommentInfo._id })
+                    if (lvTwoCommentListReducer.getLvTwoCommentList.isResultStatus == 2 && !lvTwoCommentListReducer.data.isCompleted) {
+                        this.props.getLvTwoCommentListMore({ parentCommentId: navigation.state.params.parentCommentInfo._id })
                     }
                 }}
-                ListEmptyComponent={commentListReducer.getCommentList.isResultStatus != 1 && <ListEmpty title='暂无文章' />}
-                ListFooterComponent={commentListReducer.getCommentListMore.isResultStatus == 1 ? <ListFooter /> : <View />}
+                ListEmptyComponent={lvTwoCommentListReducer.getLvTwoCommentList.isResultStatus != 1 && <ListEmpty title='暂无文章' />}
+                ListFooterComponent={lvTwoCommentListReducer.getLvTwoCommentListMore.isResultStatus == 1 ? <ListFooter /> : <View />}
             />
         )
     }
@@ -90,23 +90,23 @@ class CommentList extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        commentListReducer: state.commentListReducer
+        lvTwoCommentListReducer: state.lvTwoCommentListReducer,
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getCommentList: reqParams => {
-        dispatch(reduxActions.commentList.getCommentList(reqParams))
+    getLvTwoCommentList: reqParams => {
+        dispatch(reduxActions.lvTwoCommentList.getLvTwoCommentList(reqParams))
     },
-    getCommentListWaiting: () => {
-        dispatch(reduxActions.commentList.getCommentListWaiting())
+    getLvTwoCommentListWaiting: () => {
+        dispatch(reduxActions.lvTwoCommentList.getLvTwoCommentListWaiting())
     },
-    getCommentListMore: reqParams => {
-        dispatch(reduxActions.commentList.getCommentListMore(reqParams))
+    getLvTwoCommentListMore: reqParams => {
+        dispatch(reduxActions.lvTwoCommentList.getLvTwoCommentListMore(reqParams))
     },
-    likeComment: reqParams => {
-        dispatch(reduxActions.commentList.likeComment(reqParams))
+    lvTwoCommentList: reqParams => {
+        dispatch(reduxActions.lvTwoCommentList.lvTwoCommentList(reqParams))
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommentList)
+export default connect(mapStateToProps, mapDispatchToProps)(LvTwoCommentList)

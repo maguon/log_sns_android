@@ -6,44 +6,44 @@ import { Portal, Toast } from '@ant-design/react-native'
 
 const pageSize = 20
 
-export const getCommentList = reqParams => async (dispatch, getState) => {
+export const getLvTwoCommentList = reqParams => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
-        // console.log('reqParams', reqParams)
+        console.log('reqParams', reqParams)
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMsgComment?msgComId=${reqParams.parentCommentId}&msgType=1&start=0&size=${pageSize}`
-        // console.log('url', url)
+        console.log('url', url)
         const res = await httpRequest.get(url)
-        // console.log('res', res)
+        console.log('res', res)
         if (res.success) {
             dispatch({
-                type: reduxActionTypes.commentList.get_commentList_success, payload: {
-                    commentList: res.result,
+                type: reduxActionTypes.lvTwoCommentList.get_lvTwoCommentList_success, payload: {
+                    lvTwoCommentList: res.result,
                     isCompleted: (res.result.length == 0 || res.result.length % pageSize != 0)
                 }
             })
         } else {
-            dispatch({ type: reduxActionTypes.commentList.get_commentList_failed, payload: { failedMsg: `${res.msg}` } })
+            dispatch({ type: reduxActionTypes.lvTwoCommentList.get_lvTwoCommentList_failed, payload: { failedMsg: `${res.msg}` } })
         }
     } catch (err) {
         // console.log('err', err)
-        dispatch({ type: reduxActionTypes.commentList.get_commentList_failed, payload: { failedMsg: `${err}` } })
+        dispatch({ type: reduxActionTypes.lvTwoCommentList.get_lvTwoCommentList_failed, payload: { failedMsg: `${err}` } })
     }
 }
 
-export const getCommentListWaiting = () => (dispatch) => {
-    dispatch({ type: reduxActionTypes.commentList.get_commentList_waiting })
+export const getLvTwoCommentListWaiting = () => (dispatch) => {
+    dispatch({ type: reduxActionTypes.lvTwoCommentList.get_lvTwoCommentList_waiting })
 }
 
-export const getCommentListMore = reqParams => async (dispatch, getState) => {
-    const { loginReducer, commentListReducer } = getState()
-    if (commentListReducer.getCommentListMore.isResultStatus == 1) {
+export const getLvTwoCommentListMore = reqParams => async (dispatch, getState) => {
+    const { loginReducer, lvTwoCommentListReducer } = getState()
+    if (lvTwoCommentListReducer.getLvTwoCommentListMore.isResultStatus == 1) {
         await sleep(1000)
-        dispatch(getCommentListMore)
+        dispatch(getLvTwoCommentListMore)
     } else {
-        if (!commentListReducer.data.isCompleted) {
-            dispatch({ type: reduxActionTypes.commentList.get_commentListMore_waiting, payload: {} })
+        if (!lvTwoCommentListReducer.data.isCompleted) {
+            dispatch({ type: reduxActionTypes.lvTwoCommentList.get_lvTwoCommentListMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMsgComment?msgComId=${reqParams.parentCommentId}&msgType=1&start=${commentListReducer.data.commentList.length}&size=${pageSize}`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMsgComment?msgComId=${reqParams.parentCommentId}&msgType=1&start=${lvTwoCommentListReducer.data.lvTwoCommentList.length}&size=${pageSize}`
                 // console.log('url', url)
                 const res = await httpRequest.get(url)
                 // console.log('res', res)
@@ -53,28 +53,28 @@ export const getCommentListMore = reqParams => async (dispatch, getState) => {
                     //     ToastAndroid.show('已全部加载完毕！', 10)
                     // }
                     dispatch({
-                        type: reduxActionTypes.commentList.get_commentListMore_success, payload: {
-                            commentList: res.result,
+                        type: reduxActionTypes.lvTwoCommentList.get_lvTwoCommentListMore_success, payload: {
+                            lvTwoCommentList: res.result,
                             isCompleted
                         }
                     })
                 } else {
-                    dispatch({ type: reduxActionTypes.commentList.get_commentListMore_failed, payload: { failedMsg: `${res.msg}` } })
+                    dispatch({ type: reduxActionTypes.lvTwoCommentList.get_lvTwoCommentListMore_failed, payload: { failedMsg: `${res.msg}` } })
                 }
             } catch (err) {
                 // console.log('err', err)
-                dispatch({ type: reduxActionTypes.commentList.get_commentListMore_failed, payload: { failedMsg: `${err}` } })
+                dispatch({ type: reduxActionTypes.lvTwoCommentList.get_lvTwoCommentListMore_failed, payload: { failedMsg: `${err}` } })
             }
         }
     }
 }
 
 
-export const likeComment = reqParams => async (dispatch, getState) => {
+export const lvTwoCommentList = reqParams => async (dispatch, getState) => {
     try {
         const likeLoading = Toast.loading('点赞', 0)
         const { loginReducer } = getState()
-        dispatch({ type: reduxActionTypes.commentList.like_commentForCommentList_waiting, payload: {} })
+        dispatch({ type: reduxActionTypes.lvTwoCommentList.like_lvTwoComment_waiting, payload: {} })
         const url = `${host.base_host}/user/${loginReducer.data.user._id}/userPraise`
         // console.log('url', url)
         const res = await httpRequest.post(url, {
@@ -95,22 +95,22 @@ export const likeComment = reqParams => async (dispatch, getState) => {
 
 
             if (resComment.success) {
-                dispatch({ type: reduxActionTypes.commentList.like_commentForCommentList_success, payload: { commentInfo: resComment.result[0] } })
+                dispatch({ type: reduxActionTypes.lvTwoCommentList.like_lvTwoComment_success, payload: { commentInfo: resComment.result[0] } })
                 Portal.remove(likeLoading)
                 Toast.success("点赞成功！", 0.5)
             } else {
-                dispatch({ type: reduxActionTypes.commentList.like_commentForCommentList_failed, payload: { failedMsg: `${resComment.msg}` } })
+                dispatch({ type: reduxActionTypes.lvTwoCommentList.like_lvTwoComment_failed, payload: { failedMsg: `${resComment.msg}` } })
                 Portal.remove(likeLoading)
                 Toast.success("点赞失败！", 0.5)
             }
         } else {
-            dispatch({ type: reduxActionTypes.commentList.like_commentForCommentList_failed, payload: { failedMsg: `${res.msg}` } })
+            dispatch({ type: reduxActionTypes.lvTwoCommentList.like_lvTwoComment_failed, payload: { failedMsg: `${res.msg}` } })
             Portal.remove(likeLoading)
             Toast.success("点赞失败！", 0.5)
         }
     } catch (err) {
         // console.log('err', err)
-        dispatch({ type: reduxActionTypes.commentList.like_commentForCommentList_failed, payload: { failedMsg: `${err}` } })
+        dispatch({ type: reduxActionTypes.lvTwoCommentList.like_lvTwoComment_failed, payload: { failedMsg: `${err}` } })
         Portal.remove(likeLoading)
         Toast.success("点赞失败！", 0.5)
     }

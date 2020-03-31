@@ -10,7 +10,7 @@ import * as requestContactList from './views/message/requestContactList/requestC
 
 import * as followList from './views/person/followList/followListActions'
 import * as fansList from './views/person/fansList/fansListActions'
-import * as commentList from './views/person/commentList/commentListActions'
+
 import * as collectionList from './views/person/collectionList/collectionListActions'
 import * as voteList from './views/person/voteList/voteListActions'
 import * as collectionLocationList from './views/person/collectionLocationList/collectionLocationListActions'
@@ -42,6 +42,9 @@ import * as voteListForCommunity from './views/community/vote/voteListForCommuni
 import * as voteInfo from './views/voteInfo/voteInfoActions'
 import * as publishSeekHelp from './views/publishSeekHelp/publishSeekHelpActions'
 
+import * as lvOneCommentList from './views/comment/lvOneCommentList/LvOneCommentListActions'
+import * as lvTwoCommentList from './views/comment/lvTwoCommentList/lvTwoCommentListActions'
+import * as comment from './views/comment/comment/commentActions'
 
 
 export default {
@@ -65,7 +68,7 @@ export default {
     
     followList,
     fansList,
-    commentList,
+    
     collectionList,
     voteList,
     collectionLocationList,
@@ -92,6 +95,10 @@ export default {
 
 
     voteInfo,
-    publishSeekHelp
+    publishSeekHelp,
+    
+    lvOneCommentList,
+    lvTwoCommentList,
+    comment
     
 }

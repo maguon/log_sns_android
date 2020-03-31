@@ -14,7 +14,7 @@ import requestContactListReducer from './views/message/requestContactList/reques
 
 import followListReducer from './views/person/followList/followListReducer'
 import fansListReducer from './views/person/fansList/fansListReducer'
-import commentListReducer from './views/person/commentList/commentListReducer'
+
 import collectionListReducer from './views/person/collectionList/collectionListReducer'
 import voteListReducer from './views/person/voteList/voteListReducer'
 import collectionLocationListReducer from './views/person/collectionLocationList/collectionLocationListReducer'
@@ -37,15 +37,17 @@ import textArticleInfoReducer from './views/person/articleInfo/textArticleInfo/t
 import myCommentListReducer from './views/person/myCommentList/myCommentListReducer'
 import publishBlogReducer from './views/publishBlog/publishBlogReducer'
 
-
 import newestArticleListForCommunityReducer from './views/community/newest/newestArticleListForCommunityReducer'
 import seekHelpListForCommunityReducer from './views/community/seekHelp/seekHelpListForCommunityReducer'
 import videoArticleListForCommunityReducer from './views/community/video/videoArticleListForCommunityReducer'
 import voteListForCommunityReducer from './views/community/vote/voteListForCommunityReducer'
 
-
 import voteInfoReducer from './views/voteInfo/voteInfoReducer'
 import publishSeekHelpReducer from './views/publishSeekHelp/publishSeekHelpReducer'
+
+import LvOneCommentListReducer from './views/comment/lvOneCommentList/LvOneCommentListReducer'
+import commentReducer from './views/comment/comment/commentReducer'
+import lvTwoCommentListReducer from './views/comment/lvTwoCommentList/lvTwoCommentListReducer'
 
 export default combineReducers({
     form: formReducer,
@@ -62,7 +64,7 @@ export default combineReducers({
 
     fansListReducer,
     followListReducer,
-    commentListReducer,
+   
     collectionListReducer,
     voteListReducer,
     collectionLocationListReducer,
@@ -94,5 +96,9 @@ export default combineReducers({
 
 
     voteInfoReducer,
-    publishSeekHelpReducer
+    publishSeekHelpReducer,
+
+    LvOneCommentListReducer,
+    lvTwoCommentListReducer,
+    commentReducer
 })

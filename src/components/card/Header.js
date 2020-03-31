@@ -9,7 +9,13 @@ const Header = props => {
         <View>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <View style={{ margin: 10 }}>
-                    <Image style={{ width: 40, height: 40 }} source={{ uri: params.avatar ? params.avatar : 'personalicon' }} />
+                    <Image
+                        style={{ width: 40, height: 40 }}
+                        source={{
+                            uri: params.avatar ? params.avatar : 'personalicon',
+                            cache :'force-cache'
+                        }}
+                    />
                 </View>
                 <View style={{ marginTop: 10 }}>
                     <Text style={{ fontSize: 16 }}>{params.nick ? `${params.nick}` : ''}</Text>

@@ -55,7 +55,6 @@ const Home = props => {
             <React.Fragment>
               <Popover
                 onSelect={param => {
-                  console.log('param', param)
                   if (param == '发布文章') {
                     navigation.navigate('PublishBlog')
                   } else if (param == '发布求助') {

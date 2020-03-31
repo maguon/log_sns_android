@@ -2,7 +2,7 @@ import React from 'react'
 import { createStackNavigator } from 'react-navigation-stack'
 import StackViewStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator'
 import TabsStack from './TabsStack'
-import CommentList from '../views/person/commentList/CommentList' //评论列表
+
 import MyCommentList from '../views/person/myCommentList/MyCommentList' //我的评论
 import FollowList from '../views/person/followList/FollowList' //我的关注
 import ArticleList from '../views/person/articleList/ArticleList' //我的文章 
@@ -31,6 +31,11 @@ import TextArticleInfo from '../views/person/articleInfo/textArticleInfo/TextArt
 import VoteInfo from '../views/voteInfo/VoteInfo'
 import PublishSeekHelp from '../views/publishSeekHelp/PublishSeekHelp'
 import NavPulishSeekHelp from './navBar/NavPulishSeekHelp'
+import NavComment from './navBar/NavComment'
+
+import LvOneCommentList from '../views/comment/lvOneCommentList/LvOneCommentList'
+import LvTwoCommentList from '../views/comment/lvTwoCommentList/LvTwoCommentList' //评论列表
+import Comment from '../views/comment/comment/Comment'
 
 export default createStackNavigator({
     TabsStack: {
@@ -93,8 +98,8 @@ export default createStackNavigator({
             title: '我的收藏'
         }
     },
-    CommentList: {
-        screen: CommentList,
+    LvTwoCommentList: {
+        screen: LvTwoCommentList,
         navigationOptions: {
             title: '评论列表'
         }
@@ -188,6 +193,22 @@ export default createStackNavigator({
             header: ({ scene, previous, navigation }) => {
                 // console.log('props',props)
                 return <NavPulishBlog scene={scene} previous={previous} navigation={navigation} />
+            }
+        }
+    },
+    LvOneCommentList: {
+        screen: LvOneCommentList,
+        navigationOptions: {
+            title: '对方昵称'
+        }
+    },
+    Comment: {
+        screen: Comment,
+        navigationOptions: {
+            title: '评价',
+            header: ({ scene, previous, navigation }) => {
+                // console.log('props',props)
+                return <NavComment scene={scene} previous={previous} navigation={navigation} />
             }
         }
     }

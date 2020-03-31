@@ -3,56 +3,56 @@ import reduxActionTypes from '../../../reduxActionTypes'
 
 const initialState = {
     data: {
-        commentList: [],
+        lvTwoCommentList: [],
         isCompleted: false
     },
-    getCommentList: {
+    getLvTwoCommentList: {
         isResultStatus: 0,
         failedMsg: ''
     },
-    getCommentListMore: {
+    getLvTwoCommentListMore: {
         isResultStatus: 0,
         failedMsg: ''
     },
-    likeComment: {
+    likeLvTwoComment: {
         isResultStatus: 0,
         failedMsg: ''
     }
 }
 
 export default handleActions({
-    [reduxActionTypes.commentList.get_commentList_success]: (state, action) => {
-        const { payload: { commentList, isCompleted } } = action
+    [reduxActionTypes.lvTwoCommentList.get_lvTwoCommentList_success]: (state, action) => {
+        const { payload: { lvTwoCommentList, isCompleted } } = action
         return {
             ...state,
             data: {
                 ...state.data,
-                commentList,
+                lvTwoCommentList,
                 isCompleted
             },
-            getCommentList: {
-                ...state.getCommentList,
+            getLvTwoCommentList: {
+                ...state.getLvTwoCommentList,
                 isResultStatus: 2
             }
         }
     },
-    [reduxActionTypes.commentList.get_commentList_failed]: (state, action) => {
+    [reduxActionTypes.lvTwoCommentList.get_lvTwoCommentList_failed]: (state, action) => {
         const { payload: { failedMsg } } = action
 
         return {
             ...state,
-            getCommentList: {
-                ...state.getCommentList,
+            getLvTwoCommentList: {
+                ...state.getLvTwoCommentList,
                 isResultStatus: 3,
                 failedMsg
             }
         }
     },
-    [reduxActionTypes.commentList.get_commentList_waiting]: (state, action) => {
+    [reduxActionTypes.lvTwoCommentList.get_lvTwoCommentList_waiting]: (state, action) => {
         return {
             ...state,
-            getCommentList: {
-                ...state.getCommentList,
+            getLvTwoCommentList: {
+                ...state.getLvTwoCommentList,
                 isResultStatus: 1
             }
         }
@@ -61,51 +61,51 @@ export default handleActions({
 
 
 
-    [reduxActionTypes.commentList.get_commentListMore_success]: (state, action) => {
-        const { payload: { commentList, isCompleted } } = action
+    [reduxActionTypes.lvTwoCommentList.get_lvTwoCommentListMore_success]: (state, action) => {
+        const { payload: { lvTwoCommentList, isCompleted } } = action
         return {
             ...state,
             data: {
                 ...state.data,
-                commentList: [...state.data.commentList, ...commentList],
+                lvTwoCommentList: [...state.data.lvTwoCommentList, ...lvTwoCommentList],
                 isCompleted
             },
-            getCommentListMore: {
-                ...state.getCommentListMore,
+            getLvTwoCommentListMore: {
+                ...state.getLvTwoCommentListMore,
                 isResultStatus: 2
             }
         }
     },
-    [reduxActionTypes.commentList.get_commentListMore_failed]: (state, action) => {
+    [reduxActionTypes.lvTwoCommentList.get_lvTwoCommentListMore_failed]: (state, action) => {
         const { payload: { failedMsg } } = action
 
         return {
             ...state,
-            getCommentListMore: {
-                ...state.getCommentListMore,
+            getLvTwoCommentListMore: {
+                ...state.getLvTwoCommentListMore,
                 isResultStatus: 3,
                 failedMsg
             }
         }
     },
-    [reduxActionTypes.commentList.get_commentListMore_waiting]: (state, action) => {
+    [reduxActionTypes.lvTwoCommentList.get_lvTwoCommentListMore_waiting]: (state, action) => {
         return {
             ...state,
-            getCommentListMore: {
-                ...state.getCommentListMore,
+            getLvTwoCommentListMore: {
+                ...state.getLvTwoCommentListMore,
                 isResultStatus: 1
             }
         }
     },
 
 
-    [reduxActionTypes.commentList.like_commentForCommentList_success]: (state, action) => {
+    [reduxActionTypes.lvTwoCommentList.like_lvTwoComment_success]: (state, action) => {
         const { payload: { commentInfo } } = action
         return {
             ...state,
             data: {
                 ...state.data,
-                commentList: state.data.commentList.map(item => {
+                lvTwoCommentList: state.data.lvTwoCommentList.map(item => {
                     if (item._id != commentInfo._id) {
                         return item
                     } else {
@@ -113,29 +113,28 @@ export default handleActions({
                     }
                 })
             },
-            likeComment: {
-                ...state.likeComment,
+            likeLvTwoComment: {
+                ...state.likeLvTwoComment,
                 isResultStatus: 2
             }
         }
     },
-    [reduxActionTypes.commentList.like_commentForCommentList_failed]: (state, action) => {
+    [reduxActionTypes.lvTwoCommentList.like_lvTwoComment_failed]: (state, action) => {
         const { payload: { failedMsg } } = action
-
         return {
             ...state,
-            likeComment: {
-                ...state.likeComment,
+            likeLvTwoComment: {
+                ...state.likeLvTwoComment,
                 isResultStatus: 3,
                 failedMsg
             }
         }
     },
-    [reduxActionTypes.commentList.like_commentForCommentList_waiting]: (state, action) => {
+    [reduxActionTypes.lvTwoCommentList.like_lvTwoComment_waiting]: (state, action) => {
         return {
             ...state,
-            likeComment: {
-                ...state.likeComment,
+            likeLvTwoComment: {
+                ...state.likeLvTwoComment,
                 isResultStatus: 1
             }
         }

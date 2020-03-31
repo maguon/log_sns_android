@@ -65,7 +65,9 @@ class HotListForHome extends Component {
                                     msgCount={item.comment_num}
                                     likeCount={item.agree_num}
                                     // delOnPress={() => { this.props.delArticle({ messageId: item._id }) }}
-                                    // msgOnPress={() => { console.log('msgOnPress') }}
+                                    msgOnPress={() => { navigation.navigate('LvOneCommentList',{
+                                        articleInfo: item
+                                    }) }}
                                     likeOnPress={() => {
                                         this.props.likeArticle({
                                             msgId: item._id,

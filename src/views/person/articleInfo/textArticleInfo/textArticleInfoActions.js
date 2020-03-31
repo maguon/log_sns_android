@@ -46,9 +46,9 @@ export const getCommentMore = reqParams => async (dispatch, getState) => {
             try {
                 const url = `${host.base_host}/user/${loginReducer.data.user._id}/allMsgComment?msgId=${reqParams.msgId}&msgType=1&level=1&start=${textArticleInfoReducer.data.commentList.length}&size=${pageSize}`
 
-                console.log('url', url)
+                // console.log('url', url)
                 const res = await httpRequest.get(url)
-                console.log('res', res)
+                // console.log('res', res)
 
                 if (res.success) {
                     const isCompleted = res.result.length == 0 || res.result.length % pageSize != 0

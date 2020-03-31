@@ -1,0 +1,3 @@
+export const create_comment_success='create_comment_success'
+export const create_comment_failed='create_comment_failed'
+export const create_comment_waiting='create_comment_waiting'
