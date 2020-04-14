@@ -12,10 +12,11 @@
   "dependencies": {
     "@ant-design/icons-react-native": "2.0.0",
     "@ant-design/react-native": "3.3.0",
+    "@react-native-community/art": "1.1.2",
     "@react-native-community/viewpager": "3.2.0",
     "moment": "2.24.0",
     "react": "16.11.0",
-    "react-native": "0.62.1",
+    "react-native": "0.62.2",
     "react-native-amap-geolocation": "1.0.4",
     "react-native-amap3d": "1.1.1",
     "react-native-camera": "3.22.0",
