@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AppRegistry, StyleSheet, Text, Image, TouchableOpacity, View } from 'react-native';
+import { AppRegistry, StyleSheet, Easing, Button, Text, Image, Animated, TouchableOpacity, View } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { PermissionsAndroid, ToastAndroid } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -9,7 +9,10 @@ export default class Camera extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            imageBase64: ''
+            imageBase64: '',
+            CameraProgressPercent: 0,
+            AnimatedViewWidth: new Animated.Value(0),
+            AnimatedViewHeight: new Animated.Value(0),
         }
     }
 
@@ -31,6 +34,87 @@ export default class Camera extends Component {
         } catch (err) {
             console.log(err.toString())
         }
+    }
+
+    AnimatedStart() {
+        this.setState({
+            AnimatedViewWidth: new Animated.Value(0),
+            AnimatedViewHeight: new Animated.Value(0),
+        }, () => {
+            Animated.sequence([
+                Animated.timing(this.state.AnimatedViewHeight, {
+                    toValue: 100,
+                    duration: 3000,
+                    easing: Easing.linear,
+                }),
+                Animated.timing(this.state.AnimatedViewWidth, {
+                    toValue: 100,
+                    duration: 3000,
+                    easing: Easing.linear,
+                })
+
+            ]).start()
+            // Animated.parallel([
+            //     Animated.timing(this.state.AnimatedViewHeight, {
+            //       toValue: 100,
+            //       duration: 3000,
+            //       easing: Easing.linear,
+            //     }),
+            //     Animated.timing(this.state.AnimatedViewWidth, {
+            //       toValue: 100,
+            //       duration: 3000,
+            //       easing: Easing.linear,
+            //     }),
+            //     // 可以添加其他动画
+            //   ])
+            //   .start()
+        })
+
+        // Animated.timing(this.state.AnimatedViewHeight, {
+        //     toValue: 100,
+        //     duration: 3000,
+        //     easing:Easing.linear
+        // }).start();
+    }
+
+    componentDidMount() {
+
+        // setInterval(() => {
+        //     if (this.state.CameraProgressPercent < 100) {
+        //         this.setState({ CameraProgressPercent: this.state.CameraProgressPercent + 1 })
+        //     } else {
+        //         return
+        //     }
+
+
+        // }, 100)
+
+        // Animated.timing(this.state.AnimatedViewHeight, {
+        //     toValue: 100,
+        //     duration: 60000,
+
+        // });
+
+        // Animated.parallel([
+        //     Animated.timing(this.state.modalHeight, {
+        //       toValue: 100,
+        //       duration: 60000,
+        //       easing: Easing.linear,
+        //     }),
+        //     Animated.timing(this.state.modalWidth, {
+        //       toValue: 100,
+        //       duration: 60000,
+        //       easing: Easing.linear,
+        //     }),
+        //     // 可以添加其他动画
+        //   ])
+        //   .start()
+        //   .start(() => {
+        //     // 这里可以添加动画之后要执行的函数
+        //     setTimeout(() => {
+        //       this.setState({ isModalVisible: false });
+        //     }, 100);
+        //   });
     }
 
     render() {
@@ -71,8 +155,17 @@ export default class Camera extends Component {
                     <Ionicons name="ios-flash" size={30} style={{ color: "#fff" }} />
                 </TouchableOpacity>
                 <View style={{ position: 'absolute', alignSelf: 'center', bottom: 50 }}>
-                    <CameraProgress percent={30} radius={20}/>
+                    <CameraProgress percent={0} radius={40} color={'green'} />
                 </View>
+                {/* <Animated.View style={{
+                    backgroundColor: "#000",
+
+                    width: this.state.AnimatedViewWidth,
+                    height: this.state.AnimatedViewHeight
+                }}>
+
+                </Animated.View>
+                <Button onPress={this.AnimatedStart.bind(this)} title='开始' /> */}
 
                 {/* <TouchableOpacity style={{ position: 'absolute', top: 20, left: 20 }}>
                     <Ionicons name="ios-flash-off" size={30} style={{  color: "#fff" }} />
@@ -111,7 +204,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: '#fff',
+        backgroundColor: '#000',
 
     },
     preview: {
