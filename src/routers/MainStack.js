@@ -36,6 +36,7 @@ import NavComment from './navBar/NavComment'
 import LvOneCommentList from '../views/comment/lvOneCommentList/LvOneCommentList'
 import LvTwoCommentList from '../views/comment/lvTwoCommentList/LvTwoCommentList' //评论列表
 import Comment from '../views/comment/comment/Comment'
+import Camera from '../views/camera/Camera'
 
 export default createStackNavigator({
     TabsStack: {
@@ -200,6 +201,12 @@ export default createStackNavigator({
         screen: LvOneCommentList,
         navigationOptions: {
             title: '对方昵称'
+        }
+    },
+    Camera: {
+        screen: Camera,
+        navigationOptions: {
+            header:null
         }
     },
     Comment: {

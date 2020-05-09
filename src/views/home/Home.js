@@ -34,14 +34,18 @@ const Home = props => {
       <Tabs tabs={tabs}
         renderTabBar={tabProps => (
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
+            <TouchableOpacity onPress={()=>{
+              navigation.navigate('Camera')
+            }}>
             <Icon name='camera' size={26} color='#000' />
+            </TouchableOpacity>
             {tabProps.tabs.map((tab, i) => (
               <TouchableOpacity
                 activeOpacity={0.9}
                 key={tab.key || i}
                 style={{ padding: 15, borderBottomWidth: 2, borderColor: tabProps.activeTab === i ? '#2c8ec5' : '#fff' }}
                 onPress={() => {
-                  const { goToTab, onTabClick } = tabProps;
+                  const { goToTab, onTabClick } = tabProps; 
                   onTabClick && onTabClick(tabs[i], i);
                   goToTab && goToTab(i);
                 }}>

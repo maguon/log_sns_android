@@ -3,23 +3,28 @@ import { AppRegistry, StyleSheet, Easing, Button, Text, Image, Animated, Touchab
 import { RNCamera } from 'react-native-camera';
 import { PermissionsAndroid, ToastAndroid } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import CameraProgress from '../../components/CameraProgress'
+import * as CacheManager from 'react-native-http-cache'
+import reduxActions from '../../reduxActions'
+import { connect } from 'react-redux'
 
-export default class Camera extends Component {
+class Camera extends Component {
     constructor(props) {
         super(props)
         this.state = {
             imageBase64: '',
-            CameraProgressPercent: 0,
-            AnimatedViewWidth: new Animated.Value(0),
-            AnimatedViewHeight: new Animated.Value(0),
+            type: RNCamera.Constants.Type.back,   //front   back
+            flashMode: RNCamera.Constants.FlashMode.off,   //on  auto  torch
+            takePictureCompleted: false,
+            recordVideoCompleted: false
         }
     }
 
     async requestCarmeraPermission() {
         try {
             const granted = await PermissionsAndroid.request(
-                PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
+                PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
                 {
                     'title': 'Camera Permission',
                     'message': 'the project needs access to your camera ' +
@@ -27,7 +32,7 @@ export default class Camera extends Component {
                 }
             )
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                console.log("你已获取了相机权限")
+                console.log("PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE")
             } else {
                 console.log("获取相机失败")
             }
@@ -36,100 +41,86 @@ export default class Camera extends Component {
         }
     }
 
-    AnimatedStart() {
-        this.setState({
-            AnimatedViewWidth: new Animated.Value(0),
-            AnimatedViewHeight: new Animated.Value(0),
-        }, () => {
-            Animated.sequence([
-                Animated.timing(this.state.AnimatedViewHeight, {
-                    toValue: 100,
-                    duration: 3000,
-                    easing: Easing.linear,
-                }),
-                Animated.timing(this.state.AnimatedViewWidth, {
-                    toValue: 100,
-                    duration: 3000,
-                    easing: Easing.linear,
-                })
-
-            ]).start()
-            // Animated.parallel([
-            //     Animated.timing(this.state.AnimatedViewHeight, {
-            //       toValue: 100,
-            //       duration: 3000,
-            //       easing: Easing.linear,
-            //     }),
-            //     Animated.timing(this.state.AnimatedViewWidth, {
-            //       toValue: 100,
-            //       duration: 3000,
-            //       easing: Easing.linear,
-            //     }),
-            //     // 可以添加其他动画
-            //   ])
-            //   .start()
-        })
-
-        // Animated.timing(this.state.AnimatedViewHeight, {
-        //     toValue: 100,
-        //     duration: 3000,
-        //     easing:Easing.linear
-        // }).start();
+    changeCameraType = () => {
+        if (this.state.type === RNCamera.Constants.Type.back) {
+            this.setState({ type: RNCamera.Constants.Type.front })
+        } else if (this.state.type === RNCamera.Constants.Type.front) {
+            this.setState({ type: RNCamera.Constants.Type.back })
+        }
     }
 
-    componentDidMount() {
+    changeCameraFlashMode = () => {
+        if (this.state.flashMode === RNCamera.Constants.FlashMode.auto) {
+            this.setState({ flashMode: RNCamera.Constants.FlashMode.on })
+        } else if (this.state.flashMode === RNCamera.Constants.FlashMode.on) {
+            this.setState({ flashMode: RNCamera.Constants.FlashMode.off })
+        } else if (this.state.flashMode === RNCamera.Constants.FlashMode.off) {
+            this.setState({ flashMode: RNCamera.Constants.FlashMode.auto })
+        }
+    }
 
-        // setInterval(() => {
-        //     if (this.state.CameraProgressPercent < 100) {
-        //         this.setState({ CameraProgressPercent: this.state.CameraProgressPercent + 1 })
-        //     } else {
-        //         return
-        //     }
+    takePicture = async () => {
+        const { uploadImage } = this.props
 
+        try {
+            console.log('/storage/emulated/0/DCIM/Camera/')
+            if (this.camera) {
+                const options = {
+                    quality: 1,
+                    // base64: true,
+                    width: 900,
+                    // pauseAfterCapture: true,
+                    // path: "/storage/emulated/0/Download"
+                    // path: "/storage/emulated/0/DCIM/Camera"
+                };
+                const data = await this.camera.takePictureAsync(options)
+                console.log('data',data)
+                const filePathArr = data.uri.split('/')
+                uploadImage({ uri: data.uri, imgName: filePathArr[filePathArr.length - 1] })
+                // console.log(filePathArr[filePathArr.length-1])
+                // console.log(filePathArr)
+                // console.log('data.uri', data.uri)
 
-        // }, 100)
+                // this.setState({ imageBase64: data.base64 })
+            }
+        } catch (err) {
+            console.log('err', err)
+        }
 
-        // Animated.timing(this.state.AnimatedViewHeight, {
-        //     toValue: 100,
-        //     duration: 60000,
+    }
 
-        // });
+    recordVideoStart = async () => {
+        if (this.camera) {
+            const options = {
+                quality: 0.5,
+                // base64: true,
+                width: 900,
+                path: '/storage/emulated/0/Download/11.mp4',
+                // path: "/storage/emulated/0/DCIM/Camera/"
 
-        // Animated.parallel([
-        //     Animated.timing(this.state.modalHeight, {
-        //       toValue: 100,
-        //       duration: 60000,
-        //       easing: Easing.linear,
-        //     }),
-        //     Animated.timing(this.state.modalWidth, {
-        //       toValue: 100,
-        //       duration: 60000,
-        //       easing: Easing.linear,
-        //     }),
-        //     // 可以添加其他动画
-        //   ])
-        //   .start()
-        //   .start(() => {
-        //     // 这里可以添加动画之后要执行的函数
-        //     setTimeout(() => {
-        //       this.setState({ isModalVisible: false });
-        //     }, 100);
-        //   });
+            }
+            const data = await this.camera.recordAsync(options)
+            console.log('data', data)
+        }
+    }
+
+    recordVideoStop = () => {
+        if (this.camera) {
+            this.camera.stopRecording()
+        }
     }
 
     render() {
-        // console.log('RNCamera.Constants.CameraStatus',RNCamera.Constants.CameraStatus)
-        const baseImg = `data:image/png;base64,${this.state.imageBase64}`;
-        // console.log('baseImg',baseImg)
+        const { navigation, uploadImage } = this.props
         return (
             <View style={styles.container}>
-                {/* <RNCamera
+                <RNCamera
                     ref={ref => {
                         this.camera = ref;
                     }}
                     style={styles.preview}
-                    type={RNCamera.Constants.Type.back}
-                    flashMode={RNCamera.Constants.FlashMode.on}
+                    type={this.state.type}
+                    flashMode={this.state.flashMode}
                     androidCameraPermissionOptions={{
                         title: 'Permission to use camera',
                         message: 'We need your permission to use your camera',
@@ -144,73 +135,63 @@ export default class Camera extends Component {
                         buttonNegative: 'Cancel',
                     }}
                     playSoundOnCapture={true}
-                    onGoogleVisionBarcodesDetected={({ barcodes }) => {
-                        console.log(barcodes);
-                    }}
-                /> */}
-                <TouchableOpacity style={{ position: 'absolute', top: 20, right: 20 }}>
+                />
+                <TouchableOpacity
+                    style={{ position: 'absolute', top: 20, left: 20 }}
+                    onPress={this.changeCameraFlashMode}>
+                    {this.state.flashMode === RNCamera.Constants.FlashMode.auto && <MaterialIcons name='flash-auto' size={30} style={{ color: "#fff" }} />}
+                    {this.state.flashMode === RNCamera.Constants.FlashMode.off && <MaterialIcons name='flash-off' size={30} style={{ color: "#fff" }} />}
+                    {this.state.flashMode === RNCamera.Constants.FlashMode.on && <MaterialIcons name='flash-on' size={30} style={{ color: "#fff" }} />}
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{ position: 'absolute', left: 50, bottom: 60 }}
+                    onPress={() => navigation.pop()}>
+                    <Ionicons name="ios-arrow-down" size={40} style={{ color: "#fff" }} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{ position: 'absolute', top: 20, right: 20 }}
+                    onPress={this.changeCameraType}>
                     <Ionicons name="ios-reverse-camera" size={30} style={{ color: "#fff" }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ position: 'absolute', top: 20, left: 20 }}>
-                    <Ionicons name="ios-flash" size={30} style={{ color: "#fff" }} />
-                </TouchableOpacity>
                 <View style={{ position: 'absolute', alignSelf: 'center', bottom: 50 }}>
-                    <CameraProgress percent={0} radius={40} color={'green'} />
+                    <CameraProgress
+                        color={'#93C90F'}
+                        recordVideoStart={this.recordVideoStart}
+                        recordVideoStop={this.recordVideoStop}
+                        takePicture={this.takePicture} />
                 </View>
-                {/* <Animated.View style={{
-                    backgroundColor: "#000",
-
-                    width: this.state.AnimatedViewWidth,
-                    height: this.state.AnimatedViewHeight
-                }}>
-
-                </Animated.View>
-                <Button onPress={this.AnimatedStart.bind(this)} title='开始' /> */}
-
-                {/* <TouchableOpacity style={{ position: 'absolute', top: 20, left: 20 }}>
-                    <Ionicons name="ios-flash-off" size={30} style={{  color: "#fff" }} />
-                </TouchableOpacity> */}
-                {/* <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center', backgroundColor: '#fff' }}>
-                    <Image style={{ width: 100, height: 100 }} source={{ uri: baseImg }} />
-                    <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
-                        <Text style={{ fontSize: 14 }}> SNAP </Text>
-                    </TouchableOpacity>
-                </View> */}
-                {/* <TouchableOpacity onPress={this.requestCarmeraPermission.bind(this)} style={styles.capture}>
-                        <Text style={{ fontSize: 14 }}> SNAP </Text>
-                    </TouchableOpacity> */}
             </View>
         )
     }
-
-
-    takePicture = async () => {
-        console.log('takePicture')
-        if (this.camera) {
-            const options = {
-                quality: 0.5,
-                base64: true,
-                width: 900,
-                pauseAfterCapture: true
-            };
-            const data = await this.camera.takePictureAsync(options);
-            console.log('data.uri', data.uri)
-            this.setState({ imageBase64: data.base64 })
-        }
-    };
 }
+
+const mapStateToProps = (state) => {
+    return {
+        cameraReducer: state.cameraReducer
+    }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    uploadImage: reqParams => {
+        dispatch(reduxActions.camera.uploadImage(reqParams))
+    },
+    uploadVideo: reqParams => {
+        dispatch(reduxActions.camera.uploadVideo(reqParams))
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Camera)
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: '#000',
-
+        backgroundColor: '#000'
     },
     preview: {
         flex: 1,
         justifyContent: 'flex-end',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     capture: {
         flex: 0,
@@ -219,6 +200,6 @@ const styles = StyleSheet.create({
         padding: 15,
         paddingHorizontal: 20,
         alignSelf: 'center',
-        margin: 20,
-    },
-});
+        margin: 20
+    }
+})

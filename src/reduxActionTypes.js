@@ -48,6 +48,8 @@ import * as lvOneCommentList from './views/comment/lvOneCommentList/LvOneComment
 import * as lvTwoCommentList from './views/comment/lvTwoCommentList/lvTwoCommentListActionTypes'
 import * as comment from './views/comment/comment/commentActionTypes'
 
+import * as camera from './views/camera/cameraActionTypes'
+
 export default {
     home,
     login,
@@ -96,5 +98,6 @@ export default {
     
     lvOneCommentList,
     lvTwoCommentList,
-    comment
+    comment,
+    camera
 }

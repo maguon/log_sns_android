@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import {
   StyleSheet,
-  View,
-  Text,
   Animated,
   TouchableOpacity,
   Easing
@@ -11,18 +9,11 @@ import {
 class CameraProgress extends Component {
 
   constructor(props) {
-    super(props);
-    this.state = {
-      percent: this.props.percent,
-      borderWidth: 6,
-      textStyle: this.props.textStyle ? this.props.textStyle : null,
-    };
+    super(props)
     this.leftTransformerDegree = new Animated.Value(0)
     this.rightTransformerDegree = new Animated.Value(0)
     this.radius = new Animated.Value(0)
-
     this.cameraType = 0
-
     this.pressTimerStart = this.pressTimerStart.bind(this)
     this.pressTimerStop = this.pressTimerStop.bind(this)
     this.onPressInProgressBtn = this.onPressInProgressBtn.bind(this)
@@ -32,7 +23,7 @@ class CameraProgress extends Component {
     this.progressAnimationStop = this.progressAnimationStop.bind(this)
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.radius.setValue(0)
   }
 
@@ -50,10 +41,8 @@ class CameraProgress extends Component {
       this.rightTransformerDegree.setValue(0)
       this.progressAnimationInit()
       this.progressAnimationStart()
-
-
       this.cameraType = 1
-    }, 200)
+    }, this.props.pressTimeOut)
   }
 
   onPressOutProgressBtn() {
@@ -64,7 +53,7 @@ class CameraProgress extends Component {
 
     } else if (this.cameraType === 0) {
       this.pressTimerStop()
-      console.log('拍照片')
+      this.props.takePicture()
     }
 
     this.progressAnimationOut()
@@ -74,26 +63,26 @@ class CameraProgress extends Component {
     this.animation = Animated.sequence([
       Animated.timing(this.radius, {
         toValue: 1,
-        duration: 200,
+        duration: this.props.pressAnimationDuration,
         easing: Easing.spring,
       }),
       Animated.timing(this.rightTransformerDegree, {
         toValue: 1,
-        duration: 15000,
+        duration: this.props.progressAnimationDuration / 2,
         easing: Easing.linear,
       }),
       Animated.timing(this.leftTransformerDegree, {
         toValue: 1,
-        duration: 15000,
+        duration: this.props.progressAnimationDuration / 2,
         easing: Easing.linear,
       })
     ])
   }
 
-  progressAnimationOut(){
+  progressAnimationOut() {
     Animated.timing(this.radius, {
       toValue: 0,
-      duration: 200,
+      duration: this.props.pressAnimationDuration,
       easing: Easing.spring,
     }).start()
     this.leftTransformerDegree.setValue(0)
@@ -101,9 +90,9 @@ class CameraProgress extends Component {
   }
 
   progressAnimationStart() {
-    console.log('拍视频开始')
+    this.props.recordVideoStart()
     this.animation.start(() => {
-      console.log('拍视频结束')
+      this.props.recordVideoStop()
     })
   }
 
@@ -115,41 +104,48 @@ class CameraProgress extends Component {
 
     const radius = this.radius.interpolate({
       inputRange: [0, 1],
-      outputRange: [30, 50]
+      outputRange: [this.props.minOuterRadius, this.props.maxOuterRadius]
     })
-
-    const diameter=this.radius.interpolate({
+    const diameter = this.radius.interpolate({
       inputRange: [0, 1],
-      outputRange: [60, 100]
+      outputRange: [this.props.minOuterRadius * 2, this.props.maxOuterRadius * 2]
     })
-
-    const halfRadius=this.radius.interpolate({
+    const halfRadius = this.radius.interpolate({
       inputRange: [0, 1],
-      outputRange: [15, 25]
+      outputRange: [this.props.minOuterRadius / 2, this.props.maxOuterRadius / 2]
     })
-    const minusHalfRadius=this.radius.interpolate({
+    const minusHalfRadius = this.radius.interpolate({
       inputRange: [0, 1],
-      outputRange: [-15, -25]
+      outputRange: [-this.props.minOuterRadius / 2, -this.props.maxOuterRadius / 2]
     })
-
-    const minusRadius=this.radius.interpolate({
+    const minusRadius = this.radius.interpolate({
       inputRange: [0, 1],
-      outputRange: [-30, -50]
+      outputRange: [-this.props.minOuterRadius, -this.props.maxOuterRadius]
     })
-
+    const middleDiameter = this.radius.interpolate({
+      inputRange: [0, 1],
+      outputRange: [this.props.minMiddleRadius * 2, this.props.maxMiddleRadius * 2]
+    })
+    const middleRadius = this.radius.interpolate({
+      inputRange: [0, 1],
+      outputRange: [this.props.minMiddleRadius, this.props.maxMiddleRadius]
+    })
+    const innerDiameter = this.radius.interpolate({
+      inputRange: [0, 1],
+      outputRange: [this.props.maxInnerRadius * 2, this.props.minInnerRadius * 2]
+    })
+    const innerRadius = this.radius.interpolate({
+      inputRange: [0, 1],
+      outputRange: [this.props.maxInnerRadius, this.props.minInnerRadius]
+    })
     const leftTransformerDegree = this.leftTransformerDegree.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '180deg']
     })
-
     const rightTransformerDegree = this.rightTransformerDegree.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '180deg']
     })
-
-    console.log('radius',radius)
-    console.log('leftTransformerDegree',leftTransformerDegree)
-    console.log('rightTransformerDegree',rightTransformerDegree)
 
     return (
       <TouchableOpacity
@@ -157,7 +153,7 @@ class CameraProgress extends Component {
         onPressIn={this.onPressInProgressBtn}
         onPressOut={this.onPressOutProgressBtn}>
         <Animated.View
-          style={[styles.circle, {
+          style={[styles.container, {
             width: diameter,
             height: diameter,
             borderRadius: radius,
@@ -166,9 +162,9 @@ class CameraProgress extends Component {
           <Animated.View style={[styles.leftWrap, {
             width: radius,
             height: diameter,
-            left: 0,
+            left: 0
           }]}>
-            <Animated.View style={[styles.loader, {
+            <Animated.View style={[styles.progress, {
               left: radius,
               width: radius,
               height: diameter,
@@ -183,48 +179,65 @@ class CameraProgress extends Component {
             width: radius,
             height: diameter
           }]}>
-            <Animated.View style={[styles.loader, {
+            <Animated.View style={[styles.progress, {
               left: minusRadius,
               width: radius,
               height: diameter,
               borderTopRightRadius: 0,
               borderBottomRightRadius: 0,
               backgroundColor: this.props.color,
-              transform: [{ translateX: halfRadius}, { rotate: rightTransformerDegree }, { translateX: minusHalfRadius }],
+              transform: [{ translateX: halfRadius }, { rotate: rightTransformerDegree }, { translateX: minusHalfRadius }],
             }]}>
             </Animated.View>
           </Animated.View>
-          {/* <Animated.View style={[styles.innerCircle, {
-            width: (radius - this.state.borderWidth) * 2,
-            height: (radius - this.state.borderWidth) * 2,
-            borderRadius: radius - this.state.borderWidth,
-            backgroundColor: this.props.innerColor,
-          }]}>
-            {this.props.children ? this.props.children :
-              <Text style={[styles.text, this.state.textStyle]}></Text>}
-          </Animated.View> */}
+          <Animated.View
+            style={[styles.middle, {
+              width: middleDiameter,
+              height: middleDiameter,
+              borderRadius: middleRadius,
+              backgroundColor: this.props.bgcolor
+            }]}>
+            <Animated.View style={[styles.innerContainer, {
+              width: innerDiameter,
+              height: innerDiameter,
+              borderRadius: innerRadius,
+              backgroundColor: this.props.innerColor,
+            }]} />
+          </Animated.View>
+
         </Animated.View>
       </TouchableOpacity>
     );
   }
 }
 
-// set some attributes default value
 CameraProgress.defaultProps = {
   bgcolor: '#e3e3e3',
-  innerColor: '#fff'
-};
+  innerColor: '#fff',
+  color:'#93C90F',
+  minOuterRadius: 30,
+  maxOuterRadius: 50,
+  minMiddleRadius: 25,
+  maxMiddleRadius: 45,
+  minInnerRadius: 15,
+  maxInnerRadius: 25,
+  pressTimeOut: 300,
+  pressAnimationDuration: 200,
+  progressAnimationDuration: 20000,
+  recordVideoStart: () => { console.log('拍视频开始') },
+  recordVideoStop: () => { console.log('拍视频结束') },
+  takePicture: () => { console.log('拍照片') }
+}
 
 export default CameraProgress
 
 
 const styles = StyleSheet.create({
-  circle: {
-    overflow: 'hidden',
-    position: 'relative',
+  container: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#e3e3e3',
+    overflow: 'hidden',
+    position: 'relative'
   },
   leftWrap: {
     overflow: 'hidden',
@@ -234,22 +247,19 @@ const styles = StyleSheet.create({
   rightWrap: {
     position: 'absolute',
   },
-
-  loader: {
+  progress: {
     position: 'absolute',
     left: 0,
-    top: 0,
-    borderRadius: 1000,
+    top: 0
   },
-
-  innerCircle: {
-    overflow: 'hidden',
-    position: 'relative',
+  innerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
+    position: 'relative'
   },
-  text: {
-    fontSize: 11,
-    color: '#888',
-  },
-});
+  middle: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})

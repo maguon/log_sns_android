@@ -34,13 +34,19 @@ function del(url) {
 
 function postFile(url, params) {
     let formData = new FormData()
-    let file = { uri: params.imageUrl, type: params.imageType, name: params.imageName }
-    formData.append(params.key, file)
+    //{ image: params.imageUrl, type: params.imageType, name: params.imageName }
+    formData.set("image", params.imageUrl)
+    formData.set("type", params.imageType)
+    formData.set("name", params.imageName)
+    console.log('formData',formData)
     return fetch(url, {
         method: 'POST',
         headers: requestHeaders.formHeaders,
         body: formData,
-    }).then((response) => response.json())
+    }).then((response) =>{
+        console.log(1111)
+        return response.json()
+    } )
 }
 
 export default { get, post, put, del, postFile }

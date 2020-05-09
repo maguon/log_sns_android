@@ -49,6 +49,9 @@ import LvOneCommentListReducer from './views/comment/lvOneCommentList/LvOneComme
 import commentReducer from './views/comment/comment/commentReducer'
 import lvTwoCommentListReducer from './views/comment/lvTwoCommentList/lvTwoCommentListReducer'
 
+import cameraReducer from './views/camera/cameraReducer'
+
+
 export default combineReducers({
     form: formReducer,
     homeReducer,
@@ -100,5 +103,7 @@ export default combineReducers({
 
     LvOneCommentListReducer,
     lvTwoCommentListReducer,
-    commentReducer
+    commentReducer,
+
+    cameraReducer
 })
