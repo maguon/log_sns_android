@@ -29,6 +29,7 @@ export const getVoteList = () => async (dispatch, getState) => {
 }
 
 export const getVoteListWaiting = () => (dispatch) => {
+    
     dispatch({ type: reduxActionTypes.voteListForCommunity.get_voteListForCommunity_waiting })
 }
 
