@@ -5,8 +5,8 @@ class RequestHeaders {
         this.headers.set('charset', 'utf-8')
         this.formHeaders = new Headers()
         // this.formHeaders.set('charset', 'utf-8')
-        this.formHeaders.set('Content-Type', 'multipart/form-data;charset=utf-8')
-        this.formHeaders.set('Accept','application/json')
+        this.formHeaders.append('Content-Type', 'multipart/form-data')
+        this.formHeaders.append('Content-Length', '1000000')
     }
 
     set(key, value) {

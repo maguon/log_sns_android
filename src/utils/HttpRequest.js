@@ -35,13 +35,16 @@ function del(url) {
 function postFile(url, params) {
     let formData = new FormData()
     //{ image: params.imageUrl, type: params.imageType, name: params.imageName }
-    formData.set("image", params.imageUrl)
-    formData.set("type", params.imageType)
-    formData.set("name", params.imageName)
+    const file ={  uri: 'file:///storage/emulated/0/DCIM/Camera/581d51b8-8c2a-4308-aaec-c2b6e603b9e7.jpg', 
+    type: 'image/jpeg', 
+    name: 'image.jpg'}
+    formData.append("image",  file )
     console.log('formData',formData)
     return fetch(url, {
         method: 'POST',
-        headers: requestHeaders.formHeaders,
+        headers: {
+            'Content-Type':'multipart/form-data'
+        },
         body: formData,
     }).then((response) =>{
         console.log(1111)

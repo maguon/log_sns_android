@@ -21,20 +21,21 @@ class Camera extends Component {
         }
     }
 
-    async requestCarmeraPermission() {
+    requestReadPermission = async () => {
         try {
+            //返回string类型
             const granted = await PermissionsAndroid.request(
-                PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+                PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
                 {
-                    'title': 'Camera Permission',
-                    'message': 'the project needs access to your camera ' +
-                        'so you can take awesome pictures.'
+                    //第一次请求拒绝后提示用户你为什么要这个权限
+                    'title': '我要读写权限',
+                    'message': '没权限我不能工作，同意就好了'
                 }
             )
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                console.log("PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE")
+                console.log("你已获取了读写权限")
             } else {
-                console.log("获取相机失败")
+                console.log("获取读写权限失败")
             }
         } catch (err) {
             console.log(err.toString())
@@ -65,18 +66,20 @@ class Camera extends Component {
         try {
             console.log('/storage/emulated/0/DCIM/Camera/')
             if (this.camera) {
-                const options = {
-                    quality: 1,
-                    // base64: true,
-                    width: 900,
-                    // pauseAfterCapture: true,
-                    // path: "/storage/emulated/0/Download"
-                    // path: "/storage/emulated/0/DCIM/Camera"
-                };
-                const data = await this.camera.takePictureAsync(options)
-                console.log('data',data)
-                const filePathArr = data.uri.split('/')
-                uploadImage({ uri: data.uri, imgName: filePathArr[filePathArr.length - 1] })
+                // const options = {
+                //     quality: 1,
+                //     // base64: true,
+                //     width: 900,
+                //     // pauseAfterCapture: true,
+                //     // path: "/storage/emulated/0/Download"
+                //     // path: "/storage/emulated/0/DCIM/Camera"
+                // };
+                // const data = await this.camera.takePictureAsync(options)
+                // console.log('data', data)
+                // const filePathArr = data.uri.split('/')
+                // console.log('data', data.uri)
+
+                uploadImage()
                 // console.log(filePathArr[filePathArr.length-1])
                 // console.log(filePathArr)
                 // console.log('data.uri', data.uri)
@@ -138,7 +141,7 @@ class Camera extends Component {
                 />
                 <TouchableOpacity
                     style={{ position: 'absolute', top: 20, left: 20 }}
-                    onPress={this.changeCameraFlashMode}>
+                    onPress={this.requestReadPermission}>
                     {this.state.flashMode === RNCamera.Constants.FlashMode.auto && <MaterialIcons name='flash-auto' size={30} style={{ color: "#fff" }} />}
                     {this.state.flashMode === RNCamera.Constants.FlashMode.off && <MaterialIcons name='flash-off' size={30} style={{ color: "#fff" }} />}
                     {this.state.flashMode === RNCamera.Constants.FlashMode.on && <MaterialIcons name='flash-on' size={30} style={{ color: "#fff" }} />}

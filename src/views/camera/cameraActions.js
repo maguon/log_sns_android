@@ -15,10 +15,10 @@ export const uploadImage = reqParams => async (dispatch, getState) => {
         // })
         console.log('url', url)
         const res = await httpRequest.postFile(url, {
-            imageUrl: reqParams.uri,
-            imageType: 'image/jpg',
-            imageName: reqParams.imgName,
-            key: 'file'
+            // imageUrl: reqParams.uri,
+            // imageType: 'image/jpg',
+            // imageName: reqParams.imgName,
+            // key: 'file'
         })
         console.log('res', res)
         // if (res.success) {
