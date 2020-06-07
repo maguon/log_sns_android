@@ -32,24 +32,24 @@ function del(url) {
     }).then((response) => response.json())
 }
 
-function postFile(url, params) {
+function postFile(url, key, params) {
     let formData = new FormData()
-    //{ image: params.imageUrl, type: params.imageType, name: params.imageName }
-    const file ={  uri: 'file:///storage/emulated/0/DCIM/Camera/581d51b8-8c2a-4308-aaec-c2b6e603b9e7.jpg', 
-    type: 'image/jpeg', 
-    name: 'image.jpg'}
-    formData.append("image",  file )
-    console.log('formData',formData)
+    console.log('url',url)
+    console.log('key',key)
+    console.log('params',params)
+    // const file ={  uri: params.imageUrl, 
+    // type: params.imageType, 
+    // name: params.imageName}
+    formData.append(key, params)
     return fetch(url, {
         method: 'POST',
         headers: {
-            'Content-Type':'multipart/form-data'
+            'Content-Type': 'multipart/form-data'
         },
         body: formData,
-    }).then((response) =>{
-        console.log(1111)
+    }).then((response) => {
         return response.json()
-    } )
+    })
 }
 
 export default { get, post, put, del, postFile }

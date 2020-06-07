@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { View, FlatList, RefreshControl, InteractionManager, TouchableOpacity } from 'react-native'
-import { Card, Content as CardContent, Footer, Header, Video, Image, Map } from '../../../components/card'
+import { Card, Content as CardContent, Footer, Header, VideoContent, ImageContent, Map } from '../../../components/card'
 import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
 import { ListEmpty, ListFooter } from '../../../components/list'
+import * as host from '../../../utils/host'
 import { connect } from 'react-redux'
 import reduxActions from '../../../reduxActions'
 import globalStyles, { styleColor } from '../../../GlobalStyles'
@@ -21,7 +22,7 @@ class HotListForHome extends Component {
     render() {
         const { hotListForHomeReducer, navigation } = this.props
         // console.log('hotListForHomeReducer', hotListForHomeReducer)
-        // console.log('this.props', this.props)
+        console.log('this.props', this.props)
         return (
             <FlatList
                 keyExtractor={(item, index) => `${index}`}
@@ -29,6 +30,7 @@ class HotListForHome extends Component {
                 renderItem={params => {
                     const { item, index } = params
                     // console.log('item', item)
+                    // console.log('item',item.media)
                     return (
                         <WingBlank size='md'>
                             {index == 0 && <WhiteSpace size='md' />}
@@ -58,16 +60,22 @@ class HotListForHome extends Component {
                                         params={{ content: item.info }}
                                     />
                                     {item.type == 1 && item.carrier == 4 && <Map />}
-                                    {item.type == 1 && item.carrier == 2 && <Image />}
-                                    {item.type == 1 && item.carrier == 3 && <Video />}
+                                    {item.type == 1 && item.carrier == 2 && <ImageContent
+                                        openPictureViewer={(index, imageList) => {
+                                            navigation.navigate('PictureViewer', { imageIndex: index, imageList })
+                                        }}
+                                        imageList={item.media.map(imageUriItem => `${imageUriItem.url}`)} />}
+                                    {item.type == 1 && item.carrier == 3 && <VideoContent preview={item.media[0].preview}/>}
                                 </TouchableOpacity>
                                 <Footer
                                     msgCount={item.comment_num}
                                     likeCount={item.agree_num}
                                     // delOnPress={() => { this.props.delArticle({ messageId: item._id }) }}
-                                    msgOnPress={() => { navigation.navigate('LvOneCommentList',{
-                                        articleInfo: item
-                                    }) }}
+                                    msgOnPress={() => {
+                                        navigation.navigate('LvOneCommentList', {
+                                            articleInfo: item
+                                        })
+                                    }}
                                     likeOnPress={() => {
                                         this.props.likeArticle({
                                             msgId: item._id,

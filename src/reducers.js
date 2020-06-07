@@ -50,6 +50,9 @@ import commentReducer from './views/comment/comment/commentReducer'
 import lvTwoCommentListReducer from './views/comment/lvTwoCommentList/lvTwoCommentListReducer'
 
 import cameraReducer from './views/camera/cameraReducer'
+import currentLocationReducer from './components/inputs/currentlocation/currentLocationReducer'
+import publishPictureBlogReducer from './views/publishPictureBlog/publishPictureBlogReducer'
+
 
 
 export default combineReducers({
@@ -105,5 +108,8 @@ export default combineReducers({
     lvTwoCommentListReducer,
     commentReducer,
 
-    cameraReducer
+    cameraReducer,
+
+    currentLocationReducer,
+    publishPictureBlogReducer
 })

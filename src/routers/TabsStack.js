@@ -1,6 +1,6 @@
 import React from 'react'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
-import { Icon } from '@ant-design/react-native'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 import PersonCenter from '../views/person/personCenter/PersonCenter'
 import MessageList from '../views/message/messageList/MessageList'
 import Community from '../views/community/Community'
@@ -41,15 +41,15 @@ const TabScreens = createBottomTabNavigator(
                 const { routeName } = navigation.state
                 let iconName
                 if (routeName === 'Home') {
-                    iconName = 'home'
+                    iconName = 'ios-home'
                 } else if (routeName === 'Community') {
-                    iconName = 'team'
+                    iconName = 'ios-people'
                 } else if (routeName === 'Message') {
-                    iconName = 'message'
+                    iconName = 'ios-text'
                 } else if (routeName === 'Person') {
-                    iconName = 'user'
+                    iconName = 'ios-person'
                 }
-                return <Icon name={iconName} size='md' color={tintColor} />
+                return <Ionicons name={iconName} style={{fontSize:20}} color={tintColor}/>
             }
         }),
         tabBarOptions: {

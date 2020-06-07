@@ -1,6 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet } from 'react-native'
-import { Icon } from '@ant-design/react-native'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 
 const BackLeft = props => {
@@ -9,7 +9,7 @@ const BackLeft = props => {
         <TouchableOpacity style={style} onPress={() => {
             props.navigation.pop()
         }}>
-            <Icon name='left' color='#000' />
+            <Ionicons name='ios-arrow-back' color='#000' style={{fontSize:20}}/>
         </TouchableOpacity>
     )
 }

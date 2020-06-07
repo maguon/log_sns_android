@@ -2,6 +2,7 @@ import React from 'react'
 import { createStackNavigator } from 'react-navigation-stack'
 import StackViewStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator'
 import TabsStack from './TabsStack'
+import BlackNavBar from './navBar/BlackNavBar'
 
 import MyCommentList from '../views/person/myCommentList/MyCommentList' //我的评论
 import FollowList from '../views/person/followList/FollowList' //我的关注
@@ -17,8 +18,8 @@ import FollowingList from '../views/message/followingList/FollowingList' //关�
 import LikeMeList from '../views/message/likeMeList/LikeMeList' //赞我
 import RequestContactList from '../views/message/requestContactList/RequestContactList' //申请联系方式
 import Blog from '../views/blog/Blog' //微博详情
-import BlogPicture from '../views/blogPicture/BlogPicture' //微博照片详情
-import BlogVideo from '../views/blogVideo/BlogVideo' //微博视频详情
+import PublishPictureBlog from '../views/publishPictureBlog/PublishPictureBlog' //微博照片详情
+// import BlogVideo from '../views/blogVideo/BlogVideo' //微博视频详情
 import CollectionAddr from '../views/collectionAddr/CollectionAddr' //收藏地址
 import SeekHelp from '../views/seekHelp/SeekHelp' //发帮助
 import Scan from '../views/scan/Scan' //扫一扫
@@ -31,12 +32,14 @@ import TextArticleInfo from '../views/person/articleInfo/textArticleInfo/TextArt
 import VoteInfo from '../views/voteInfo/VoteInfo'
 import PublishSeekHelp from '../views/publishSeekHelp/PublishSeekHelp'
 import NavPulishSeekHelp from './navBar/NavPulishSeekHelp'
+import NavPubishPictrueBlog from './navBar/NavPubishPictrueBlog'
 import NavComment from './navBar/NavComment'
 
 import LvOneCommentList from '../views/comment/lvOneCommentList/LvOneCommentList'
 import LvTwoCommentList from '../views/comment/lvTwoCommentList/LvTwoCommentList' //评论列表
 import Comment from '../views/comment/comment/Comment'
 import Camera from '../views/camera/Camera'
+import PictureViewer from '../views/pictureViewer/PictureViewer'
 
 export default createStackNavigator({
     TabsStack: {
@@ -141,22 +144,37 @@ export default createStackNavigator({
             title: '收藏地址'
         }
     },
-    BlogVideo: {
-        screen: BlogVideo,
-        navigationOptions: {
-            title: '微博视频',
-        }
-    },
+    // BlogVideo: {
+    //     screen: BlogVideo,
+    //     navigationOptions: {
+    //         title: '微博视频',
+    //     }
+    // },
     Scan: {
         screen: Scan,
         navigationOptions: {
             title: '扫一扫'
         }
     },
-    BlogPicture: {
-        screen: BlogPicture,
+    PublishPictureBlog: {
+        screen: PublishPictureBlog,
         navigationOptions: {
-            title: '微博照片'
+            title: '微博照片',
+            header:({ scene, previous, navigation }) => {
+                // console.log('props',props)
+                return <NavPubishPictrueBlog scene={scene} previous={previous} navigation={navigation} />
+            }
+            
+        }
+    },
+    PictureViewer: {
+        screen: PictureViewer,
+        navigationOptions: {
+            title: '' ,
+            header: ({ scene, previous, navigation }) => {
+                // console.log('props',props)
+                return <BlackNavBar scene={scene} previous={previous} navigation={navigation} />
+            } 
         }
     },
     PublishSeekHelp: {

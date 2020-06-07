@@ -1,11 +1,11 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
-import { Card, Content as CardContent, Footer, Header, Video, Image, Map } from '../../components/card'
 import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
 import HotListForHome from './hotListForHome/HotListForHome'
 import FollowingListForHome from './followingListForHome/FollowingListForHome'
 import NearbyListForHome from './nearbyListForHome/NearbyListForHome'
 import TextArticleInfo from '../person/articleInfo/textArticleInfo/TextArticleInfo'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const Home = props => {
   const { navigation } = props
@@ -17,13 +17,13 @@ const Home = props => {
   ];
 
   const overlayList = [
-    { icon: 'edit', title: '发布文章' },
-    { icon: 'question', title: '发布求助' },
-    { icon: 'scan', title: '扫一扫' },
-    { icon: 'environment', title: '收藏定位' }].map(item => {
+    { icon: 'ios-create', title: '发布文章' },
+    { icon: 'md-help', title: '发布求助' },
+    { icon: 'ios-qr-scanner', title: '扫一扫' },
+    { icon: 'ios-pin', title: '收藏定位' }].map(item => {
       return (
         <Popover.Item value={item.title} style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Icon name={item.icon} size='md' color='#000' />
+          <Ionicons name={item.icon} color='#000' />
           <Text style={{ marginLeft: 10 }}>{item.title}</Text>
         </Popover.Item>
       )
@@ -34,10 +34,10 @@ const Home = props => {
       <Tabs tabs={tabs}
         renderTabBar={tabProps => (
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
-            <TouchableOpacity onPress={()=>{
+            <TouchableOpacity onPress={() => {
               navigation.navigate('Camera')
             }}>
-            <Icon name='camera' size={26} color='#000' />
+              <Ionicons name='ios-camera' color='#000' style={{ fontSize: 35 }} />
             </TouchableOpacity>
             {tabProps.tabs.map((tab, i) => (
               <TouchableOpacity
@@ -45,7 +45,7 @@ const Home = props => {
                 key={tab.key || i}
                 style={{ padding: 15, borderBottomWidth: 2, borderColor: tabProps.activeTab === i ? '#2c8ec5' : '#fff' }}
                 onPress={() => {
-                  const { goToTab, onTabClick } = tabProps; 
+                  const { goToTab, onTabClick } = tabProps;
                   onTabClick && onTabClick(tabs[i], i);
                   goToTab && goToTab(i);
                 }}>
@@ -75,7 +75,7 @@ const Home = props => {
                   <View style={{ padding: 5 }}>
                     {nodes}
                   </View>)}>
-                <Icon name='menu' size={26} color='#000' />
+                <Ionicons name='ios-menu' color='#000' style={{ fontSize: 35 }} />
               </Popover>
             </React.Fragment>
           </View>

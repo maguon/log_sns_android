@@ -47,6 +47,9 @@ import * as lvTwoCommentList from './views/comment/lvTwoCommentList/lvTwoComment
 import * as comment from './views/comment/comment/commentActions'
 
 import * as camera from './views/camera/cameraActions'
+import * as currentlocation from './components/inputs/currentlocation/currentLocationActions'
+import * as publishPictureBlog from './views/publishPictureBlog/publishPictureBlogActions'
+
 
 export default {
     home,
@@ -102,6 +105,10 @@ export default {
     lvTwoCommentList,
     comment,
 
-    camera
+    camera,
+
+
+    currentlocation,
+    publishPictureBlog
     
 }

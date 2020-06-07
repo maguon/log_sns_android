@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
-import { Card, Content as CardContent, Footer, Header, Video, Image, Map } from '../../../components/card'
+import { Card, Content as CardContent, Footer, Header, Image, Map } from '../../../components/card'
 import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
 import { ListEmpty, ListFooter } from '../../../components/list'
 import { connect } from 'react-redux'
@@ -190,7 +190,7 @@ class FollowingListForHome extends Component {
               <Card>
                 <Header />
                 <CardContent />
-                <Video />
+                {/* <Video /> */}
                 <Footer />
               </Card>
               <WhiteSpace size='md' />

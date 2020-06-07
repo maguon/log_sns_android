@@ -1,21 +1,20 @@
 import React, { Component } from 'react'
 import { View, Text, ScrollView, PermissionsAndroid } from 'react-native'
-import { List, TextareaItem, Icon, Switch ,Toast } from '@ant-design/react-native'
+import { List, TextareaItem, Icon, Switch, Toast } from '@ant-design/react-native'
 import { init, Geolocation } from "react-native-amap-geolocation"
 import { reduxForm, Field, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
 import reduxActions from '../../reduxActions'
 import { required, requiredObj } from '../../utils/validators'
+import CurrentLocation from '../../components/inputs/currentlocation/CurrentLocation'
 
 const Item = List.Item
-const Brief = Item.Brief
 
 const requiredValidator = required('必填')
 
 const infoField = props => {
     const { input, meta: { error } } = props
-    // console.log('props', props)
-    // console.log('!!error', !!error)
+    console.log('error',error)
     return (
         <TextareaItem rows={8}
             placeholder="输入文章内容"
@@ -32,14 +31,13 @@ class PublishBlog extends Component {
     }
 
     render() {
-        const { publishBlogReducer: { data: { currentAddrName } }, publishBlogForm = {} } = this.props
+
         return (
             <ScrollView
                 style={{ flex: 1 }}
                 automaticallyAdjustContentInsets={false}
                 showsHorizontalScrollIndicator={false}
-                showsVerticalScrollIndicator={false}
-            >
+                showsVerticalScrollIndicator={false}>
                 <List>
                     <Field
                         name='info'
@@ -53,28 +51,7 @@ class PublishBlog extends Component {
                                 <Icon name="environment" color='orange' style={{ marginRight: 15 }} />
                             </View>
                         }>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                            <Text style={{ fontSize: 17 }}>显示定位</Text>
-                            <Field name='addressShow' component={({ input: { value, onChange } }) => {
-                                return (
-                                    <Switch checked={value} onChange={async (checked) => {
-                                        onChange(checked)
-                                        if (checked) {
-                                            try {
-                                                await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION)
-                                                await init({ android: '1c3897e56e825478d31561767f184a5b' })
-                                                Geolocation.getCurrentPosition(({ coords }) => {
-                                                    this.props.getCurrentAddr({ longitude: coords.longitude, latitude: coords.latitude })
-                                                })
-                                            } catch (err) { }
-                                        } else {
-                                            this.props.removeCurrentAddr()
-                                        }
-                                    }} />
-                                )
-                            }} />
-                        </View>
-                        {publishBlogForm.addressShow && <Brief>{currentAddrName ? `${currentAddrName}` : ''}</Brief>}
+                        <Field name='addressShow' component={CurrentLocation} />
                     </Item>
                 </List>
             </ScrollView>
@@ -86,24 +63,39 @@ class PublishBlog extends Component {
 const mapStateToProps = (state) => {
     return {
         publishBlogReducer: state.publishBlogReducer,
-        publishBlogForm: getFormValues('publishBlog')(state)
+        initialValues:{
+            info:'',
+            addressShow:{
+                switchChecked:false
+            }
+        }
+        
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    getCurrentAddr: reqParams => {
-        dispatch(reduxActions.publishBlog.getCurrentAddr(reqParams))
-    },
-    removeCurrentAddr: () => {
-        dispatch(reduxActions.publishBlog.removeCurrentAddr())
-    }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(
+export default connect(mapStateToProps)(
     reduxForm({
         form: 'publishBlog',
         onSubmit: (values, dispatch, props) => {
-            // console.log('onSubmit')
-            dispatch(reduxActions.publishBlog.createArticle(values))
+            let reqParams
+            if(values.addressShow.switchChecked){
+                reqParams={
+                    type: 1,
+                    carrier: 1,
+                    info: values.info,
+                    address: [values.addressShow.data.longitude, values.addressShow.data.latitude],
+                    addressName: values.addressShow.data.currentAddrName,
+                    addressReal: values.addressShow.data.currentAddrReal,
+                    addressShow: 1,
+                }
+            }else{
+                reqParams={
+                    type: 1,
+                    carrier: 1,
+                    info: values.info,
+                    addressShow: 0
+                }
+            }
+            dispatch(reduxActions.publishBlog.createArticle(reqParams))
         }
     })(PublishBlog))
