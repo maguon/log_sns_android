@@ -23,13 +23,14 @@ export const getVoteList = () => async (dispatch, getState) => {
             dispatch({ type: reduxActionTypes.voteListForCommunity.get_voteListForCommunity_failed, payload: { failedMsg: `${res.msg}` } })
         }
     } catch (err) {
+        
         // console.log('err', err)
         dispatch({ type: reduxActionTypes.voteListForCommunity.get_voteListForCommunity_failed, payload: { failedMsg: `${err}` } })
     }
 }
 
 export const getVoteListWaiting = () => (dispatch) => {
-    
+
     dispatch({ type: reduxActionTypes.voteListForCommunity.get_voteListForCommunity_waiting })
 }
 
