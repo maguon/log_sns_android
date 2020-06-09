@@ -8,11 +8,10 @@ const pageSize = 1
 export const getVideoArticleList = () => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/userBeMsgComment?start=0&size=${pageSize}`
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?carrier=3&status=1&start=0&size=${pageSize}`
         console.log('url', url)
         const res = await httpRequest.get(url)
         console.log('res', res)
-
         if (res.success) {
             dispatch({
                 type: reduxActionTypes.videoArticleListForCommunity.get_videoArticleListForCommunity_success, payload: {
@@ -42,7 +41,7 @@ export const getVideoArticleListMore = () => async (dispatch, getState) => {
         if (!videoArticleListForCommunityReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.videoArticleListForCommunity.get_videoArticleListForCommunityMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/userBeMsgComment?start=${(videoArticleListForCommunityReducer.data.articleList.length)}&size=${pageSize}`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?carrier=3&status=1&start=${(videoArticleListForCommunityReducer.data.articleList.length)}&size=${pageSize}`
                 console.log('url', url)
                 const res = await httpRequest.get(url)
                 console.log('res', res)

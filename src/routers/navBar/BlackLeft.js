@@ -5,7 +5,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const BackLeft = props => {
     const { style = styles.left } = props
-    console.log(style)
     return (
         <TouchableOpacity style={style} onPress={() => {
             props.navigation.pop()

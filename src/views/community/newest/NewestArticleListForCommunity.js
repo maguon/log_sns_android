@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, FlatList, RefreshControl, InteractionManager, TouchableOpacity } from 'react-native'
-import { Card, Content as CardContent, Footer, Header, Video, Image, Map } from '../../../components/card'
+import { Card, Content as CardContent, Footer, Header, VideoContent, ImageContent, Map } from '../../../components/card'
 import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
 import { ListEmpty, ListFooter } from '../../../components/list'
 import { connect } from 'react-redux'
@@ -14,8 +14,8 @@ class NewestArticleListForCommunity extends Component {
     }
 
     render() {
-        // console.log('this.props.newestArticleListForCommunityReducer',
-        //     this.props.newestArticleListForCommunityReducer)
+        console.log('this.props.newestArticleListForCommunityReducer',
+            this.props.newestArticleListForCommunityReducer)
         const { newestArticleListForCommunityReducer, navigation } = this.props
         return (
             // <View style={{ flex: 1 }}>
@@ -56,9 +56,14 @@ class NewestArticleListForCommunity extends Component {
                                         params={{ content: item.info }}
                                     />
                                     {item.type == 1 && item.carrier == 4 && <Map />}
-                                    {item.type == 1 && item.carrier == 2 && <Image />}
-                                    {item.type == 1 && item.carrier == 3 && <Video />}
+                                    {item.type == 1 && item.carrier == 2 && <ImageContent
+                                        openPictureViewer={(index, imageList) => {
+                                            navigation.navigate('PictureViewer', { imageIndex: index, imageList })
+                                        }}
+                                        imageList={item.media.map(imageUriItem => `${imageUriItem.url}`)} />}
+
                                 </TouchableOpacity>
+                                {item.type == 1 && item.carrier == 3 && <VideoContent preview={item.media[0].preview} video={item.media[0].url} />}
                                 <Footer
                                     msgCount={item.comment_num}
                                     likeCount={item.agree_num}

@@ -12,27 +12,10 @@ class VideoContent extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <Video source={{ uri: this.props.video }}   // Can be a URL or a local file.
+
                     paused={true}
                     repeat={true}
                     controls={true}
-                    ref={(ref) => {
-                        this.player = ref
-                    }} 
-                                                         // Store reference
-                    onEnd={() => {
-                        this.player.seek(0);
-                    }}
-                    onError={(err) => {
-                        console.log(err)
-                        console.log(this.props.video)
-                        
-                        // Alert.alert(JSON.stringify(err))
-                    }}
-                    onLoad={params => {
-                        console.log(params)
-                        console.log(this.props.video)
-                        
-                    }}
                     style={styles.backgroundVideo} />
                 {/* <Image source={{uri:props.preview}} style={{width:200,height:200}}/> */}
             </View>
@@ -43,8 +26,8 @@ class VideoContent extends Component {
 
 const styles = StyleSheet.create({
     backgroundVideo: {
-        width: 200,
-        height: 200
+        width: 300,
+        height: 300
     },
 });
 

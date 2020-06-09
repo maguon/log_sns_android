@@ -4,13 +4,13 @@ import * as host from '../../../utils/host'
 import { sleep } from '../../../utils/util'
 import { Portal, Toast } from '@ant-design/react-native'
 
-const pageSize = 1
+const pageSize = 20
 
 export const getNewestArticleList = () => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/popularMsg?status=1&start=0&size=${pageSize}`
-        // console.log('url', url)
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?status=1&start=0&size=${pageSize}`
+        console.log('url', url)
         const res = await httpRequest.get(url)
         // console.log('res', res)
 
@@ -43,7 +43,7 @@ export const getNewestArticleListMore = () => async (dispatch, getState) => {
         if (!newestArticleListForCommunityReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.newestArticleListForCommunity.get_newestArticleListForCommunityMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/userBeMsgComment?start=${(newestArticleListForCommunityReducer.data.articleList.length)}&size=${pageSize}`
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?start=${(newestArticleListForCommunityReducer.data.articleList.length)}&size=${pageSize}`
                 // console.log('url', url)
                 const res = await httpRequest.get(url)
                 // console.log('res', res)
