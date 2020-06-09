@@ -3,16 +3,16 @@ import httpRequest from '../../../utils/HttpRequest'
 import * as host from '../../../utils/host'
 import { sleep } from '../../../utils/util'
 
-const pageSize = 1
+const pageSize = 20
 
 export const getFollowingListForHome = () => async (dispatch, getState) => {
     try {
         const { loginReducer } = getState()
         // console.log('reqParams', reqParams)
-        const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?start=0&size=${pageSize}`
-        // console.log('url', url)
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/followUserMsg?status=1&start=0&size=${pageSize}`
+        console.log('url', url)
         const res = await httpRequest.get(url)
-        // console.log('res', res)
+        console.log('res', res)
         if (res.success) {
             dispatch({
                 type: reduxActionTypes.followingListForHome.get_followingListForHome_success, payload: {
@@ -42,10 +42,10 @@ export const getFollowingListForHomeMore = () => async (dispatch, getState) => {
         if (!followingListForHomeReducer.data.isCompleted) {
             dispatch({ type: reduxActionTypes.followingListForHome.get_followingListForHomeMore_waiting, payload: {} })
             try {
-                const url = `${host.base_host}/user/${loginReducer.data.user._id}/msg?start=${followingListForHomeReducer.data.articleList.length}&size=${pageSize}`
-                // console.log('url', url)
+                const url = `${host.base_host}/user/${loginReducer.data.user._id}/followUserMsg?status=1&start=${followingListForHomeReducer.data.articleList.length}&size=${pageSize}`
+                console.log('url', url)
                 const res = await httpRequest.get(url)
-                // console.log('res', res)
+                console.log('res', res)
 
                 if (res.success) {
                     const isCompleted = res.result.length == 0 || res.result.length % pageSize != 0

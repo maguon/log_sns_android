@@ -14,8 +14,6 @@ class NewestArticleListForCommunity extends Component {
     }
 
     render() {
-        console.log('this.props.newestArticleListForCommunityReducer',
-            this.props.newestArticleListForCommunityReducer)
         const { newestArticleListForCommunityReducer, navigation } = this.props
         return (
             // <View style={{ flex: 1 }}>
