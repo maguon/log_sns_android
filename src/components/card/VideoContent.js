@@ -9,9 +9,7 @@ class VideoContent extends Component {
 
     render() {
         return (
-            <TouchableOpacity style={{ flex: 1 }} onPress={() => {
-
-            }}>
+            <View style={{ flex: 1 }}>
                 <Video source={{ uri: this.props.video }}   // Can be a URL or a local file.
                     paused={true}
                     repeat={true}
@@ -30,7 +28,7 @@ class VideoContent extends Component {
                     }}
                     style={styles.backgroundVideo} />
                 {/* <Image source={{uri:props.preview}} style={{width:200,height:200}}/> */}
-            </TouchableOpacity>
+            </View>
         )
     }
 
