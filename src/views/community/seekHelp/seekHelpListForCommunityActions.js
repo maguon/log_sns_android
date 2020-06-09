@@ -4,7 +4,7 @@ import * as host from '../../../utils/host'
 import { sleep } from '../../../utils/util'
 import { Portal, Toast } from '@ant-design/react-native'
 
-const pageSize = 1
+const pageSize = 20
 
 export const getSeekHelpList = () => async (dispatch, getState) => {
     try {
