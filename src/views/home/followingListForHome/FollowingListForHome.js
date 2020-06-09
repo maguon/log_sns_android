@@ -27,12 +27,12 @@ class FollowingListForHome extends Component {
     const el_followingUserList = followingListForHomeReducer.data.followingUserList.map((item, i) => {
       return (
         <WingBlank size='sm' key={i}>
-          <View>
+          <View style={{ alignItems: 'center' }}>
             <WhiteSpace size='md' />
             <View style={{ height: 48, width: 48, borderRadius: 24 }} >
-              <Image source={{ uri: item.avatar ? `${item.avatar}` : 'personicon' }} style={{ height: 48, width: 48 }}></Image>
+              <Image source={{ uri: item.follow_user_detail_info && item.follow_user_detail_info[0].avatar ? `${item.follow_user_detail_info[0].avatar}` : 'personalicon' }} style={{ height: 48, width: 48, borderRadius: 24 }}></Image>
             </View>
-            <Text>张大爷</Text>
+            <Text >{item.follow_user_detail_info && item.follow_user_detail_info[0].nick_name ? `${item.follow_user_detail_info[0].nick_name}` : ''}</Text>
             <WhiteSpace size='md' />
           </View>
         </WingBlank>
