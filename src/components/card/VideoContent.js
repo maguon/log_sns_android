@@ -8,6 +8,7 @@ class VideoContent extends Component {
     }
 
     render() {
+       
         return (
             <View style={{ flex: 1 }}>
                 <Video source={{ uri: this.props.video }}   // Can be a URL or a local file.
@@ -16,15 +17,21 @@ class VideoContent extends Component {
                     controls={true}
                     ref={(ref) => {
                         this.player = ref
-                    }}                                      // Store reference
+                    }} 
+                                                         // Store reference
                     onEnd={() => {
                         this.player.seek(0);
                     }}
                     onError={(err) => {
-                        Alert.alert(JSON.stringify(err))
+                        console.log(err)
+                        console.log(this.props.video)
+                        
+                        // Alert.alert(JSON.stringify(err))
                     }}
-                    onLoad={() => {
-                        this.player.seek(0)
+                    onLoad={params => {
+                        console.log(params)
+                        console.log(this.props.video)
+                        
                     }}
                     style={styles.backgroundVideo} />
                 {/* <Image source={{uri:props.preview}} style={{width:200,height:200}}/> */}
