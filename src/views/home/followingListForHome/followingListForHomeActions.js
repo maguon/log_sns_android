@@ -67,3 +67,30 @@ export const getFollowingListForHomeMore = () => async (dispatch, getState) => {
         }
     }
 }
+
+
+export const getFollowUserList = () => async (dispatch, getState) => {
+    try {
+        const { loginReducer } = getState()
+        const url = `${host.base_host}/user/${loginReducer.data.user._id}/followUserInfo`
+        console.log('url', url)
+        const res = await httpRequest.get(url)
+        console.log('res', res)
+
+        if (res.success) {
+            dispatch({
+                type: reduxActionTypes.followingListForHome.get_followingUserListForHome_success, payload: {
+                    followingUserList: res.result
+                }
+            })
+        } else {
+            dispatch({ type: reduxActionTypes.followingListForHome.get_followingUserListForHome_failed, payload: { failedMsg: `${res.msg}` } })
+        }
+    } catch (err) {
+        dispatch({ type: reduxActionTypes.followingListForHome.get_followingUserListForHome_failed, payload: { failedMsg: `${err}` } })
+    }
+}
+
+export const getFollowUserListWaiting = () => (dispatch) => {
+    dispatch({ type: reduxActionTypes.followingListForHome.get_followingUserListForHome_waiting })
+}

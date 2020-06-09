@@ -5,3 +5,7 @@ export const get_followingListForHome_waiting = 'get_followingListForHome_waitin
 export const get_followingListForHomeMore_success = 'get_followingListForHomeMore_success'
 export const get_followingListForHomeMore_failed = 'get_followingListForHomeMore_failed'
 export const get_followingListForHomeMore_waiting = 'get_followingListForHomeMore_waiting'
+
+export const get_followingUserListForHome_success = 'get_followingUserListForHome_success'
+export const get_followingUserListForHome_failed = 'get_followingUserListForHome_failed'
+export const get_followingUserListForHome_waiting = 'get_followingUserListForHome_waiting'

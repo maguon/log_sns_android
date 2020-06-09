@@ -4,13 +4,18 @@ import reduxActionTypes from '../../../reduxActionTypes'
 const initialState = {
     data: {
         articleList: [],
-        isCompleted: false
+        isCompleted: false,
+        followingUserList:[]
     },
     getFollowingListForHome: {
         isResultStatus: 0,
         failedMsg: ''
     },
     getFollowingListForHomeMore: {
+        isResultStatus: 0,
+        failedMsg: ''
+    },
+    getFollowingUserListForHome:{
         isResultStatus: 0,
         failedMsg: ''
     }
@@ -20,9 +25,9 @@ export default handleActions({
     [reduxActionTypes.followingListForHome.get_followingListForHome_success]: (state, action) => {
         const { payload: { articleList, isCompleted } } = action
         return {
-            ...initialState,
+            ...state,
             data: {
-                ...initialState.data,
+                ...state.data,
                 articleList,
                 isCompleted
             },
@@ -61,9 +66,9 @@ export default handleActions({
         const { payload: { articleList, isCompleted } } = action
         // console.log('articleList', articleList)
         return {
-            ...initialState,
+            ...state,
             data: {
-                ...initialState.data,
+                ...state.data,
                 articleList: [...state.data.articleList, ...articleList],
                 isCompleted
             },
@@ -93,5 +98,44 @@ export default handleActions({
                 isResultStatus: 1
             }
         }
-    }
+    },
+
+
+
+    [reduxActionTypes.followingListForHome.get_followingUserListForHome_success]: (state, action) => {
+        const { payload: { followingUserList } } = action
+        // console.log('articleList', articleList)
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                followingUserList
+            },
+            getFollowingUserListForHome: {
+                ...state.getFollowingUserListForHome,
+                isResultStatus: 2
+            }
+        }
+    },
+    [reduxActionTypes.followingListForHome.get_followingUserListForHome_failed]: (state, action) => {
+        const { payload: { failedMsg } } = action
+
+        return {
+            ...state,
+            getFollowingUserListForHome: {
+                ...state.getFollowingUserListForHome,
+                isResultStatus: 3,
+                failedMsg
+            }
+        }
+    },
+    [reduxActionTypes.followingListForHome.get_followingUserListForHome_waiting]: (state, action) => {
+        return {
+            ...state,
+            getFollowingUserListForHome: {
+                ...state.getFollowingUserListForHome,
+                isResultStatus: 1
+            }
+        }
+    }    
 }, initialState)

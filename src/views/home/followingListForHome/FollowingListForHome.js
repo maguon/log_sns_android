@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList,RefreshControl, TouchableOpacity, ScrollView, InteractionManager } from 'react-native'
+import { View, Text, FlatList, RefreshControl, TouchableOpacity, Image, ScrollView, InteractionManager } from 'react-native'
 import { Card, Content as CardContent, Footer, Header, ImageContent, VideoContent, Map } from '../../../components/card'
 import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
 import { ListEmpty, ListFooter } from '../../../components/list'
@@ -12,180 +12,38 @@ class FollowingListForHome extends Component {
 
   componentDidMount() {
     this.props.getFollowingListForHomeWaiting()
-    InteractionManager.runAfterInteractions(this.props.getFollowingListForHome)
+    this.props.getFollowUserListWaiting()
+    InteractionManager.runAfterInteractions(() => {
+      this.props.getFollowingListForHome()
+      this.props.getFollowUserList()
+    })
   }
 
-  componentWillUnmount() {
-
-  }
 
   render() {
     console.log('this.props', this.props)
-    const { followingListForHomeReducer,navigation } = this.props
+    const { followingListForHomeReducer, navigation } = this.props
+
+    const el_followingUserList = followingListForHomeReducer.data.followingUserList.map((item, i) => {
+      return (
+        <WingBlank size='sm' key={i}>
+          <View>
+            <WhiteSpace size='md' />
+            <View style={{ height: 48, width: 48, borderRadius: 24 }} >
+              <Image source={{ uri: item.avatar ? `${item.avatar}` : 'personicon' }} style={{ height: 48, width: 48 }}></Image>
+            </View>
+            <Text>张大爷</Text>
+            <WhiteSpace size='md' />
+          </View>
+        </WingBlank>
+      )
+    })
     return (
       <ScrollView style={{ flex: 1 }}>
         <ScrollView horizontal={true} style={{ borderBottomWidth: 0.5, borderColor: '#ccc' }}>
           <WingBlank size='sm' style={{ flexDirection: 'row' }}>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
-            <WingBlank size='sm'>
-              <View>
-                <WhiteSpace size='md' />
-                <View style={{ height: 48, width: 48, backgroundColor: 'red', borderRadius: 24 }} />
-                <Text>张大爷</Text>
-                <WhiteSpace size='md' />
-              </View>
-            </WingBlank>
+            {el_followingUserList}
+
           </WingBlank>
         </ScrollView>
         <WhiteSpace size='md' />
@@ -294,6 +152,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getFollowingListForHomeMore: () => {
     dispatch(reduxActions.followingListForHome.getFollowingListForHomeMore())
+  },
+  getFollowUserList: () => {
+    dispatch(reduxActions.followingListForHome.getFollowUserList())
+  },
+  getFollowUserListWaiting: () => {
+    dispatch(reduxActions.followingListForHome.getFollowUserListWaiting())
   }
 })
 
