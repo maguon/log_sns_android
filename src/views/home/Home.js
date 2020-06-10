@@ -81,8 +81,8 @@ const Home = props => {
           </View>
         )}>
         <HotListForHome {...props} />
-        <FollowingListForHome />
-        <NearbyListForHome />
+        <FollowingListForHome {...props} />
+        <NearbyListForHome {...props} />
       </Tabs>
     </View>
   )

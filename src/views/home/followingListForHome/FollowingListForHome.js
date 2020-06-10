@@ -24,6 +24,8 @@ class FollowingListForHome extends Component {
     console.log('this.props', this.props)
     const { followingListForHomeReducer, navigation } = this.props
 
+    console.log('navigation',navigation)
+
     const el_followingUserList = followingListForHomeReducer.data.followingUserList.map((item, i) => {
       return (
         <WingBlank size='sm' key={i}>

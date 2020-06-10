@@ -4,7 +4,9 @@ import reduxActionTypes from '../../../reduxActionTypes'
 const initialState = {
     data: {
         articleList: [],
-        isCompleted: false
+        isCompleted: false,
+        coords: {}
+
     },
     getNearbyListForHome: {
         isResultStatus: 0,
@@ -18,13 +20,14 @@ const initialState = {
 
 export default handleActions({
     [reduxActionTypes.nearbyListForHome.get_nearbyListForHome_success]: (state, action) => {
-        const { payload: { articleList, isCompleted } } = action
+        const { payload: { articleList, isCompleted, coords } } = action
         return {
             ...initialState,
             data: {
                 ...initialState.data,
                 articleList,
-                isCompleted
+                isCompleted,
+                coords
             },
             getNearbyListForHome: {
                 ...initialState.getNearbyListForHome,
