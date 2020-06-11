@@ -49,6 +49,7 @@ import * as comment from './views/comment/comment/commentActions'
 import * as camera from './views/camera/cameraActions'
 import * as currentlocation from './components/inputs/currentlocation/currentLocationActions'
 import * as publishPictureBlog from './views/publishPictureBlog/publishPictureBlogActions'
+import * as about from './views/person/about/aboutActions'
 
 
 export default {
@@ -109,6 +110,8 @@ export default {
 
 
     currentlocation,
-    publishPictureBlog
+    publishPictureBlog,
+
+    about
     
 }

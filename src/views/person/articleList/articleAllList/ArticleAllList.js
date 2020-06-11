@@ -40,8 +40,8 @@ class ArticleAllList extends Component {
                                 }} />
                                 <CardContent params={{ content: item.info }} />
                                 {item.type == 1 && item.carrier == 4 && <Map />}
-                                {item.type == 1 && item.carrier == 2 && <Image />}
-                                {item.type == 1 && item.carrier == 3 && <Video />}
+                                {/* {item.type == 1 && item.carrier == 2 && <Image />}
+                                {item.type == 1 && item.carrier == 3 && <Video />} */}
                                 <FooterForDel
                                     msgCount={item.comment_num}
                                     likeCount={item.agree_num}

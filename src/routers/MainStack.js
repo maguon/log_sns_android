@@ -40,6 +40,12 @@ import LvTwoCommentList from '../views/comment/lvTwoCommentList/LvTwoCommentList
 import Comment from '../views/comment/comment/Comment'
 import Camera from '../views/camera/Camera'
 import PictureViewer from '../views/pictureViewer/PictureViewer'
+import About from '../views/person/about/About'
+
+import ChangePassword from '../views/person/changePassword/ChangePassword'
+import ChangePhone from '../views/person/changePhone/ChangePhone'
+import PrivacySetting from '../views/person/privacySetting/PrivacySetting'
+import NoticeSetting from '../views/person/noticeSetting/NoticeSetting'
 
 export default createStackNavigator({
     TabsStack: {
@@ -118,6 +124,36 @@ export default createStackNavigator({
         screen: VoteList,
         navigationOptions: {
             title: '我参与的投票'
+        }
+    },
+    About: {
+        screen: About,
+        navigationOptions: {
+            title: '关于我们'
+        }
+    },
+    ChangePassword: {
+        screen: ChangePassword,
+        navigationOptions: {
+            title: '关于我们'
+        }
+    },
+    ChangePhone: {
+        screen: ChangePhone,
+        navigationOptions: {
+            title: '关于我们'
+        }
+    },
+    PrivacySetting: {
+        screen: PrivacySetting,
+        navigationOptions: {
+            title: '关于我们'
+        }
+    },
+    NoticeSetting: {
+        screen: NoticeSetting,
+        navigationOptions: {
+            title: '关于我们'
         }
     },
     CollectionLocationList: {

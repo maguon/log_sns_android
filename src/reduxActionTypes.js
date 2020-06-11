@@ -52,6 +52,8 @@ import * as camera from './views/camera/cameraActionTypes'
 import * as currentlocation from './components/inputs/currentlocation/currentLocationActionTypes'
 import * as publishPictureBlog from './views/publishPictureBlog/publishPictureBlogActionTypes'
 
+import * as about from './views/person/about/aboutActionTypes'
+
 
 export default {
     home,
@@ -106,5 +108,6 @@ export default {
 
 
     currentlocation,
-    publishPictureBlog
+    publishPictureBlog,
+    about
 }

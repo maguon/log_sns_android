@@ -53,7 +53,7 @@ import cameraReducer from './views/camera/cameraReducer'
 import currentLocationReducer from './components/inputs/currentlocation/currentLocationReducer'
 import publishPictureBlogReducer from './views/publishPictureBlog/publishPictureBlogReducer'
 
-
+import aboutReducer from './views/person/about/aboutReducer'
 
 export default combineReducers({
     form: formReducer,
@@ -111,5 +111,6 @@ export default combineReducers({
     cameraReducer,
 
     currentLocationReducer,
-    publishPictureBlogReducer
+    publishPictureBlogReducer,
+    aboutReducer
 })
