@@ -3,11 +3,12 @@ import { View, Text } from 'react-native'
 
 class ChangePassword extends Component {
     render() {
-        <View>
-            <Text>ChangePassword</Text>
-        </View>
+        return (
+            <View>
+                <Text>ChangePassword</Text>
+            </View>
+        )
     }
 }
-
 
 export default ChangePassword

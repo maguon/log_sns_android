@@ -3,9 +3,11 @@ import { View, Text } from 'react-native'
 
 class NoticeSetting extends Component {
     render() {
-        <View>
-            <Text>NoticeSetting</Text>
-        </View>
+        return (
+            <View>
+                <Text>NoticeSetting</Text>
+            </View>
+        )
     }
 }
 

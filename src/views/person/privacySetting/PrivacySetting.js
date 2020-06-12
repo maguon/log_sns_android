@@ -3,9 +3,11 @@ import { View, Text } from 'react-native'
 
 class PrivacySetting extends Component {
     render() {
-        <View>
-            <Text>PrivacySetting</Text>
-        </View>
+        return (
+            <View>
+                <Text>PrivacySetting</Text>
+            </View>
+        )
     }
 }
 
