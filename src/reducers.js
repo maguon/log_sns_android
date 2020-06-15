@@ -55,6 +55,9 @@ import publishPictureBlogReducer from './views/publishPictureBlog/publishPicture
 
 import aboutReducer from './views/person/about/aboutReducer'
 
+import retrievePasswordVCodeReducer from './views/auth/retrievePassword/retrievePasswordVCode/retrievePasswordVCodeReducer'
+import userRegisterVCodeReducer from './views/auth/userRegister/userRegisterVCode/userRegisterVCodeReducer'
+
 export default combineReducers({
     form: formReducer,
     homeReducer,
@@ -112,5 +115,8 @@ export default combineReducers({
 
     currentLocationReducer,
     publishPictureBlogReducer,
-    aboutReducer
+    aboutReducer,
+
+    retrievePasswordVCodeReducer,
+    userRegisterVCodeReducer
 })

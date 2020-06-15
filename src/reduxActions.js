@@ -51,6 +51,8 @@ import * as currentlocation from './components/inputs/currentlocation/currentLoc
 import * as publishPictureBlog from './views/publishPictureBlog/publishPictureBlogActions'
 import * as about from './views/person/about/aboutActions'
 
+import * as userRegisterVCode from './views/auth/userRegister/userRegisterVCode/userRegisterVCodeActions'
+import * as retrievePasswordVCode from './views/auth/retrievePassword/retrievePasswordVCode/retrievePasswordVCodeActions'
 
 export default {
     home,
@@ -108,10 +110,11 @@ export default {
 
     camera,
 
-
     currentlocation,
     publishPictureBlog,
 
-    about
+    about,
+    userRegisterVCode,
+    retrievePasswordVCode
     
 }

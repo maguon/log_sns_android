@@ -1,0 +1,3 @@
+export const get_vCodeForUserRegister_success = "get_vCodeForUserRegister_success"
+export const get_vCodeForUserRegister_waiting = "get_vCodeForUserRegister_waiting"
+export const get_vCodeForUserRegister_failed = "get_vCodeForUserRegister_failed"

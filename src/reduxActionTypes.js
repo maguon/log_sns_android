@@ -54,6 +54,9 @@ import * as publishPictureBlog from './views/publishPictureBlog/publishPictureBl
 
 import * as about from './views/person/about/aboutActionTypes'
 
+import * as userRegisterVCode from './views/auth/userRegister/userRegisterVCode/userRegisterVCodeActionTypes'
+import * as retrievePasswordVCode from './views/auth/retrievePassword/retrievePasswordVCode/retrievePasswordVCodeActionTypes'
+
 
 export default {
     home,
@@ -109,5 +112,7 @@ export default {
 
     currentlocation,
     publishPictureBlog,
-    about
+    about,
+    userRegisterVCode,
+    retrievePasswordVCode
 }

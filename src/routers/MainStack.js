@@ -135,25 +135,25 @@ export default createStackNavigator({
     ChangePassword: {
         screen: ChangePassword,
         navigationOptions: {
-            title: '关于我们'
+            title: '修改密码'
         }
     },
     ChangePhone: {
         screen: ChangePhone,
         navigationOptions: {
-            title: '关于我们'
+            title: '换绑手机'
         }
     },
     PrivacySetting: {
         screen: PrivacySetting,
         navigationOptions: {
-            title: '关于我们'
+            title: '隐私设置'
         }
     },
     NoticeSetting: {
         screen: NoticeSetting,
         navigationOptions: {
-            title: '关于我们'
+            title: '通知设置'
         }
     },
     CollectionLocationList: {

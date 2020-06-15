@@ -5,7 +5,7 @@ import AuthStack from './AuthStack'
 import MainStack from './MainStack'
 
 const RouteConfigs = {
-    initialRouteName: 'MainStack'
+    initialRouteName: 'Auth'
 }
 
 export default createAppContainer(createSwitchNavigator({

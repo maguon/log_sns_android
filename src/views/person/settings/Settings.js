@@ -16,19 +16,19 @@ const Settings = props => {
             <List>
                 <Item arrow="horizontal"
                     onPress={() => {
-
+                        navigation.navigate('ChangePassword')
                     }}
                     onLongPress={() => {
-
+                        navigation.navigate('ChangePassword')
                     }}
                     thumb={<Icon name="file-text" style={{ marginRight: 15 }} />} >
                     修改密码</Item>
                 <Item arrow="horizontal"
                     onPress={() => {
-
+                        navigation.navigate('ChangePhone')
                     }}
                     onLongPress={() => {
-
+                        navigation.navigate('ChangePhone')
                     }}
                     thumb={<Icon name="file-text" style={{ marginRight: 15 }} />} >
                     换绑手机</Item>
@@ -37,18 +37,22 @@ const Settings = props => {
             <List>
                 <Item arrow="horizontal"
                     onPress={() => {
+                        navigation.navigate('PrivacySetting')
 
                     }}
                     onLongPress={() => {
+                        navigation.navigate('PrivacySetting')
 
                     }}
                     thumb={<Icon name="file-text" style={{ marginRight: 15 }} />} >
                     隐私设置</Item>
                 <Item arrow="horizontal"
                     onPress={() => {
+                        navigation.navigate('NoticeSetting')
 
                     }}
                     onLongPress={() => {
+                        navigation.navigate('NoticeSetting')
 
                     }}
                     thumb={<Icon name="file-text" style={{ marginRight: 15 }} />} >
@@ -61,7 +65,7 @@ const Settings = props => {
                         navigation.navigate('About')
                     }}
                     onLongPress={() => {
-
+                        navigation.navigate('About')
                     }}
                     thumb={<Icon name="file-text" style={{ marginRight: 15 }} />} >
                     关于我们</Item>
