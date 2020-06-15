@@ -1,7 +1,6 @@
 import reduxActionTypes from '../../../reduxActionTypes'
 import httpRequest from '../../../utils/HttpRequest'
 import * as host from '../../../utils/host'
-import reduxActionTypes from '../../../reduxActionTypes'
 
 
 export const register = (props) => async (dispatch, getState) => {
@@ -71,24 +70,3 @@ export const register = (props) => async (dispatch, getState) => {
     }
 };
 
-//忘记密码获得验证码
-export const getVCode = props => async (dispatch, getState) => {
-    try {
-        const { RegisterReducer: { account } } = getState()
-        const url = `${host.base_host}/phone/${account}/passwordSms`
-        console.log('url', url)
-        const res = await HttpRequest.post(url)
-        console.log('res', res)
-
-        if (res.success) {
-
-            console.log('success')
-        } else {
-            // Toast.loading('Loading...', 0.5, () => {
-            //     Alert.alert("", `${res.msg},返回登录`, [{text: "确定", onPress: () => props.navigation.goBack()}])
-            // })
-        }
-    } catch (err) {
-        dispatch({ type: reduxActionTypes.retrievePassword.get_vCodeForRetrievePassword_failed, payload: { failedMsg: `${err}` } })
-    }
-};
