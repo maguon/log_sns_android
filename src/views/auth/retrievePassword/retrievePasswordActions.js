@@ -2,7 +2,6 @@ import reduxActionTypes from '../../../reduxActionTypes'
 import httpRequest from '../../../utils/HttpRequest'
 import * as host from '../../../utils/host'
 
-
 export const register = (props) => async (dispatch, getState) => {
     try {
         const { RegisterReducer: { account, password, pass_word, code } } = getState()
@@ -34,7 +33,7 @@ export const register = (props) => async (dispatch, getState) => {
                     captcha: code,
                     type: 0,
                 }
-                let res = await HttpRequest.post(apiHost + `/user`, params)
+                let res = await httpRequest.post(apiHost + `/user`, params)
                 if (res.success) {
                     Toast.loading('Loading...', 0.5, () => {
                         Alert.alert("", "注册成功，返回登录", [{ text: "确定", onPress: () => props.navigation.goBack() }])
@@ -51,7 +50,7 @@ export const register = (props) => async (dispatch, getState) => {
                     code: code,
                     newPassword: password,
                 }
-                let res = await HttpRequest.put(apiHost + `/phone/${account}/password`, params)
+                let res = await httpRequest.put(apiHost + `/phone/${account}/password`, params)
 
                 if (res.success) {
                     Toast.loading('Loading...', 0.5, () => {

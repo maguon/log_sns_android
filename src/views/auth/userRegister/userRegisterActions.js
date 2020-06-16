@@ -1,7 +1,6 @@
-import {apiHost} from '../../config/HostConfig'
-import HttpRequest from '../../utils/HttpRequest'
-import {Alert} from 'react-native'
-import {Toast} from "@ant-design/react-native"
+import reduxActionTypes from '../../../../reduxActionTypes'
+import httpRequest from '../../../../utils/HttpRequest'
+import * as host from '../../../../utils/host'
 
 export const register = (props) => async (dispatch, getState) => {
     try {

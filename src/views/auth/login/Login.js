@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import globalStyles from '../../../GlobalStyles'
 import { Button, WingBlank, WhiteSpace, Icon } from '@ant-design/react-native'
+import { reduxForm } from 'redux-form'
 
 
 const Login = props => {

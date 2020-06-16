@@ -9,7 +9,7 @@ export const getVCode = props => async (dispatch, getState) => {
         const { RegisterReducer: { account } } = getState()
         const url = `${host.base_host}/phone/${account}/passwordSms`
         console.log('url', url)
-        const res = await HttpRequest.post(url)
+        const res = await httpRequest.post(url)
         console.log('res', res)
         if (res.success) {
             dispatch({ type: reduxActionTypes.retrievePasswordVCode.get_vCodeForRetrievePassword_success})

@@ -1,7 +1,6 @@
 import reduxActionTypes from '../../../../reduxActionTypes'
 import httpRequest from '../../../../utils/HttpRequest'
 import * as host from '../../../../utils/host'
-import reduxActionTypes from '../../../../reduxActionTypes'
 
 export const getCode = props => async (dispatch, getState) => {
     try {
