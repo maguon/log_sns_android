@@ -1,8 +1,9 @@
 import { NavigationActions,StackActions } from 'react-navigation';
  
-let _navigator;function 
- 
-setTopLevelNavigator(navigatorRef) {
+let _navigator;
+
+
+function setTopLevelNavigator(navigatorRef) {
   _navigator = navigatorRef;
 }
  

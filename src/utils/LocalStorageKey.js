@@ -1,5 +1,5 @@
 const localStorageKey = {
-    USER: 'log-sns_android_user'
+    USER: 'log-sns-android-user'
 }
 
 export default localStorageKey

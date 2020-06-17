@@ -56,6 +56,7 @@ import * as about from './views/person/about/aboutActionTypes'
 
 import * as userRegisterVCode from './views/auth/userRegister/userRegisterVCode/userRegisterVCodeActionTypes'
 import * as retrievePasswordVCode from './views/auth/retrievePassword/retrievePasswordVCode/retrievePasswordVCodeActionTypes'
+import * as settings from './views/person/settings/settingsActionTypes'
 
 
 export default {
@@ -114,5 +115,7 @@ export default {
     publishPictureBlog,
     about,
     userRegisterVCode,
-    retrievePasswordVCode
+    retrievePasswordVCode,
+
+    settings
 }

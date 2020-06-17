@@ -53,6 +53,7 @@ import * as about from './views/person/about/aboutActions'
 
 import * as userRegisterVCode from './views/auth/userRegister/userRegisterVCode/userRegisterVCodeActions'
 import * as retrievePasswordVCode from './views/auth/retrievePassword/retrievePasswordVCode/retrievePasswordVCodeActions'
+import * as settings from './views/person/settings/settingsActions'
 
 export default {
     home,
@@ -115,6 +116,7 @@ export default {
 
     about,
     userRegisterVCode,
-    retrievePasswordVCode
+    retrievePasswordVCode,
+    settings
     
 }

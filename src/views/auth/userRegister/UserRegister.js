@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, TextInput, StyleSheet } from 'react-native'
 import globalStyles from '../../../GlobalStyles'
 import { Button, WingBlank, WhiteSpace, Icon } from '@ant-design/react-native'
-import {} from 'redux-form'
+import { reduxForm } from 'redux-form'
 
 
 class UserRegister extends Component {
