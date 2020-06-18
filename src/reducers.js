@@ -57,7 +57,7 @@ import aboutReducer from './views/person/about/aboutReducer'
 
 import retrievePasswordVCodeReducer from './views/auth/retrievePassword/retrievePasswordVCode/retrievePasswordVCodeReducer'
 import userRegisterVCodeReducer from './views/auth/userRegister/userRegisterVCode/userRegisterVCodeReducer'
-import settingsReducer from './views/person/settings/settingsReducer'
+import personCenterReducer from './views/person/personCenter/personCenterReducer'
 
 export default combineReducers({
     form: formReducer,
@@ -121,5 +121,5 @@ export default combineReducers({
     retrievePasswordVCodeReducer,
     userRegisterVCodeReducer,
 
-    settingsReducer
+    personCenterReducer
 })

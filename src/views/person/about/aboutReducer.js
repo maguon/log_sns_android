@@ -41,7 +41,7 @@ export default handleActions({
     [reduxActionTypes.about.get_about_waiting]: (state, action) => {
         return {
             ...state,
-            getNearbyListForHome: {
+            getAbout: {
                 ...state.getAbout,
                 isResultStatus: 1
             }

@@ -15,7 +15,6 @@ export const login = reqParams => async (dispatch, getState) => {
         const res = await httpRequest.post(url, {
             userName: username,
             password: password
-
         })
 
         if (res.success === true) {
@@ -28,7 +27,8 @@ export const login = reqParams => async (dispatch, getState) => {
                         userInfo: {
                             _id: res.result.userId,
                             _userDriveId: getUserInfoRes.result[0]._user_drive_id,
-                            _userDetailId: getUserInfoRes.result[0]._user_detail_id
+                            _userDetailId: getUserInfoRes.result[0]._user_detail_id,
+                            type: getUserInfoRes.result[0].type
                         }
                     }
                 })
@@ -48,7 +48,6 @@ export const login = reqParams => async (dispatch, getState) => {
         } else {
             dispatch({ type: reduxActionTypes.login.login_failed, payload: { failedMsg: `${res.msg}` } })
         }
-
     } catch (err) {
         dispatch({ type: reduxActionTypes.login.login_failed, payload: { failedMsg: `${err}` } })
     }

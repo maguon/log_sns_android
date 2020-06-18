@@ -1,42 +1,88 @@
-import React from 'react'
+import React,{Component} from 'react'
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import globalStyles from '../../../GlobalStyles'
 import { Button, WingBlank, WhiteSpace, Icon, List, InputItem } from '@ant-design/react-native'
+import RetrievePasswordVCode from './retrievePasswordVCode/RetrievePasswordVCode'
+import { reduxForm, getFormValues, Field } from 'redux-form'
+import { connect } from 'react-redux'
+import reduxActions from '../../../reduxActions'
 
-const Item = List.Item;
+const Item = List.Item
 
-const RetrievePassword = props => {
-    return (
-        <ScrollView
-            style={{ flex: 1, backgroundColor: '#f5f5f9' }}
-            automaticallyAdjustContentInsets={false}
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-        >
-            <List>
-                <InputItem
-                    extra={<Button type="primary" style={{ width: 100 }}>验证码</Button>}
-                    styles={{
-                        container: styles.container
-                    }}
-                    placeholder="请输入手机号">手机</InputItem>
-                <InputItem
-                    placeholder="请输入验证码">验证码</InputItem>
-                <InputItem
-                    placeholder="请输入密码">密码</InputItem>
-                <InputItem
-                    placeholder="请输入密码">确认密码</InputItem>
-            </List>
-            <WhiteSpace size='xl'/>
-            <WingBlank size='lg'>
-                <Button type="primary" >确认</Button>
-            </WingBlank>
-        </ScrollView>
-
-    )
+class RetrievePassword extends Component{
+    render(){
+        console.log('props', this.props)
+        return (
+            <ScrollView
+                style={{ flex: 1, backgroundColor: '#f5f5f9' }}
+                automaticallyAdjustContentInsets={false}
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+            >
+                <List>
+                    <InputItem
+                        extra={<RetrievePasswordVCode />}
+                        styles={{
+                            container: styles.container
+                        }}
+                        placeholder="请输入手机号">手机</InputItem>
+                    <Field name='vCode' component={() => {
+                        return (
+                            <InputItem
+                                placeholder="请输入验证码">验证码</InputItem>
+                        )
+                    }} />
+    
+                    <Field name='password' component={() => {
+                        return (
+                            <InputItem
+                                placeholder="请输入密码">密码</InputItem>
+                        )
+                    }} />
+    
+                    <Field name='reviewPassword' component={({  input }) => {
+                        console.log('input', input)
+                        return (
+                            <InputItem
+                                // onChange={txt=>{console.log(txt)}}
+                                // onFocus={p1=>{
+                                //     console.log('p1',p1)
+                                // }}
+                                // onBlur={p2=>{
+                                //     console.log('p2',p2)
+    
+                                // }}
+                                // value={value}
+                                // {...input}
+                                placeholder="请输入密码">确认密码</InputItem>
+                        )
+                    }} />
+    
+                </List>
+                <WhiteSpace size='xl' />
+                <WingBlank size='lg'>
+                    <Button type="primary" >确认</Button>
+                </WingBlank>
+            </ScrollView>
+    
+        )
+    }
 }
 
-export default RetrievePassword
+const mapStateToProps = (state) => {
+    return {
+        retrievePasswordReducer: state.retrievePasswordReducer,
+        formValues: getFormValues('RetrievePasswordForm')(state)
+    }
+}
+
+export default connect(mapStateToProps)(
+    reduxForm({
+        form: 'RetrievePasswordForm',
+        onSubmit: (values, dispatch) => {
+            dispatch(reduxActions.retrievePassword.retrieve(values))
+        }
+    })(RetrievePassword))
 
 
 const styles = StyleSheet.create({
