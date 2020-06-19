@@ -7,11 +7,11 @@ import { sleep } from '../../../../utils/util'
 export const getVCode = props => async (dispatch, getState) => {
     try {
         dispatch({ type: reduxActionTypes.retrievePasswordVCode.get_vCodeForRetrievePassword_waiting})
-        const { RegisterReducer: { account } } = getState()
-        const url = `${host.base_host}/phone/${account}/passwordSms`
-        console.log('url', url)
+        const { phoneNo } = props
+        const url = `${host.base_host}/phone/${phoneNo}/passwordSms`
+        // console.log('url', url)
         const res = await httpRequest.post(url)
-        console.log('res', res)
+        // console.log('res', res)
         if (res.success) {
             dispatch({ type: reduxActionTypes.retrievePasswordVCode.get_vCodeForRetrievePassword_success})
             dispatch(countDown())
@@ -27,13 +27,11 @@ export const countDown = () => async (dispatch, getState) => {
     const { retrievePasswordVCodeReducer: { data: { countDownTime } } } = getState()
     try {
         if (countDownTime > 0) {
-            console.log('countDownTime',countDownTime)
+            // console.log('countDownTime',countDownTime)
             dispatch({ type: reduxActionTypes.retrievePasswordVCode.countDownForRetrievePassword_start, payload: { countDownTime: countDownTime - 1 } })
             await sleep(1000)
             dispatch(countDown())
         } else {
-            console.log('f')
-
             dispatch({ type: reduxActionTypes.retrievePasswordVCode.countDownForRetrievePassword_end, payload: { countDownTime: 60 } })
         }
     } catch (err) {
