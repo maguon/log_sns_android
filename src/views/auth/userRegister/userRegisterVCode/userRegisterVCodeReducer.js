@@ -2,6 +2,12 @@ import { handleActions } from 'redux-actions'
 import reduxActionTypes from '../../../../reduxActionTypes'
 
 const initialState = {
+    data: {
+        countDownTime: 60
+    },
+    countDown: {
+        isResultStatus: 0
+    },
     getVCode: {
         isResultStatus: 0,
         failedMsg: ''
@@ -36,6 +42,37 @@ export default handleActions({
             getVCode: {
                 ...state.getVCode,
                 isResultStatus: 1
+            }
+        }
+    },
+
+
+
+
+    [(reduxActionTypes.userRegisterVCode.countDownForUserRegister_start)]: (state, action) => {
+        const { payload: { countDownTime } } = action
+        return {
+            ...state,
+            data: {
+                countDownTime
+            },
+            countDown: {
+                ...state.countDown,
+                isResultStatus: 1
+            }
+        }
+    },
+    
+    [(reduxActionTypes.userRegisterVCode.countDownForUserRegister_end)]: (state, action) => {
+        const { payload: { countDownTime } } = action
+        return {
+            ...state,
+            data: {
+                countDownTime
+            },
+            countDown: {
+                ...state.countDown,
+                isResultStatus: 0
             }
         }
     }

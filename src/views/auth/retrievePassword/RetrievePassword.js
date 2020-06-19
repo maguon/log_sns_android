@@ -89,7 +89,6 @@ export default connect(mapStateToProps)(
     reduxForm({
         form: 'RetrievePasswordForm',
         onSubmit: (values, dispatch) => {
-            console.log('values', values)
             if (values.password == values.reviewPassword) {
                 dispatch(reduxActions.retrievePassword.retrieve(values))
             } else {
