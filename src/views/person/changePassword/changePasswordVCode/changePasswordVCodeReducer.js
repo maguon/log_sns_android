@@ -16,7 +16,7 @@ const initialState = {
 
 //isResultStatus(执行结果状态):[0(未执行),1(等待)，2(成功)，3(失败)]
 export default handleActions({
-    [reduxActionTypes.retrievePasswordVCode.get_vCodeForRetrievePassword_success]: (state, action) => {
+    [reduxActionTypes.changePasswordVCode.get_vCodeForChangePassword_success]: (state, action) => {
         return {
             ...state,
             getVCode: {
@@ -25,7 +25,7 @@ export default handleActions({
             }
         }
     },
-    [reduxActionTypes.retrievePasswordVCode.get_vCodeForRetrievePassword_failed]: (state, action) => {
+    [reduxActionTypes.changePasswordVCode.get_vCodeForChangePassword_failed]: (state, action) => {
         const { payload: { failedMsg } } = action
         return {
             ...state,
@@ -36,7 +36,7 @@ export default handleActions({
             }
         }
     },
-    [reduxActionTypes.retrievePasswordVCode.get_vCodeForRetrievePassword_waiting]: (state, action) => {
+    [reduxActionTypes.changePasswordVCode.get_vCodeForChangePassword_waiting]: (state, action) => {
         return {
             ...state,
             getVCode: {
@@ -49,7 +49,7 @@ export default handleActions({
 
 
 
-    [(reduxActionTypes.retrievePasswordVCode.countDownForRetrievePassword_start)]: (state, action) => {
+    [(reduxActionTypes.changePasswordVCode.countDownForChangePassword_start)]: (state, action) => {
         const { payload: { countDownTime } } = action
         return {
             ...state,
@@ -63,7 +63,7 @@ export default handleActions({
         }
     },
     
-    [(reduxActionTypes.retrievePasswordVCode.countDownForRetrievePassword_end)]: (state, action) => {
+    [(reduxActionTypes.changePasswordVCode.countDownForChangePassword_end)]: (state, action) => {
         const { payload: { countDownTime } } = action
         return {
             ...state,

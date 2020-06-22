@@ -58,6 +58,10 @@ import * as personCenter from './views/person/personCenter/personCenterActions'
 import * as changePhone from './views/person/changePhone/changePhoneActions'
 import * as changePassword from './views/person/changePassword/changePasswordActions'
 
+
+import * as changePhoneVCode from './views/person/changePhone/changePhoneVCode/changePhoneVCodeActions'
+import * as changePasswordVCode from './views/person/changePassword/changePasswordVCode/changePasswordVCodeActions'
+
 export default {
     home,
     login,
@@ -125,5 +129,8 @@ export default {
 
     changePhone,
     changePassword,
+
+    changePhoneVCode,
+    changePasswordVCode
     
 }

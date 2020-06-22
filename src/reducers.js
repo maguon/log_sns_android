@@ -63,6 +63,8 @@ import personCenterReducer from './views/person/personCenter/personCenterReducer
 import changePhoneReducer from './views/person/changePhone/changePhoneReducer'
 import changePasswordReducer from './views/person/changePassword/changePasswordReducer'
 
+import changePhoneVCodeReducer from './views/person/changePhone/changePhoneVCode/changePhoneVCodeReducer'
+import changePasswordVCodeReducer from './views/person/changePassword/changePasswordVCode/changePasswordVCodeReducer'
 
 export default combineReducers({
     form: formReducer,
@@ -129,5 +131,8 @@ export default combineReducers({
     personCenterReducer,
 
     changePhoneReducer,
-    changePasswordReducer
+    changePasswordReducer,
+
+    changePhoneVCodeReducer,
+    changePasswordVCodeReducer
 })

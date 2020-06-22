@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import reduxActions from '../../../../reduxActions'
 import { validatePhoneNotField } from '../../../../utils/validators'
 
-const RetrievePasswordVCode = props => {
-    const { retrievePasswordVCodeReducer: { data: { countDownTime }, countDown } } = props
+const ChangePhoneVCode = props => {
+    const { changePhoneVCodeReducer: { data: { countDownTime }, countDown } } = props
     return (
         <Button type="primary" style={{ width: 100 }}
             disabled={countDown.isResultStatus == 1} onPress={() => {
@@ -28,15 +28,15 @@ const RetrievePasswordVCode = props => {
 
 const mapStateToProps = (state) => {
     return {
-        retrievePasswordVCodeReducer: state.retrievePasswordVCodeReducer
+        changePhoneVCodeReducer: state.changePhoneVCodeReducer
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
     getVCode: reqParams => {
-        dispatch(reduxActions.retrievePasswordVCode.getVCode(reqParams))
+        dispatch(reduxActions.changePhoneVCode.getVCode(reqParams))
     },
 
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(RetrievePasswordVCode) 
+export default connect(mapStateToProps, mapDispatchToProps)(ChangePhoneVCode) 

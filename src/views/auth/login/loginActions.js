@@ -20,7 +20,7 @@ export const login = reqParams => async (dispatch, getState) => {
         if (res.success === true) {
             const getUserInfoUrl = `${base_host}/user?userId=${res.result.userId}`
             const getUserInfoRes = await httpRequest.get(getUserInfoUrl)
-
+            console.log('getUserInfoRes', getUserInfoRes)
             if (getUserInfoRes.success) {
                 dispatch({
                     type: reduxActionTypes.login.login_success, payload: {
@@ -28,7 +28,8 @@ export const login = reqParams => async (dispatch, getState) => {
                             _id: res.result.userId,
                             _userDriveId: getUserInfoRes.result[0]._user_drive_id,
                             _userDetailId: getUserInfoRes.result[0]._user_detail_id,
-                            type: getUserInfoRes.result[0].type
+                            type: getUserInfoRes.result[0].type,
+                            phone: getUserInfoRes.result[0].phone
                         }
                     }
                 })

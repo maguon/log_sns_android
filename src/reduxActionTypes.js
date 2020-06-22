@@ -61,6 +61,9 @@ import * as personCenter from './views/person/personCenter/personCenterActionTyp
 import * as changePhone from './views/person/changePhone/changePhoneActionTypes'
 import * as changePassword from './views/person/changePassword/changePasswordActionTypes'
 
+import * as changePhoneVCode from './views/person/changePhone/changePhoneVCode/changePhoneVCodeActionTypes'
+import * as changePasswordVCode from './views/person/changePassword/changePasswordVCode/changePasswordVCodeActionTypes'
+
 export default {
     home,
     login,
@@ -121,5 +124,9 @@ export default {
 
     personCenter,
     changePhone,
-    changePassword
+    changePassword,
+
+
+    changePhoneVCode,
+    changePasswordVCode
 }

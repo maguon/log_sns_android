@@ -5,19 +5,12 @@ import { connect } from 'react-redux'
 import reduxActions from '../../../../reduxActions'
 import { validatePhoneNotField } from '../../../../utils/validators'
 
-const RetrievePasswordVCode = props => {
-    const { retrievePasswordVCodeReducer: { data: { countDownTime }, countDown } } = props
+const ChangePasswordVCode = props => {
+    const { changePasswordVCodeReducer: { data: { countDownTime }, countDown } } = props
     return (
         <Button type="primary" style={{ width: 100 }}
             disabled={countDown.isResultStatus == 1} onPress={() => {
-                const warnMsg = validatePhoneNotField('您输入的手机号码不正确，请重新输入！')(props.phoneNo)
-                if (!warnMsg) {
-                    props.getVCode({
-                        phoneNo: props.phoneNo
-                    })
-                } else {
-                    ToastAndroid.show(warnMsg, 10)
-                }
+                props.getVCode()
             }}>
                 {countDown.isResultStatus == 0 && '验证码'}
                 {countDown.isResultStatus == 1 && `${countDownTime}`}
@@ -28,15 +21,14 @@ const RetrievePasswordVCode = props => {
 
 const mapStateToProps = (state) => {
     return {
-        retrievePasswordVCodeReducer: state.retrievePasswordVCodeReducer
+        changePasswordVCodeReducer: state.changePasswordVCodeReducer
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getVCode: reqParams => {
-        dispatch(reduxActions.retrievePasswordVCode.getVCode(reqParams))
-    },
-
+    getVCode: () => {
+        dispatch(reduxActions.changePasswordVCode.getVCode())
+    }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(RetrievePasswordVCode) 
+export default connect(mapStateToProps, mapDispatchToProps)(ChangePasswordVCode) 

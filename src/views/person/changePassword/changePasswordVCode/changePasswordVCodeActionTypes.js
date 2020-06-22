@@ -1,6 +1,6 @@
-export const get_vCodeForRetrievePassword_success = "get_vCodeForRetrievePassword_success"
-export const get_vCodeForRetrievePassword_waiting = "get_vCodeForRetrievePassword_waiting"
-export const get_vCodeForRetrievePassword_failed = "get_vCodeForRetrievePassword_failed"
+export const get_vCodeForChangePassword_success = "get_vCodeForChangePassword_success"
+export const get_vCodeForChangePassword_waiting = "get_vCodeForChangePassword_waiting"
+export const get_vCodeForChangePassword_failed = "get_vCodeForChangePassword_failed"
 
-export const countDownForRetrievePassword_start = 'countDownForRetrievePassword_start'
-export const countDownForRetrievePassword_end = 'countDownForRetrievePassword_end'
+export const countDownForChangePassword_start = 'countDownForChangePassword_start'
+export const countDownForChangePassword_end = 'countDownForChangePassword_end'

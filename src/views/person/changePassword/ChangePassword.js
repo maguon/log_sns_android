@@ -2,33 +2,24 @@ import React, { Component } from 'react'
 import { View, Text, ScrollView, StyleSheet, ToastAndroid, TouchableOpacity } from 'react-native'
 import globalStyles from '../../../GlobalStyles'
 import { Button, WingBlank, WhiteSpace, Icon, List, InputItem } from '@ant-design/react-native'
-import RetrievePasswordVCode from './retrievePasswordVCode/RetrievePasswordVCode'
+import ChangePasswordVCode from './changePasswordVCode/ChangePasswordVCode'
 import { reduxForm, getFormValues, Field } from 'redux-form'
 import { connect } from 'react-redux'
 import reduxActions from '../../../reduxActions'
 
 const Item = List.Item
 
-const Phone = props => {
-    return (
-        <InputItem
-            {...props.input}
-            extra={<RetrievePasswordVCode phoneNo={props.input.value} />}
-            styles={{
-                container: styles.container
-            }}
-            placeholder="请输入手机号">手机</InputItem>
-    )
-}
-
 const VCode = props => {
     return (
         <InputItem
             {...props.input}
+            extra={<ChangePasswordVCode phoneNo={props.input.value} />}
+            styles={{
+                container: styles.container
+            }}
             placeholder="请输入验证码">验证码</InputItem>
     )
 }
-
 
 class Password extends Component {
     constructor(props) {
@@ -63,7 +54,6 @@ class ChangePassword extends Component {
                 showsVerticalScrollIndicator={false}
             >
                 <List>
-                    <Field name='phone' component={Phone} />
                     <Field name='vCode' component={VCode} />
                     <Field name='password' component={Password} title={'密码'} placeholder={'请输入密码'} />
                     <Field name='reviewPassword' component={Password} title={'确认密码'} placeholder={'请输入确认密码'} />
@@ -80,17 +70,18 @@ class ChangePassword extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        retrievePasswordReducer: state.retrievePasswordReducer,
-        formValues: getFormValues('RetrievePasswordForm')(state)
+        changePasswordReducer: state.changePasswordReducer,
+        formValues: getFormValues('ChangePasswordForm')(state)
     }
 }
 
 export default connect(mapStateToProps)(
     reduxForm({
-        form: 'RetrievePasswordForm',
+        form: 'ChangePasswordForm',
         onSubmit: (values, dispatch) => {
+            // console.log('values',values)
             if (values.password == values.reviewPassword) {
-                dispatch(reduxActions.retrievePassword.retrieve(values))
+                dispatch(reduxActions.changePassword.changePassword(values))
             } else {
                 ToastAndroid.show('两次输入的密码不一致', 10)
             }
