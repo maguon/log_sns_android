@@ -65,11 +65,7 @@ export default connect(mapStateToProps)(
     reduxForm({
         form: 'ChangePhoneForm',
         onSubmit: (values, dispatch) => {
-            // if (values.password == values.reviewPassword) {
-            //     dispatch(reduxActions.retrievePassword.retrieve(values))
-            // } else {
-            //     ToastAndroid.show('两次输入的密码不一致', 10)
-            // }
+            dispatch(reduxActions.changePhone.changePhone(values))
         }
     })(ChangePhone))
 

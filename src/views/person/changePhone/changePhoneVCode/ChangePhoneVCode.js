@@ -10,14 +10,7 @@ const ChangePhoneVCode = props => {
     return (
         <Button type="primary" style={{ width: 100 }}
             disabled={countDown.isResultStatus == 1} onPress={() => {
-                const warnMsg = validatePhoneNotField('您输入的手机号码不正确，请重新输入！')(props.phoneNo)
-                if (!warnMsg) {
-                    props.getVCode({
-                        phoneNo: props.phoneNo
-                    })
-                } else {
-                    ToastAndroid.show(warnMsg, 10)
-                }
+                props.getVCode()
             }}>
                 {countDown.isResultStatus == 0 && '验证码'}
                 {countDown.isResultStatus == 1 && `${countDownTime}`}
@@ -33,8 +26,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getVCode: reqParams => {
-        dispatch(reduxActions.changePhoneVCode.getVCode(reqParams))
+    getVCode: () => {
+        dispatch(reduxActions.changePhoneVCode.getVCode())
     },
 
 })
