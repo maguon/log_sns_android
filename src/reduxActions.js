@@ -55,6 +55,9 @@ import * as userRegisterVCode from './views/auth/userRegister/userRegisterVCode/
 import * as retrievePasswordVCode from './views/auth/retrievePassword/retrievePasswordVCode/retrievePasswordVCodeActions'
 import * as personCenter from './views/person/personCenter/personCenterActions'
 
+import * as changePhone from './views/person/changePhone/changePhoneActions'
+import * as changePassword from './views/person/changePassword/changePasswordActions'
+
 export default {
     home,
     login,
@@ -117,6 +120,10 @@ export default {
     about,
     userRegisterVCode,
     retrievePasswordVCode,
-    personCenter
+    personCenter,
+
+
+    changePhone,
+    changePassword,
     
 }

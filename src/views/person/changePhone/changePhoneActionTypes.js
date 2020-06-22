@@ -1,7 +1,3 @@
-export const get_changePhone_success = 'get_changePhone_success'
-export const get_changePhone_failed = 'get_changePhone_failed'
-export const get_changePhone_waiting = 'get_changePhone_waiting'
-
-export const get_verifChangePhoneCode_success = 'get_verifChangePhoneCode_success'
-export const get_verifChangePhoneCode_failed = 'get_verifChangePhoneCode_failed'
-export const get_verifChangePhoneCode_waiting = 'get_verifChangePhoneCode_waiting'
+export const change_phone_success = 'change_phone_success'
+export const change_phone_failed = 'change_phone_failed'
+export const change_phone_waiting = 'change_phone_waiting'

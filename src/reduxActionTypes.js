@@ -58,7 +58,8 @@ import * as userRegisterVCode from './views/auth/userRegister/userRegisterVCode/
 import * as retrievePasswordVCode from './views/auth/retrievePassword/retrievePasswordVCode/retrievePasswordVCodeActionTypes'
 import * as personCenter from './views/person/personCenter/personCenterActionTypes'
 
-
+import * as changePhone from './views/person/changePhone/changePhoneActionTypes'
+import * as changePassword from './views/person/changePassword/changePasswordActionTypes'
 
 export default {
     home,
@@ -118,5 +119,7 @@ export default {
     userRegisterVCode,
     retrievePasswordVCode,
 
-    personCenter
+    personCenter,
+    changePhone,
+    changePassword
 }

@@ -7,14 +7,14 @@ export const register = reqParams => async (dispatch, getState) => {
     try {
         dispatch({ type: reduxActionTypes.userRegister.register_account_waiting })
         const url = `${host.base_host}/user`
-        console.log('url', url)
+        // console.log('url', url)
         const res = await httpRequest.post(url, {
             phone: reqParams.phone,
             captcha: reqParams.vCode,
             password: reqParams.password,
             type: 0
         })
-        console.log('res', res)
+        // console.log('res', res)
         if (res.success) {
             dispatch({ type: reduxActionTypes.userRegister.register_account_success })
             ToastAndroid.show(`注册成功，请登录！`, 10)
