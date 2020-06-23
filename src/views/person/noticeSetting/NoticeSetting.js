@@ -5,15 +5,7 @@ import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
 import reduxActions from '../../../reduxActions'
 
-// const SwitchComponent = props => {
-//     const { input } = props
-//     return (
-//         <List.Item extra={<Switch checked={input.value} onChange={() => { input.onChange(!input.value) }} />}>{props.label}</List.Item>
-//     )
-// }
-
 class NoticeSetting extends Component {
-
     componentDidMount() {
         this.props.getNoticeSettingWaiting()
         InteractionManager.runAfterInteractions(() => {
@@ -60,7 +52,6 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(reduxActions.noticeSetting.getNoticeSetting())
     },
     changeNoticeSetting: reqParams => {
-        // console.log('reqParams', reqParams)
         dispatch(reduxActions.noticeSetting.changeNoticeSetting(reqParams))
     },
     getNoticeSettingWaiting: () => {

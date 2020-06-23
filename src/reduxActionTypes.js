@@ -66,6 +66,7 @@ import * as changePasswordVCode from './views/person/changePassword/changePasswo
 
 
 import * as noticeSetting from './views/person/noticeSetting/noticeSettingActionTypes'
+import * as privacySetting from './views/person/privacySetting/privacySettingActionTypes'
 
 
 export default {
@@ -131,5 +132,6 @@ export default {
     changePhoneVCode,
     changePasswordVCode,
 
-    noticeSetting
+    noticeSetting,
+    privacySetting
 }

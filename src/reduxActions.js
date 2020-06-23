@@ -64,6 +64,7 @@ import * as changePasswordVCode from './views/person/changePassword/changePasswo
 
 
 import * as noticeSetting from './views/person/noticeSetting/noticeSettingActions'
+import * as privacySetting from './views/person/privacySetting/privacySettingActions'
 
 export default {
     home,
@@ -135,6 +136,6 @@ export default {
     changePhoneVCode,
     changePasswordVCode,
 
-    noticeSetting
-    
+    noticeSetting,
+    privacySetting
 }
