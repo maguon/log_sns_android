@@ -5,7 +5,7 @@ import AuthStack from './AuthStack'
 import MainStack from './MainStack'
 
 const RouteConfigs = {
-    initialRouteName: 'Auth',
+    initialRouteName: 'MainStack',
     resetOnBlur: false,
     backBehavior:'none'
 }

@@ -64,6 +64,10 @@ import * as changePassword from './views/person/changePassword/changePasswordAct
 import * as changePhoneVCode from './views/person/changePhone/changePhoneVCode/changePhoneVCodeActionTypes'
 import * as changePasswordVCode from './views/person/changePassword/changePasswordVCode/changePasswordVCodeActionTypes'
 
+
+import * as noticeSetting from './views/person/noticeSetting/noticeSettingActionTypes'
+
+
 export default {
     home,
     login,
@@ -106,7 +110,6 @@ export default {
     videoArticleListForCommunity,
     voteListForCommunity,
 
-
     voteInfo,
     publishSeekHelp,
     
@@ -114,7 +117,6 @@ export default {
     lvTwoCommentList,
     comment,
     camera,
-
 
     currentlocation,
     publishPictureBlog,
@@ -126,7 +128,8 @@ export default {
     changePhone,
     changePassword,
 
-
     changePhoneVCode,
-    changePasswordVCode
+    changePasswordVCode,
+
+    noticeSetting
 }

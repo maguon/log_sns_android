@@ -4,9 +4,9 @@ import reduxActionTypes from '../../../reduxActionTypes'
 const initialState = {
     data: {
         user: {
-            // _id: '5df1fe3924f71f3e37d37292',
-            // _userDriveId: '5df1fe3924f71f3e37d37294',
-            // _userDetailId: '5df1fe3924f71f3e37d37293'
+            _id: '5df1fe3924f71f3e37d37292',
+            _userDriveId: '5df1fe3924f71f3e37d37294',
+            _userDetailId: '5df1fe3924f71f3e37d37293'
         }
     },
     login: {

@@ -62,6 +62,9 @@ import * as changePassword from './views/person/changePassword/changePasswordAct
 import * as changePhoneVCode from './views/person/changePhone/changePhoneVCode/changePhoneVCodeActions'
 import * as changePasswordVCode from './views/person/changePassword/changePasswordVCode/changePasswordVCodeActions'
 
+
+import * as noticeSetting from './views/person/noticeSetting/noticeSettingActions'
+
 export default {
     home,
     login,
@@ -126,11 +129,12 @@ export default {
     retrievePasswordVCode,
     personCenter,
 
-
     changePhone,
     changePassword,
 
     changePhoneVCode,
-    changePasswordVCode
+    changePasswordVCode,
+
+    noticeSetting
     
 }

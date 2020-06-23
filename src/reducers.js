@@ -66,6 +66,9 @@ import changePasswordReducer from './views/person/changePassword/changePasswordR
 import changePhoneVCodeReducer from './views/person/changePhone/changePhoneVCode/changePhoneVCodeReducer'
 import changePasswordVCodeReducer from './views/person/changePassword/changePasswordVCode/changePasswordVCodeReducer'
 
+
+import noticeSettingReducer from './views/person/noticeSetting/noticeSettingReducer'
+
 export default combineReducers({
     form: formReducer,
     homeReducer,
@@ -134,5 +137,7 @@ export default combineReducers({
     changePasswordReducer,
 
     changePhoneVCodeReducer,
-    changePasswordVCodeReducer
+    changePasswordVCodeReducer,
+
+    noticeSettingReducer
 })
