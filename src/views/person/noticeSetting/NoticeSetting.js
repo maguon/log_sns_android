@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, InteractionManager } from 'react-native'
 import { List, Switch } from '@ant-design/react-native'
-import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
 import reduxActions from '../../../reduxActions'
 

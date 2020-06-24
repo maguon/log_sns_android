@@ -34,9 +34,9 @@ function del(url) {
 
 function postFile(url, key, params) {
     let formData = new FormData()
-    console.log('url',url)
-    console.log('key',key)
-    console.log('params',params)
+    // console.log('url',url)
+    // console.log('key',key)
+    // console.log('params',params)
     // const file ={  uri: params.imageUrl, 
     // type: params.imageType, 
     // name: params.imageName}

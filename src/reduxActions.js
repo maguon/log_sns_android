@@ -49,6 +49,7 @@ import * as comment from './views/comment/comment/commentActions'
 import * as camera from './views/camera/cameraActions'
 import * as currentlocation from './components/inputs/currentlocation/currentLocationActions'
 import * as publishPictureBlog from './views/publishPictureBlog/publishPictureBlogActions'
+import * as publishVideoBlog from './views/publishVideoBlog/publishVideoBlogActions'
 import * as about from './views/person/about/aboutActions'
 
 import * as userRegisterVCode from './views/auth/userRegister/userRegisterVCode/userRegisterVCodeActions'
@@ -124,6 +125,7 @@ export default {
 
     currentlocation,
     publishPictureBlog,
+    publishVideoBlog,
 
     about,
     userRegisterVCode,

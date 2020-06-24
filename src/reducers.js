@@ -52,6 +52,7 @@ import lvTwoCommentListReducer from './views/comment/lvTwoCommentList/lvTwoComme
 import cameraReducer from './views/camera/cameraReducer'
 import currentLocationReducer from './components/inputs/currentlocation/currentLocationReducer'
 import publishPictureBlogReducer from './views/publishPictureBlog/publishPictureBlogReducer'
+import publishVideoBlogReducer from './views/publishVideoBlog/publishVideoBlogReducer'
 
 import aboutReducer from './views/person/about/aboutReducer'
 
@@ -141,5 +142,6 @@ export default combineReducers({
     changePasswordVCodeReducer,
 
     noticeSettingReducer,
-    privacySettingReducer
+    privacySettingReducer,
+    publishVideoBlogReducer
 })

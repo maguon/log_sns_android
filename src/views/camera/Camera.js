@@ -27,16 +27,18 @@ class Camera extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('nextProps', nextProps)
-        const { cameraReducer: { data: { opType,uploadImageUri },uploadImage },navigation } = nextProps
+        // console.log('nextProps', nextProps)
+        const { cameraReducer: { data: { opType, uploadImageUri }, uploadImage }, navigation } = nextProps
         //0无操作，1：takePicture , 2:recordVideo,3：uploadImage，4：uploadVideo
         if (opType == 0) {
             this.resetCamera()
-        }else if(opType==3){
-            if(uploadImage.isResultStatus==2){
+        } else if (opType == 3) {
+            if (uploadImage.isResultStatus == 2) {
                 navigation.navigate('PublishPictureBlog', { imageUri: uploadImageUri })
                 this.props.resetCamera()
             }
+        } else if (opType == 4) {
+
         }
     }
 
@@ -192,7 +194,10 @@ class Camera extends Component {
                 name: filePathArr[filePathArr.length - 1]
             })
             this.setState({ paused: false })
-            // navigation.navigate('BlogPicture')
+            navigation.navigate('PublishVideoBlog', {
+                uri: `file://${cameraReducer.data.videoUri}`,
+                preview: `file://${previewImgUri}`
+            })
         }
     }
 
@@ -202,21 +207,10 @@ class Camera extends Component {
         console.log('cameraReducer', cameraReducer)
         let flag = 1  //1:拍照，2：完成  3:空白
 
-
-
         //判断是否是拍照，拍照流程
         const takePictureFlag = 1 //1:初始化：可拍照，2:拍照处理中：无button 3：拍照处理完成:显示完成按钮，重置按钮，4:图片上传中：无button,5:图片上传完毕：回到1状态  
 
-
-
         //判断是否是拍摄视频
-
-
-
-
-
-
-
         if (cameraReducer.data.opType == 1) {
             if (cameraReducer.takePicture.isResultStatus == 1)
                 flag = 3
@@ -272,8 +266,8 @@ class Camera extends Component {
                 {!this.state.paused && flag == 1 && <View style={{ position: 'absolute', alignSelf: 'center', bottom: 50 }}>
                     <CameraProgress
                         color={'#93C90F'}
-                        recordVideoStart={() => this.takePicture()} //this.recordVideoStart()
-                        recordVideoStop={() => { }} //this.recordVideoStop()
+                        recordVideoStart={() => this.recordVideoStart()} //this.recordVideoStart()
+                        recordVideoStop={() => this.recordVideoStop()} //this.recordVideoStop()
                         takePicture={() => this.takePicture()} />
                 </View>}
                 {this.state.paused && flag == 2 && <TouchableOpacity style={{

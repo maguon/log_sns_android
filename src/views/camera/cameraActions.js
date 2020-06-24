@@ -9,10 +9,10 @@ export const uploadImage = (key, reqParams) => async (dispatch, getState) => {
         dispatch({ type: reduxActionTypes.camera.upload_image_waiting })
         const { loginReducer } = getState()
         const url = `${host.file_host}/user/${loginReducer.data.user._id}/image?imageType=0`
-        console.log('reqParams', reqParams)
-        console.log('url', url)
+        // console.log('reqParams', reqParams)
+        // console.log('url', url)
         const res = await httpRequest.postFile(url, key, reqParams)
-        console.log('res', res)
+        // console.log('res', res)
         if (res.success) {
             dispatch({ type: reduxActionTypes.camera.upload_image_success, payload: { uploadImageUri: res.imageId } })
 
@@ -30,14 +30,13 @@ export const uploadVideo = (key, reqParams) => async (dispatch, getState) => {
         dispatch({ type: reduxActionTypes.camera.upload_video_waiting })
         const { loginReducer } = getState()
         const url = `${host.file_host}/user/${loginReducer.data.user._id}/media`
-        console.log('reqParams', reqParams)
-        console.log('url', url)
-        console.log('key', key)
+        // console.log('reqParams', reqParams)
+        // console.log('url', url)
+        // console.log('key', key)
         const res = await httpRequest.postFile(url, key, reqParams)
         console.log('res', res)
         if (res.success) {
             dispatch({ type: reduxActionTypes.camera.upload_video_success, payload: { uploadVideoUri: res.result.url } })
-
             dispatch(resetCamera())
         } else {
             dispatch({ type: reduxActionTypes.camera.upload_video_failed, payload: { failedMsg: `${res.msg}` } })

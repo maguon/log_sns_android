@@ -17,9 +17,10 @@ import CommentOnMeList from '../views/message/commentOnMeList/CommentOnMeList' /
 import FollowingList from '../views/message/followingList/FollowingList' //关注我
 import LikeMeList from '../views/message/likeMeList/LikeMeList' //赞我
 import RequestContactList from '../views/message/requestContactList/RequestContactList' //申请联系方式
-import Blog from '../views/blog/Blog' //微博详情
+// import Blog from '../views/blog/Blog' //微博详情
 import PublishPictureBlog from '../views/publishPictureBlog/PublishPictureBlog' //微博照片详情
-// import BlogVideo from '../views/blogVideo/BlogVideo' //微博视频详情
+import PublishVideoBlog from '../views/publishVideoBlog/PublishVideoBlog' //微博视频详情
+
 import CollectionAddr from '../views/collectionAddr/CollectionAddr' //收藏地址
 import SeekHelp from '../views/seekHelp/SeekHelp' //发帮助
 import Scan from '../views/scan/Scan' //扫一扫
@@ -33,6 +34,7 @@ import VoteInfo from '../views/voteInfo/VoteInfo'
 import PublishSeekHelp from '../views/publishSeekHelp/PublishSeekHelp'
 import NavPulishSeekHelp from './navBar/NavPulishSeekHelp'
 import NavPubishPictrueBlog from './navBar/NavPubishPictrueBlog'
+import NavPubishVideoBlog from './navBar/NavPubishVideoBlog'
 import NavComment from './navBar/NavComment'
 
 import LvOneCommentList from '../views/comment/lvOneCommentList/LvOneCommentList'
@@ -168,24 +170,29 @@ export default createStackNavigator({
             title: '设置'
         }
     },
-    Blog: {
-        screen: Blog,
-        navigationOptions: {
-            title: '微博'
-        }
-    },
+    // Blog: {
+    //     screen: Blog,
+    //     navigationOptions: {
+    //         title: '微博'
+    //     }
+    // },
     CollectionAddr: {
         screen: CollectionAddr,
         navigationOptions: {
             title: '收藏地址'
         }
     },
-    // BlogVideo: {
-    //     screen: BlogVideo,
-    //     navigationOptions: {
-    //         title: '微博视频',
-    //     }
-    // },
+    PublishVideoBlog: {
+        screen: PublishVideoBlog,
+        navigationOptions: {
+            title: '微博视频',
+            header:({ scene, previous, navigation }) => {
+                // console.log('props',props)
+                return <NavPubishVideoBlog scene={scene} previous={previous} navigation={navigation} />
+            }
+            
+        }
+    },
     Scan: {
         screen: Scan,
         navigationOptions: {
