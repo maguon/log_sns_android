@@ -38,7 +38,10 @@ class Camera extends Component {
                 this.props.resetCamera()
             }
         } else if (opType == 4) {
-
+            // navigation.navigate('PublishVideoBlog', {
+            //     uri: `file://${cameraReducer.data.videoUri}`,
+            //     preview: `file://${previewImgUri}`
+            // })
         }
     }
 
@@ -130,7 +133,7 @@ class Camera extends Component {
                 const data = await this.camera.recordAsync(options)
                 console.log('data', data)
                 if (data && data.uri) {
-                    const compressUri = `${RNFS.CachesDirectoryPath}/Camera/${this.guid()}.mp4`
+                    const compressUri = `${RNFS.CachesDirectoryPath}/Camera/${this.guid()}.png`
                     const compressRes = await this.compressVideo(data.uri, compressUri)
                     console.log('data.uri', data.uri)
                     console.log('compressUri', compressUri)
@@ -194,10 +197,7 @@ class Camera extends Component {
                 name: filePathArr[filePathArr.length - 1]
             })
             this.setState({ paused: false })
-            navigation.navigate('PublishVideoBlog', {
-                uri: `file://${cameraReducer.data.videoUri}`,
-                preview: `file://${previewImgUri}`
-            })
+
         }
     }
 
