@@ -21,7 +21,7 @@ class FollowingListForHome extends Component {
 
 
   render() {
-    // console.log('this.props', this.props)
+    console.log('this.props', this.props)
     const { followingListForHomeReducer, navigation } = this.props
 
     // console.log('navigation',navigation)

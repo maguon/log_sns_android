@@ -16,9 +16,6 @@ const requiredValidator = required('必填')
 const infoField = props => {
     const { input, meta: { error } } = props
 
-    // console.log('props', props)
-    // console.log('!!error', !!error)
-
     return (
         <TextareaItem rows={8}
             placeholder="输入文章内容"

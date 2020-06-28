@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import reduxActions from '../../../../reduxActions'
 import { ListEmpty, ListFooter } from '../../../../components/list'
 import { styleColor } from '../../../../GlobalStyles'
+import { ImageContent } from '../../../../components/card'
 import moment from 'moment'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 
@@ -38,7 +39,11 @@ class TextArticleInfo extends Component {
                                 <WhiteSpace size='md' />
                                 <Text>{articleInfo.info ? `${articleInfo.info}` : ''}</Text>
                                 <WhiteSpace size='md' />
-                                <View style={{ backgroundColor: '#000', height: 200 }} />
+                                {articleInfo.type == 1 && articleInfo.carrier == 2 && <ImageContent
+                                    openPictureViewer={(index, imageList) => {
+                                        navigation.navigate('PictureViewer', { imageIndex: index, imageList })
+                                    }}
+                                    imageList={articleInfo.media.map(imageUriItem => `${imageUriItem.url}`)} />}
                             </WingBlank>
                             <WhiteSpace size='md' />
                             <View style={{ backgroundColor: '#f0f0f0', padding: 5 }}>
@@ -124,7 +129,7 @@ class TextArticleInfo extends Component {
                             this.props.getCommentMore({ msgId: navigation.state.params.articleInfo._id })
                         }
                     }}
-                    ListEmptyComponent={textArticleInfoReducer.getComment.isResultStatus != 1 && <ListEmpty title='暂无文章' />}
+                    ListEmptyComponent={textArticleInfoReducer.getComment.isResultStatus != 1 && <ListEmpty title='评论' />}
                     ListFooterComponent={textArticleInfoReducer.getCommentMore.isResultStatus == 1 ? <ListFooter /> : <View />}
                 />
 
