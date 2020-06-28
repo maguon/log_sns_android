@@ -22,7 +22,7 @@ class HotListForHome extends Component {
     render() {
         const { hotListForHomeReducer, navigation } = this.props
         // console.log('hotListForHomeReducer', hotListForHomeReducer)
-        console.log('this.props', this.props)
+        // console.log('this.props', this.props)
         return (
             <FlatList
                 keyExtractor={(item, index) => `${index}`}
@@ -38,7 +38,7 @@ class HotListForHome extends Component {
                                 <TouchableOpacity
                                     onPress={() => {
                                         navigation.navigate('ArticleListOfFriend', {
-                                            userInfo: item.user_detail_info[0]
+                                            userInfo: { _user_id: item._user_id }
                                         })
                                     }}>
                                     <Header
@@ -65,9 +65,9 @@ class HotListForHome extends Component {
                                             navigation.navigate('PictureViewer', { imageIndex: index, imageList })
                                         }}
                                         imageList={item.media.map(imageUriItem => `${imageUriItem.url}`)} />}
-                                   
+
                                 </TouchableOpacity>
-                                {item.type == 1 && item.carrier == 3 && <VideoContent preview={item.media[0].preview} video={item.media[0].url}/>}
+                                {item.type == 1 && item.carrier == 3 && <VideoContent preview={item.media[0].preview} video={item.media[0].url} />}
                                 <Footer
                                     msgCount={item.comment_num}
                                     likeCount={item.agree_num}

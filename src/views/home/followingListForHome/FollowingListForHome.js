@@ -21,10 +21,10 @@ class FollowingListForHome extends Component {
 
 
   render() {
-    console.log('this.props', this.props)
+    // console.log('this.props', this.props)
     const { followingListForHomeReducer, navigation } = this.props
 
-    console.log('navigation',navigation)
+    // console.log('navigation',navigation)
 
     const el_followingUserList = followingListForHomeReducer.data.followingUserList.map((item, i) => {
       return (
@@ -54,7 +54,7 @@ class FollowingListForHome extends Component {
           data={followingListForHomeReducer.data.articleList}
           renderItem={params => {
             const { item, index } = params
-            // console.log('item', item)
+
             // console.log('item',item.media)
             return (
               <WingBlank size='md'>
@@ -62,8 +62,9 @@ class FollowingListForHome extends Component {
                 <Card>
                   <TouchableOpacity
                     onPress={() => {
+                      // console.log('item',item)
                       navigation.navigate('ArticleListOfFriend', {
-                        userInfo: item.user_detail_info[0]
+                        userInfo: { _user_id: item._user_id }
                       })
                     }}>
                     <Header

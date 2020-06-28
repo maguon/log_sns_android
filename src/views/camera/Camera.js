@@ -112,6 +112,9 @@ class Camera extends Component {
 
     getPreview = (uri, previewImgUri) => {
         //截取视频第一帧缩略图 保存缓存路径
+        console.log('=================================')
+
+        console.log('previewImgUri',previewImgUri)
         return RNFFmpeg.execute(` -i ${uri} -ss 00:00:01  -frames:v 1  -f image2 -y ${previewImgUri}`)
 
     }
@@ -133,7 +136,7 @@ class Camera extends Component {
                 const data = await this.camera.recordAsync(options)
                 console.log('data', data)
                 if (data && data.uri) {
-                    const compressUri = `${RNFS.CachesDirectoryPath}/Camera/${this.guid()}.png`
+                    const compressUri = `${RNFS.CachesDirectoryPath}/Camera/${this.guid()}.mp4`
                     const compressRes = await this.compressVideo(data.uri, compressUri)
                     console.log('data.uri', data.uri)
                     console.log('compressUri', compressUri)

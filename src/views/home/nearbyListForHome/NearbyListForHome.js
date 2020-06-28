@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, ScrollView, FlatList,RefreshControl,VideoContent, InteractionManager } from 'react-native'
-import { Card, Content as CardContent, Footer, Header,ImageContent, Map } from '../../../components/card'
+import { View, Text, TouchableOpacity, ScrollView, FlatList, RefreshControl, VideoContent, InteractionManager } from 'react-native'
+import { Card, Content as CardContent, Footer, Header, ImageContent, Map } from '../../../components/card'
 import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
 import { ListEmpty, ListFooter } from '../../../components/list'
 import { connect } from 'react-redux'
@@ -36,7 +36,7 @@ class NearbyListForHome extends Component {
                                 <TouchableOpacity
                                     onPress={() => {
                                         navigation.navigate('ArticleListOfFriend', {
-                                            userInfo: item.user_detail_info[0]
+                                            userInfo: { _user_id: item._user_id }
                                         })
                                     }}>
                                     <Header

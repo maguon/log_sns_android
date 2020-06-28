@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, FlatList, InteractionManager, RefreshControl, TouchableOpacity } from 'react-native'
-import { Card, Content as CardContent, Footer, Header, Video, Image, Map } from '../../components/card'
+import { Card, Content as CardContent, Footer, Header, ImageContent, VideoContent, Map } from '../../components/card'
 import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
 import FriendInfo from './friendInfo/FriendInfo'
 import reduxActions from '../../reduxActions'
@@ -26,7 +26,7 @@ class ArticleListOfFriend extends Component {
     }
 
     render() {
-        console.log('props', this.props)
+        // console.log('props', this.props)
         const { articleListOfFriendReducer, navigation: { state: { params: { userInfo } } }, navigation } = this.props
         return (
             <View style={{ flex: 1 }}>
@@ -47,16 +47,23 @@ class ArticleListOfFriend extends Component {
                                     }}
                                 />
                                 <TouchableOpacity
-                                    onPress={() => navigation.navigate('TextArticleInfo')}
-                                    onLongPress={() => navigation.navigate('TextArticleInfo')}
-                                >
+                                    onPress={() => {
+                                        navigation.navigate('TextArticleInfo', {
+                                            articleInfo: item
+                                        })
+                                    }}>
                                     <CardContent
                                         params={{ content: item.info }}
                                     />
                                     {item.type == 1 && item.carrier == 4 && <Map />}
-                                    {item.type == 1 && item.carrier == 2 && <Image />}
-                                    {item.type == 1 && item.carrier == 3 && <Video />}
+                                    {item.type == 1 && item.carrier == 2 && <ImageContent
+                                        openPictureViewer={(index, imageList) => {
+                                            navigation.navigate('PictureViewer', { imageIndex: index, imageList })
+                                        }}
+                                        imageList={item.media.map(imageUriItem => `${imageUriItem.url}`)} />}
+
                                 </TouchableOpacity>
+                                {item.type == 1 && item.carrier == 3 && <VideoContent preview={item.media[0].preview} video={item.media[0].url} />}
                                 <Footer
                                     msgCount={item.commentsNum}
                                     likeCount={item.agreeNum}
