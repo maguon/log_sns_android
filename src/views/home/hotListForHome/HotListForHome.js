@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, FlatList, RefreshControl, InteractionManager, TouchableOpacity } from 'react-native'
-import { Card, Content as CardContent, Footer, Header, VideoContent, ImageContent, Map } from '../../../components/card'
+import { Card, Content as CardContent, Footer, Header, VideoContent, ImageContent, Map, PreViewContent } from '../../../components/card'
 import { Tabs, Icon, Popover, WhiteSpace, WingBlank } from '@ant-design/react-native'
 import { ListEmpty, ListFooter } from '../../../components/list'
 import * as host from '../../../utils/host'
@@ -67,7 +67,7 @@ class HotListForHome extends Component {
                                         imageList={item.media.map(imageUriItem => `${imageUriItem.url}`)} />}
 
                                 </TouchableOpacity>
-                                {item.type == 1 && item.carrier == 3 && <VideoContent preview={item.media[0].preview} video={item.media[0].url} />}
+                                {item.type == 1 && item.carrier == 3 && <PreViewContent preview={item.media[0].preview} />}
                                 <Footer
                                     msgCount={item.comment_num}
                                     likeCount={item.agree_num}

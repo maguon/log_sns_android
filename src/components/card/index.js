@@ -10,6 +10,7 @@ import Map from './Map'
 import Vote from './vote/Vote'
 import VoteHeader from './vote/VoteHeader'
 import VoteFooter from './vote/VoteFooter'
+import PreViewContent from './PreViewContent'
 
 
 export {
@@ -24,5 +25,6 @@ export {
     FooterForDel,
     Vote,
     VoteHeader,
-    VoteFooter
+    VoteFooter,
+    PreViewContent
 }
