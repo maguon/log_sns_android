@@ -54,7 +54,6 @@ class PassWordText extends Component {
 
 const Login = props => {
     const { navigation, handleSubmit } = props
-    console.log('props', props)
     return (
         <View style={[globalStyles.container, { flex: 1 }]}>
             <View style={{ alignItems: 'center', marginVertical: 90 }}>
@@ -71,7 +70,6 @@ const Login = props => {
             <WingBlank size="lg">
                 <Button type="primary" onPress={() => {
                     handleSubmit()
-                    // navigation.navigate('MainStack')
                 }}>登录</Button>
             </WingBlank>
             <WhiteSpace size='md' />

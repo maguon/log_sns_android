@@ -10,9 +10,7 @@ export const getVCode = props => async (dispatch, getState) => {
         dispatch({ type: reduxActionTypes.userRegisterVCode.get_vCodeForUserRegister_waiting })
         const { phoneNo } = props
         const url = `${host.base_host}/phone/${phoneNo}/regSms`
-        // console.log('url', url)
         const res = await httpRequest.post(url)
-        // console.log('res', res)
         if (res.success) {
             dispatch({ type: reduxActionTypes.userRegisterVCode.get_vCodeForUserRegister_success })
             dispatch(countDown())
@@ -30,7 +28,6 @@ export const countDown = () => async (dispatch, getState) => {
     const { userRegisterVCodeReducer: { data: { countDownTime } } } = getState()
     try {
         if (countDownTime > 0) {
-            // console.log('countDownTime',countDownTime)
             dispatch({ type: reduxActionTypes.userRegisterVCode.countDownForUserRegister_start, payload: { countDownTime: countDownTime - 1 } })
             await sleep(1000)
             dispatch(countDown())

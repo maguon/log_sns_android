@@ -62,27 +62,27 @@ class PersonCenter extends Component {
                     <List>
                         <Item arrow="horizontal"
                             onPress={() => {
-                                props.getFollowListWaiting()
+                                this.props.getFollowListWaiting()
                                 navigation.navigate('FollowList')
-                                InteractionManager.runAfterInteractions(props.getFollowList)
+                                InteractionManager.runAfterInteractions(this.props.getFollowList)
                             }}
                             onLongPress={() => {
-                                props.getFollowListWaiting()
+                                this.props.getFollowListWaiting()
                                 navigation.navigate('FollowList')
-                                InteractionManager.runAfterInteractions(props.getFollowList)
+                                InteractionManager.runAfterInteractions(this.props.getFollowList)
                             }}
                             thumb={<Icon name="heart" style={{ marginRight: 15 }} />} >
                             我的关注</Item>
                         <Item arrow="horizontal"
                             onPress={() => {
-                                props.getFansListWaiting()
+                                this.props.getFansListWaiting()
                                 navigation.navigate('FansList')
-                                InteractionManager.runAfterInteractions(props.getFansList)
+                                InteractionManager.runAfterInteractions(this.props.getFansList)
                             }}
                             onLongPress={() => {
-                                props.getFansListWaiting()
+                                this.props.getFansListWaiting()
                                 navigation.navigate('FansList')
-                                InteractionManager.runAfterInteractions(props.getFansList)
+                                InteractionManager.runAfterInteractions(this.props.getFansList)
                             }}
                             thumb={<Icon name="smile" style={{ marginRight: 15 }} />} >
                             我的粉丝</Item>

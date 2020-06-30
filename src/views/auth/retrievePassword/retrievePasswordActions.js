@@ -6,12 +6,10 @@ import { ToastAndroid } from 'react-native'
 export const retrieve = reqParams => async (dispatch, getState) => {
     try {
         const url = `${host.base_host}/phone/${reqParams.phone}/password`
-        // console.log('url', url)
         const res = await httpRequest.put(url, {
             code: reqParams.vCode,
             newPassword: reqParams.password
         })
-        // console.log('res', res)
         if (res.success) {
             dispatch({ type: reduxActionTypes.retrievePasswordVCode.get_vCodeForRetrievePassword_success, payload: {} })
             ToastAndroid.show('密码修改成功，请重新登录！', 10)

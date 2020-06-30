@@ -4,6 +4,7 @@ import localStorageKey from '../../../utils/LocalStorageKey'
 import localStorage from '../../../utils/LocalStorage'
 import { base_host } from '../../../utils/host'
 import NavigationService from '../../../routers/NavigationService'
+import {ToastAndroid} from 'react-native'
 
 
 export const login = reqParams => async (dispatch, getState) => {
@@ -20,7 +21,6 @@ export const login = reqParams => async (dispatch, getState) => {
         if (res.success === true) {
             const getUserInfoUrl = `${base_host}/user?userId=${res.result.userId}`
             const getUserInfoRes = await httpRequest.get(getUserInfoUrl)
-            console.log('getUserInfoRes', getUserInfoRes)
             if (getUserInfoRes.success) {
                 dispatch({
                     type: reduxActionTypes.login.login_success, payload: {
@@ -45,12 +45,15 @@ export const login = reqParams => async (dispatch, getState) => {
                 NavigationService.navigate('MainStack')
             } else {
                 dispatch({ type: reduxActionTypes.login.login_failed, payload: { failedMsg: `${getUserInfoRes.msg}` } })
+                ToastAndroid.show(`登录失败：${getUserInfoRes.msg}!`,10)
             }
         } else {
             dispatch({ type: reduxActionTypes.login.login_failed, payload: { failedMsg: `${res.msg}` } })
+            ToastAndroid.show(`登录失败：${res.msg}!`,10)
         }
     } catch (err) {
         dispatch({ type: reduxActionTypes.login.login_failed, payload: { failedMsg: `${err}` } })
+        ToastAndroid.show(`登录失败：${err}!`,10)
     }
 
 }
