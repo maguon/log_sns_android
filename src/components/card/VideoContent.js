@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity,Dimensions } from 'react-native'
 import Video from 'react-native-video'
+import {video_host} from '../../utils/host'
+
+
+const windowWidth = Dimensions.get("window").width - 15
+
 
 class VideoContent extends Component {
     constructor(props) {
@@ -8,10 +13,10 @@ class VideoContent extends Component {
     }
 
     render() {
-       
+       console.log('this.props',this.props)
         return (
             <View style={{ flex: 1 }}>
-                <Video source={{ uri: this.props.video }}   // Can be a URL or a local file.
+                <Video source={{ uri: `${video_host}/${this.props.videoUrl}` }}   // Can be a URL or a local file.
 
                     paused={true}
                     repeat={true}
@@ -26,8 +31,8 @@ class VideoContent extends Component {
 
 const styles = StyleSheet.create({
     backgroundVideo: {
-        width: 300,
-        height: 300
+        width: windowWidth,
+        height: windowWidth / 16 * 9
     },
 });
 

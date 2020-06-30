@@ -42,6 +42,7 @@ import LvTwoCommentList from '../views/comment/lvTwoCommentList/LvTwoCommentList
 import Comment from '../views/comment/comment/Comment'
 import Camera from '../views/camera/Camera'
 import PictureViewer from '../views/pictureViewer/PictureViewer'
+import VideoViewer from '../views/videoViewer/VideoViewer'
 import About from '../views/person/about/About'
 
 import ChangePassword from '../views/person/changePassword/ChangePassword'
@@ -218,6 +219,12 @@ export default createStackNavigator({
                 // console.log('props',props)
                 return <BlackNavBar scene={scene} previous={previous} navigation={navigation} />
             } 
+        }
+    },
+    VideoViewer:{
+        screen: VideoViewer,
+        navigationOptions: {
+            title: '播放'
         }
     },
     PublishSeekHelp: {

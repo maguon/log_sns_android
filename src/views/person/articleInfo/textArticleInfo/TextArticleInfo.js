@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import reduxActions from '../../../../reduxActions'
 import { ListEmpty, ListFooter } from '../../../../components/list'
 import { styleColor } from '../../../../GlobalStyles'
-import { ImageContent } from '../../../../components/card'
+import { ImageContent ,VideoContent} from '../../../../components/card'
 import moment from 'moment'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 
@@ -44,6 +44,8 @@ class TextArticleInfo extends Component {
                                         navigation.navigate('PictureViewer', { imageIndex: index, imageList })
                                     }}
                                     imageList={articleInfo.media.map(imageUriItem => `${imageUriItem.url}`)} />}
+                                {articleInfo.type == 1 && articleInfo.carrier == 3 && <VideoContent
+                                    videoUrl={articleInfo.media[0].url} />}
                             </WingBlank>
                             <WhiteSpace size='md' />
                             <View style={{ backgroundColor: '#f0f0f0', padding: 5 }}>

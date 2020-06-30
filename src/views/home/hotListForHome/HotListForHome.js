@@ -67,7 +67,11 @@ class HotListForHome extends Component {
                                         imageList={item.media.map(imageUriItem => `${imageUriItem.url}`)} />}
 
                                 </TouchableOpacity>
-                                {item.type == 1 && item.carrier == 3 && <PreViewContent preview={item.media[0].preview} />}
+                                {item.type == 1 && item.carrier == 3 && <TouchableOpacity onPress={() => {
+                                    navigation.navigate('VideoViewer', { VideoUrl: item.media[0].url })
+                                }}>
+                                    <PreViewContent preview={item.media[0].preview} />
+                                </TouchableOpacity>}
                                 <Footer
                                     msgCount={item.comment_num}
                                     likeCount={item.agree_num}

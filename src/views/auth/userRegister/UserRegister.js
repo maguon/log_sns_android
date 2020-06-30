@@ -95,7 +95,6 @@ export default connect(mapStateToProps)(
     reduxForm({
         form: 'UserRegisterForm',
         onSubmit: (values, dispatch) => {
-            // console.log('values', values)
             if (values.password == values.reviewPassword) {
                 dispatch(reduxActions.userRegister.register(values))
             } else {

@@ -16,31 +16,31 @@ const MessageList = props => {
             <ScrollView style={globalStyles.container}>
                 <List>
                     <Item arrow="horizontal"
-                        extra={
-                            <View style={{ backgroundColor: 'red', justifyContent: 'center', alignItems: 'center', height: 20, borderRadius: 10 }}>
-                                <Text style={{ color: '#fff', paddingHorizontal: 10 }}>1</Text>
-                            </View>
-                        }
+                        // extra={
+                        //     <View style={{ backgroundColor: 'red', justifyContent: 'center', alignItems: 'center', height: 20, borderRadius: 10 }}>
+                        //         <Text style={{ color: '#fff', paddingHorizontal: 10 }}>1</Text>
+                        //     </View>
+                        // }
                         onPress={() => { navigation.navigate('FollowingList') }}
                         onLongPress={() => { navigation.navigate('FollowingList') }}
                         thumb={<Icon name="star" style={{ marginRight: 15 }} />} >
                         关注我</Item>
                     <Item arrow="horizontal"
-                        extra={
-                            <View style={{ backgroundColor: 'red', justifyContent: 'center', alignItems: 'center', height: 20, borderRadius: 10 }}>
-                                <Text style={{ color: '#fff', paddingHorizontal: 10 }}>1</Text>
-                            </View>
-                        }
+                        // extra={
+                        //     <View style={{ backgroundColor: 'red', justifyContent: 'center', alignItems: 'center', height: 20, borderRadius: 10 }}>
+                        //         <Text style={{ color: '#fff', paddingHorizontal: 10 }}>1</Text>
+                        //     </View>
+                        // }
                         onPress={() => { navigation.navigate('CommentOnMeList') }}
                         onLongPress={() => { navigation.navigate('CommentOnMeList') }}
                         thumb={<Icon name="edit" style={{ marginRight: 15 }} />} >
                         评价我</Item>
                     <Item arrow="horizontal"
-                        extra={
-                            <View style={{ backgroundColor: 'red', justifyContent: 'center', alignItems: 'center', height: 20, borderRadius: 10 }}>
-                                <Text style={{ color: '#fff', paddingHorizontal: 10 }}>200</Text>
-                            </View>
-                        }
+                        // extra={
+                        //     <View style={{ backgroundColor: 'red', justifyContent: 'center', alignItems: 'center', height: 20, borderRadius: 10 }}>
+                        //         <Text style={{ color: '#fff', paddingHorizontal: 10 }}>200</Text>
+                        //     </View>
+                        // }
                         onPress={() => { navigation.navigate('LikeMeList') }}
                         onLongPress={() => { navigation.navigate('LikeMeList') }}
                         thumb={<Icon name="like" style={{ marginRight: 15 }} />} >

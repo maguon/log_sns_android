@@ -11,32 +11,32 @@ const LikeMeList = props => {
         <View style={globalStyles.container}>
             <ScrollView style={{ flex: 1 }}>
                 <Card style={{ backgroundColor: '#fff' }}>
-                    <ReplyHeader />
-                    <ReplyContent />
+                    {/* <ReplyHeader />
+                    <ReplyContent /> */}
                 </Card>
                 <WhiteSpace size='md' />
 
                 <Card style={{ backgroundColor: '#fff' }}>
-                    <ReplyHeader />
-                    <ReplyContent />
+                     {/* <ReplyHeader />
+                    <ReplyContent /> */}
                 </Card>
                 <WhiteSpace size='md' />
 
                 <Card style={{ backgroundColor: '#fff' }}>
-                    <ReplyHeader />
-                    <ReplyContent />
+                    {/* <ReplyHeader />
+                    <ReplyContent /> */}
                 </Card>
                 <WhiteSpace size='md' />
 
                 <Card style={{ backgroundColor: '#fff' }}>
-                    <ReplyHeader />
-                    <ReplyContent />
+                    {/* <ReplyHeader />
+                    <ReplyContent /> */}
                 </Card>
                 <WhiteSpace size='md' />
 
                 <Card style={{ backgroundColor: '#fff' }}>
-                    <ReplyHeader />
-                    <ReplyContent />
+                    {/* <ReplyHeader />
+                    <ReplyContent /> */}
                 </Card>
                 <WhiteSpace size='md' />
 
