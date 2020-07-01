@@ -36,7 +36,12 @@ export const uploadVideo = (key, reqParams) => async (dispatch, getState) => {
         const res = await httpRequest.postFile(url, key, reqParams)
         console.log('res', res)
         if (res.success) {
-            dispatch({ type: reduxActionTypes.camera.upload_video_success, payload: { uploadVideoUri: res.result.url } })
+            dispatch({
+                type: reduxActionTypes.camera.upload_video_success, payload: {
+                    uploadVideoUri: res.result.url,
+                    uploadPreViewUri: res.result.preview
+                }
+            })
             dispatch(resetCamera())
         } else {
             dispatch({ type: reduxActionTypes.camera.upload_video_failed, payload: { failedMsg: `${res.msg}` } })

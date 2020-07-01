@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 
 const mapDispatchToProps = (dispatch) => ({
     submit: () => {
-        dispatch(submit('publishVideoBlog'))
+        dispatch(submit('PublishVideoBlog'))
     }
 })
 

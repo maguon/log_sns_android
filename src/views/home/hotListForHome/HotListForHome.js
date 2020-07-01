@@ -29,7 +29,7 @@ class HotListForHome extends Component {
                 data={hotListForHomeReducer.data.articleList}
                 renderItem={params => {
                     const { item, index } = params
-                    // console.log('item', item)
+                    console.log('item', item)
                     // console.log('item',item.media)
                     return (
                         <WingBlank size='md'>
@@ -68,9 +68,9 @@ class HotListForHome extends Component {
 
                                 </TouchableOpacity>
                                 {item.type == 1 && item.carrier == 3 && <TouchableOpacity onPress={() => {
-                                    navigation.navigate('VideoViewer', { VideoUrl: item.media[0].url })
+                                    navigation.navigate('VideoViewer', { VideoUrl: item.media.url })
                                 }}>
-                                    <PreViewContent preview={item.media[0].preview} />
+                                    <PreViewContent preview={item.media.preview} />
                                 </TouchableOpacity>}
                                 <Footer
                                     msgCount={item.comment_num}

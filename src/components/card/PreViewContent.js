@@ -12,10 +12,11 @@ class PreViewContent extends Component {
     }
 
     render() {
+        console.log('this.props.preview ',this.props.preview )
         return (
             <View style={{ width: windowWidth, height: windowWidth / 16 * 9, justifyContent: 'center', alignItems: 'center' }}>
-                {this.props.preView && <Image source={{ uri: this.props.preView }} style={{ width: windowWidth, height: windowWidth / 16 * 9 }} />}
-                {!this.props.preView && <Icon name={'file-image'} />}
+                {!!this.props.preview && <Image source={{ uri: this.props.preview }} style={{ width: windowWidth, height: windowWidth / 16 * 9 }} />}
+                {!this.props.preview && <Icon name={'file-image'} />}
             </View>
         )
     }

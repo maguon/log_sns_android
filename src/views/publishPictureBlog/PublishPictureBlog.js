@@ -115,9 +115,9 @@ export default connect(mapStateToProps)(
                     addressName: values.addressShow.data.currentAddrName,
                     addressReal: values.addressShow.data.currentAddrReal,
                     addressShow: 1,
-                    media: values.imageList.map(item => {
+                    media: values.imageList.map(item=>{
                         return {
-                            url: `${host.image_host}/${item}`
+                            url:item
                         }
                     })
                 }
@@ -127,9 +127,9 @@ export default connect(mapStateToProps)(
                     carrier: 2,
                     info: values.info,
                     addressShow: 0,
-                    media: values.imageList.map(item => {
+                    media: values.imageList.map(item=>{
                         return {
-                            url: `${host.image_host}/${item}`
+                            url:item
                         }
                     })
                 }

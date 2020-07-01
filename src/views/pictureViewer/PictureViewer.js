@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, Image } from 'react-native'
 import ImageViewer from 'react-native-image-zoom-viewer'
-
+import {image_host} from '../../utils/host'
 
 class PictureViewer extends Component {
     render() {
@@ -13,8 +13,9 @@ class PictureViewer extends Component {
                     index={imageIndex}
                     ref={ref => this.ImageViewer = ref}
                     imageUrls={imageList.map(item => {
+                        console.log(`${image_host}/${item}`)
                         return {
-                            url: `${item}`
+                            url: `${image_host}/${item}`
                         }
                     })}
                 />

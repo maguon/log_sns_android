@@ -11,6 +11,7 @@ import reduxActions from '../../reduxActions'
 import { connect } from 'react-redux'
 import { LogLevel, RNFFmpeg } from 'react-native-ffmpeg'
 import RNFS from 'react-native-fs'
+import {video_host} from '../../utils/host'
 
 
 class Camera extends Component {
@@ -28,7 +29,7 @@ class Camera extends Component {
 
     componentWillReceiveProps(nextProps) {
         // console.log('nextProps', nextProps)
-        const { cameraReducer: { data: { opType, uploadImageUri }, uploadImage }, navigation } = nextProps
+        const { cameraReducer: { data: { opType, uploadImageUri ,uploadVideoUri}, uploadImage ,uploadVideo}, navigation } = nextProps
         //0无操作，1：takePicture , 2:recordVideo,3：uploadImage，4：uploadVideo
         if (opType == 0) {
             this.resetCamera()
@@ -38,10 +39,13 @@ class Camera extends Component {
                 this.props.resetCamera()
             }
         } else if (opType == 4) {
-            // navigation.navigate('PublishVideoBlog', {
-            //     uri: `file://${cameraReducer.data.videoUri}`,
-            //     preview: `file://${previewImgUri}`
-            // })
+            console.log('nextProps', nextProps)
+            if (uploadVideo.isResultStatus == 2) {
+                navigation.navigate('PublishVideoBlog', {
+                    uri: uploadVideoUri
+                })
+            }
+
         }
     }
 
@@ -114,7 +118,7 @@ class Camera extends Component {
         //截取视频第一帧缩略图 保存缓存路径
         console.log('=================================')
 
-        console.log('previewImgUri',previewImgUri)
+        console.log('previewImgUri', previewImgUri)
         return RNFFmpeg.execute(` -i ${uri} -ss 00:00:01  -frames:v 1  -f image2 -y ${previewImgUri}`)
 
     }

@@ -45,7 +45,7 @@ class TextArticleInfo extends Component {
                                     }}
                                     imageList={articleInfo.media.map(imageUriItem => `${imageUriItem.url}`)} />}
                                 {articleInfo.type == 1 && articleInfo.carrier == 3 && <VideoContent
-                                    videoUrl={articleInfo.media[0].url} />}
+                                    videoUrl={articleInfo.media.url} />}
                             </WingBlank>
                             <WhiteSpace size='md' />
                             <View style={{ backgroundColor: '#f0f0f0', padding: 5 }}>

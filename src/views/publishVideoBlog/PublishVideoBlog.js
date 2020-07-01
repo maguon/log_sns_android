@@ -8,6 +8,8 @@ import { required, requiredObj } from '../../utils/validators'
 import CurrentLocation from '../../components/inputs/currentlocation/CurrentLocation'
 import ImageList from '../../components/inputs/ImageList'
 import * as host from '../../utils/host'
+import { VideoContent } from '../../components/card'
+
 
 const Item = List.Item
 
@@ -34,22 +36,8 @@ class PublishVideoBlog extends Component {
         super(props)
     }
 
-    componentDidMount() {
-        console.log('componentDidMount')
-
-        const { navigation: { state: { params } }, formValues } = this.props
-        console.log('params',params)
-        // if (params.imageUri) {
-        // console.log('componentDidMount')
-
-            // const { dispatch, change } = this.props
-            // const imageList = formValues ? formValues.imageList : []
-            // dispatch(change('imageList', [...imageList, params.imageUri]))
-        // }
-    }
-
     render() {
-        console.log('this.props', this.props)
+        console.log('this.props.navigation.state.params.uri', this.props.navigation.state.params.uri)
         const { navigation } = this.props
         return (
             <ScrollView
@@ -76,6 +64,10 @@ class PublishVideoBlog extends Component {
                     </Item>
 
                 </List>
+                <View style={{ margin: 7.5 }}>
+                    <VideoContent videoUrl={this.props.navigation.state.params.uri} />
+                </View>
+
                 {/* <Field name='imageList'
                     component={ImageList}
                     openSources={() => { navigation.navigate('Camera') }}
@@ -94,10 +86,9 @@ const mapStateToProps = (state) => {
     return {
         publishVideoBlogReducer: state.publishVideoBlogReducer,
         initialValues: {
-            // imageList: [],
-            info:'',
-            addressShow:{
-                switchChecked:false
+            info: '',
+            addressShow: {
+                switchChecked: false
             }
         },
         formValues: getFormValues('PublishVideoBlog')(state)
@@ -110,37 +101,35 @@ export default connect(mapStateToProps)(
         form: 'PublishVideoBlog',
         destroyOnUnmount: false,
         onSubmit: (values, dispatch, props) => {
-            // console.log('values', values)
-            // let reqParams
-            // if (values.addressShow.switchChecked) {
-            //     reqParams = {
-            //         type: 1,
-            //         carrier: 3,
-            //         info: values.info,
-            //         address: [values.addressShow.data.longitude, values.addressShow.data.latitude],
-            //         addressName: values.addressShow.data.currentAddrName,
-            //         addressReal: values.addressShow.data.currentAddrReal,
-            //         addressShow: 1,
-            //         media: values.imageList.map(item => {
-            //             return {
-            //                 url: `${host.image_host}/${item}`,
-            //                 preview
-            //             }
-            //         })
-            //     }
-            // } else {
-            //     reqParams = {
-            //         type: 1,
-            //         carrier: 3,
-            //         info: values.info,
-            //         addressShow: 0,
-            //         media: values.imageList.map(item => {
-            //             return {
-            //                 url: `${host.image_host}/${item}`
-            //             }
-            //         })
-            //     }
-            // }
-            // dispatch(reduxActions.publishPictureBlog.createPictureBlog(reqParams))
+            console.log('props1111', props)
+            let reqParams
+            if (values.addressShow.switchChecked) {
+                reqParams = {
+                    type: 1,
+                    carrier: 3,
+                    info: values.info,
+                    address: [values.addressShow.data.longitude, values.addressShow.data.latitude],
+                    addressName: values.addressShow.data.currentAddrName,
+                    addressReal: values.addressShow.data.currentAddrReal,
+                    addressShow: 1,
+                    media: {
+                        url: props.navigation.state.params.uri,
+                        preview: props.navigation.state.params.preview ? props.navigation.state.params.preview : ''
+                    }
+
+                }
+            } else {
+                reqParams = {
+                    type: 1,
+                    carrier: 3,
+                    info: values.info,
+                    addressShow: 0,
+                    media: {
+                        url: props.navigation.state.params.uri,
+                        preview: props.navigation.state.params.preview ? props.navigation.state.params.preview : ''
+                    }
+                }
+            }
+            dispatch(reduxActions.publishPictureBlog.createPictureBlog(reqParams))
         }
     })(PublishVideoBlog))

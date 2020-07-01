@@ -7,6 +7,7 @@ const initialState = {
         videoUri: '',
         uploadImageUri: '',
         uploadVideoUri: '',
+        uploadPreViewUri:'',
         opType: 0  //0无操作，1：takePicture , 2:recordVideo,3：uploadImage，4：uploadVideo
     },
     uploadImage: {
@@ -73,12 +74,13 @@ export default handleActions({
     },
 
     [reduxActionTypes.camera.upload_video_success]: (state, action) => {
-        const { payload: { uploadVideoUri } } = action
+        const { payload: { uploadVideoUri,uploadPreViewUri } } = action
         return {
             ...state,
             data: {
                 ...state.data,
                 uploadVideoUri,
+                uploadPreViewUri,
                 opType: 4
             },
             uploadVideo: {
